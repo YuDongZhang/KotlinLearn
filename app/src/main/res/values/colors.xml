@@ -3,4 +3,93 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <color name="main_tone">#5d9dff</color>
+    <color name="divider_thick">#f0f0f0</color>
+    <color name="divider_thin">#e0e0e0</color>
+    <color name="light_gray">#C9C9C9</color>
+
+    <color name="yellow_login">#FF8E1B</color>
+    <color name="donut_progress_finish">#ffb844</color>
+    <color name="donut_progress_unfinished">#ffeccc</color>
+    <color name="light_blue">#5d9bff</color>
+    <color name="gray">#9b9b9b</color>
+    <color name="dark_gray">#333333</color>
+    <color name="txt_title">#999999</color>
+    <color name="txt_content">#222222</color>
+    <color name="item_title">#414141</color>
+    <color name="line">#e4e4e4</color>
+    <color name="white">#fff</color>
+    <color name="username">#BEC1C5</color>
+    <color name="black">#000</color>
+    <color name="module">#526583</color>
+    <color name="unread_message_tip">#ff1c1c</color>
+    <color name="txt_color_3">#333333</color>
+    <color name="lightgray">#ffbbbbbb</color>
+    <color name="blue_txt">#3596ce</color>
+
+    <!--二维码扫描-->
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+
+    <color name="translucentColorPrimary">#DFEBFF</color>
+    <color name="bg_daily_attendance">#a4c6f9</color>
+    <color name="bg_sign">#eef5ff</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="custom_cb_selected">#3b81ed</color>
+    <color name="latest_lecture_indicator">#ff8f69</color>
+    <color name="start_examine">#ff9056</color>
+    <color name="score">#ff5670</color>
+    <color name="blue">#33b5e5</color>
+    <color name="exercise_sign">#ffac23</color>
+    <color name="exercise_signed">#ff8f69</color>
+    <color name="exercise_view_evaluate">#ff905d</color>
+    <color name="dotted_line">#979797</color>
+    <color name="tab_selected">#7C8EAB</color>
+    <color name="latest">#ff8f69</color>
+    <color name="bg_graduation">#E7E7E7</color>
+    <color name="divider_txt">#dadada</color>
+    <color name="pointer_message">#ff9789</color>
+
+    <color name="blue_t">#72A3F5</color>
+    <color name="break_line">#D6D6D6</color>
+    <color name="bg_common_dialog">#88000000</color>
+    <color name="drop_down">#555555</color>
+    <color name="color_4a">#4A4A4A</color>
+    <color name="txt_6">#666666</color>
+    <color name="f1f1f1">#f1f1f1</color>
+    <color name="cbcbcb">#cbcbcb</color>
+    <color name="txt_hint">#C7C6C6</color>
+    <color name="red">#f00</color>
+    <color name="delbg">#81ff0000</color>
+    <color name="color_49">#494949</color>
+    <color name="color_b7">#b7b7b7</color>
+    <color name="green">#85DFA4</color>
+    <color name="yello">#EDE268</color>
+    <color name="pink">#E9A2A9</color>
+    <color name="bg_dept_t">#F5F4F4</color>
+    <color name="absence">#F08990</color>
+    <color name="color_score">#ff5f5f</color>
+    <color name="color_53">#535353</color>
+    <color name="color_score_detail">#ffa586</color>
+    <color name="color_5c">#5c5c5c</color>
+
+    <color name="list_bg">#E2E7EB</color>
+    <color name="login_btn">#1894ec</color>
+    <color name="hint">#d7d7d7</color>
+    <color name="common_title">#19b4f3</color>
+    <color name="logon_bg">#FF00ACD1</color>
+
+
+    <color name="bg_exercise">#F9F9F9</color>//
+    <color name="search_text_color">#323232</color>
+
+    <color name="shallow_yellow">#FFD21B</color>//#599AFD
+    <color name="title">#599AFD</color>
+
 </resources>
+
+
