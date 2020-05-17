@@ -5,7 +5,9 @@ buildscript {
     ext.butterknife_version='8.6.0'
     repositories {
         google()
+        mavenCentral()
         jcenter()
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'

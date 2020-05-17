@@ -16,4 +16,9 @@ public class MyTest {
     @Test fun test() {
         subject.method()  // dereference directly
     }*/
+    public static void main(String args[]) {
+        System.out.println("Hello World");
+    }
+
+
 }
