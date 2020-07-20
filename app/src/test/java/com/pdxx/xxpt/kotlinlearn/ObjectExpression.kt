@@ -1,5 +1,6 @@
 package com.pdxx.xxpt.kotlinlearn
 
+import com.pdxx.xxpt.kotlinlearn.classandobject.Entrust
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
@@ -7,8 +8,108 @@ class ObjectExpression {
 
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, (2 + 2).toLong())
+        //  assertEquals(4, (2 + 2).toLong())
+        // print(sum(1, 3))
     }
+
+    /**
+     * 函数定义
+     */
+    @Test
+    fun function_definition() {
+        // println(sum3(2, 3))
+//        printSum(1,1)
+//        printSum_1(1, 2)
+//        vars(1,3,5)
+        lambda_test()
+
+    }
+
+    // Int 参数，返回值 Int
+    fun sum(a: Int, b: Int): Int {
+        return a + b
+    }
+
+    //表达式作为函数体，返回类型自动推断：
+    fun sum1(a: Int, b: Int) = a + b;
+    public fun sum3(a: Int, b: Int): Int = a + b   // public 方法则必须明确写出返回类型
+
+
+    //无返回值的函数(类似Java中的void)：
+    fun printSum(a: Int, b: Int): Unit {
+        print(a + b)
+    }
+
+    // 如果是返回 Unit类型，则可以省略(对于public方法也是这样)：
+    public fun printSum_1(a: Int, b: Int) {
+        print(a + b)
+    }
+
+    //    可变长参数函数
+//    函数的变长参数可以用 vararg 关键字进行标识：
+    fun vars(vararg v: Int) {
+        for (vt in v) {
+            print(vt)
+        }
+    }
+
+    //    lambda(匿名函数)
+//    lambda表达式使用实例：
+    fun lambda_test() {
+        val sumLambda: (Int, Int) -> Int = { x, y -> x + y }
+        println(sumLambda(1, 2))  // 输出 3
+    }
+
+    /**
+     * 定义常量与变量
+     */
+    /*可变变量定义：var 关键字
+
+    var <标识符> : <类型> = <初始化值>
+    不可变变量定义：val 关键字，只能赋值一次的变量(类似Java中final修饰的变量)
+
+    val <标识符> : <类型> = <初始化值>
+    常量与变量都可以没有初始化值,但是在引用前必须初始化
+
+    编译器支持自动类型判断,即声明时可以不指定类型,由编译器判断。*/
+
+    @Test
+    fun variable_test() {
+        var b: Int = 2;
+        var c: Int;
+        val e = 1;
+
+        var a = 1
+// 模板中的简单名称：
+        val s1 = "a is $a"
+
+        a = 2
+// 模板中的任意表达式：
+        val s2 = "${s1.replace("is", "was")}, but now is $a"
+
+        print(s2)
+    }
+
+    /**
+     * NULL检查机制
+     * Kotlin的空安全设计对于声明可为空的参数，在使用时要进行空判断处理，有两种处理方式，字段后加!!像Java一样抛出空异常，
+     * 另一种字段后加?可不做处理返回值为 null或配合?:做空判断处理
+     */
+    @Test
+    fun null_test() {
+        //类型后面加?表示可为空
+        var age: String? = "23"
+        //抛出空指针异常
+        val ages = age!!.toInt()
+        //不做处理返回 null
+        val ages1 = age?.toInt()
+        //age为空返回-1
+        val ages2 = age?.toInt() ?: -1
+
+
+    }
+
+
 }
 
 

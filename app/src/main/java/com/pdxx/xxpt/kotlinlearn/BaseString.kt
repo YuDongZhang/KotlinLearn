@@ -1,5 +1,7 @@
 package com.pdxx.xxpt.kotlinlearn
 
+import org.jetbrains.annotations.TestOnly
+
 class KtTest {
 
 
@@ -7,6 +9,9 @@ class KtTest {
      $ 表示一个变量名或者变量值
      $varName 表示变量值
      ${varName.fun()} 表示变量的方法返回值:*/
+
+
+
     fun test() {
         var a = 1;
         //// 模板中的简单名称：
