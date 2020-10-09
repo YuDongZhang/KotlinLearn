@@ -1,6 +1,10 @@
 package com.pdxx.xxpt.kotlinlearn.`5ClassAndObject`
 
+import org.junit.Test
+
 /**
+ * 写测试类的时候 , 不能有main 的方法
+ *
 Kotlin 扩展
 Kotlin 可以对一个类的属性和方法进行扩展，且不需要继承或使用 Decorator 模式。
 
@@ -8,34 +12,43 @@ Kotlin 可以对一个类的属性和方法进行扩展，且不需要继承或�
 
 扩展函数
 扩展函数可以在已有类中添加新的方法，不会对原类做修改，扩展函数定义形式：
-*/
-fun receiverType.functionName(params){
-    body
-}
+下面这个就是写法 :
+ */
+
+//fun receiverType.functionName(params){
+//    body
+//}
+
 /**
 receiverType：表示函数的接收者，也就是函数扩展的对象
 functionName：扩展函数的名称
 params：扩展函数的参数，可以为NULL
 以下实例扩展 User 类 ：
-*/
-class User(var name:String)
+ */
+class User(var name: String)
 
 /**扩展函数**/
-fun User.Print(){
+fun User.Print() {
     print("用户名 $name")
 }
 
-fun main(arg:Array<String>){
-    var user = User("Runoob")
-    user.Print()
+class TestUser {
+
+    @Test
+    fun test1() {
+        var user = User("Runoob")
+        user.Print()
+    }
 }
+
 
 /**
 实例执行输出结果为：
 
 用户名 Runoob
 下面代码为 MutableList 添加一个swap 函数：
-*/
+
+ */
 
 // 扩展函数 swap,调换不同位置的值
 fun MutableList<Int>.swap(index1: Int, index2: Int) {
@@ -44,13 +57,15 @@ fun MutableList<Int>.swap(index1: Int, index2: Int) {
     this[index2] = tmp
 }
 
-fun main(args: Array<String>) {
+class TestMutableList {
+    @Test
+    fun test() {
+        val l = mutableListOf(1, 2, 3)
+        // 位置 0 和 2 的值做了互换
+        l.swap(0, 2) // 'swap()' 函数内的 'this' 将指向 'l' 的值
 
-    val l = mutableListOf(1, 2, 3)
-    // 位置 0 和 2 的值做了互换
-    l.swap(0, 2) // 'swap()' 函数内的 'this' 将指向 'l' 的值
-
-    println(l.toString())
+        println(l.toString())
+    }
 }
 
 /**
@@ -61,38 +76,51 @@ this关键字指代接收者对象(receiver object)(也就是调用扩展函数�
 
 扩展函数是静态解析的
 扩展函数是静态解析的，并不是接收者类型的虚拟成员，在调用扩展函数时，具体被调用的的是哪一个函数，由调用函数的的对象表达式来决定的，而不是动态的类型决定的:
-*/
-open class C
+ */
 
-class D: C()
+open class C2
 
-fun C.foo() = "c"   // 扩展函数 foo
+class D2 : C2()
 
-fun D.foo() = "d"   // 扩展函数 foo
+fun C2.foo() = "c2"   // 扩展函数 foo
 
-fun printFoo(c: C) {
-    println(c.foo())  // 类型是 C 类
+fun D2.foo() = "d2"   // 扩展函数 foo
+
+fun printFoo(c2: C2) {
+    println(c2.foo())  // 类型是 C 类
 }
 
-fun main(arg:Array<String>){
-    printFoo(D())
+class TestCD2 {
+    @Test
+    fun Test() {
+        printFoo(D2())
+    }
 }
+
 /**
 实例执行输出结果为：
 
 c
 若扩展函数和成员函数一致，则使用该函数时，会优先使用成员函数。
-*/
 
-class C {
-    fun foo() { println("成员函数") }
+ */
+
+class C3 {
+    fun foo() {
+        println("成员函数")
+    }
 }
 
-fun C.foo() { println("扩展函数") }
+fun C3.foo() {
+    println("扩展函数")
+}
 
-fun main(arg:Array<String>){
-    var c = C()
-    c.foo()
+class TestC3 {
+    @Test
+    fun test() {
+        var c3 = C3()
+        c3.foo()
+    }
 }
 
 /**
@@ -101,16 +129,20 @@ fun main(arg:Array<String>){
 成员函数
 扩展一个空对象
 在扩展函数内， 可以通过 this 来判断接收者是否为 NULL,这样，即使接收者为 NULL,也可以调用扩展函数。例如:
-*/
+ */
 fun Any?.toString(): String {
     if (this == null) return "null"
     // 空检测之后，“this”会自动转换为非空类型，所以下面的 toString()
     // 解析为 Any 类的成员函数
     return toString()
 }
-fun main(arg:Array<String>){
-    var t = null
-    println(t.toString())
+
+class TestAny {
+    @Test
+    fun test() {
+        var t = null
+        println(t.toString())
+    }
 }
 
 /**
@@ -119,11 +151,14 @@ fun main(arg:Array<String>){
 null
 扩展属性
 除了函数，Kotlin 也支持属性对属性进行扩展:
-*/
+ */
+
 val <T> List<T>.lastIndex: Int
     get() = size - 1
+
 /**
-扩展属性允许定义在类或者kotlin文件中，不允许定义在函数中。初始化属性因为属性没有后端字段（backing field），所以不允许被初始化，只能由显式提供的 getter/setter 定义。
+扩展属性允许定义在类或者kotlin文件中，不允许定义在函数中。初始化属性因为属性没有后端字段（backing field），
+所以不允许被初始化，只能由显式提供的 getter/setter 定义。
 
 val Foo.bar = 1 // 错误：扩展属性不能有初始化器
 扩展属性只能被声明为 val。
@@ -132,9 +167,9 @@ val Foo.bar = 1 // 错误：扩展属性不能有初始化器
 如果一个类定义有一个伴生对象 ，你也可以为伴生对象定义扩展函数和属性。
 
 伴生对象通过"类名."形式调用伴生对象，伴生对象声明的扩展函数，通过用类名限定符来调用：
-
+ */
 class MyClass {
-    companion object { }  // 将被称为 "Companion"
+    companion object {}  // 将被称为 "Companion"
 }
 
 fun MyClass.Companion.foo() {
@@ -144,9 +179,12 @@ fun MyClass.Companion.foo() {
 val MyClass.Companion.no: Int
     get() = 10
 
-fun main(args: Array<String>) {
-    println("no:${MyClass.no}")
-    MyClass.foo()
+class TestMyClass {
+    @Test
+    fun test() {
+        println("no:${MyClass.no}")
+        MyClass.foo()
+    }
 }
 /**
 实例执行输出结果为：
@@ -168,37 +206,47 @@ import foo.bar.goo // 导入所有名为 goo 的扩展
 import foo.bar.*   // 从 foo.bar 导入一切
 
 fun usage(baz: Baz) {
-    baz.goo()
+baz.goo()
 }
+ */
+
 /**
 扩展声明为成员
 在一个类内部你可以为另一个类声明扩展。
 
 在这个扩展中，有个多个隐含的接受者，其中扩展方法定义所在类的实例称为分发接受者，而扩展方法的目标类型的实例称为扩展接受者。
-
-class D {
-    fun bar() { println("D bar") }
+ */
+class D4 {
+    fun bar() {
+        println("D bar")
+    }
 }
 
-class C {
-    fun baz() { println("C baz") }
+class C4 {
+    fun baz() {
+        println("C baz")
+    }
 
-    fun D.foo() {
+    fun D4.foo() {
         bar()   // 调用 D.bar
         baz()   // 调用 C.baz
     }
 
-    fun caller(d: D) {
-        d.foo()   // 调用扩展函数
+    fun caller(d4: D4) {
+        d4.foo()   // 调用扩展函数
     }
 }
 
-fun main(args: Array<String>) {
-    val c: C = C()
-    val d: D = D()
-    c.caller(d)
-
+class TestC4 {
+    @Test
+    fun test() {
+        val c4: C4 = C4()
+        val d4: D4 = D4()
+        c4.caller(d4)
+    }
 }
+
+/**
 实例执行输出结果为：
 
 D bar
@@ -206,75 +254,92 @@ C baz
 在 C 类内，创建了 D 类的扩展。此时，C 被成为分发接受者，而 D 为扩展接受者。从上例中，可以清楚的看到，在扩展函数中，可以调用派发接收者的成员函数。
 
 假如在调用某一个函数，而该函数在分发接受者和扩展接受者均存在，则以扩展接收者优先，要引用分发接收者的成员你可以使用限定的 this 语法。
+ */
 
-class D {
-    fun bar() { println("D bar") }
+class D5 {
+    fun bar() {
+        println("D bar")
+    }
 }
 
-class C {
-    fun bar() { println("C bar") }  // 与 D 类 的 bar 同名
+class C5 {
+    fun bar() {
+        println("C bar")
+    }  // 与 D 类 的 bar 同名
 
-    fun D.foo() {
+    fun D5.foo() {
         bar()         // 调用 D.bar()，扩展接收者优先
-        this@C.bar()  // 调用 C.bar()
+        this@C5.bar()  // 调用 C.bar()
     }
 
-    fun caller(d: D) {
-        d.foo()   // 调用扩展函数
+    fun caller(d5: D5) {
+        d5.foo()   // 调用扩展函数
     }
 }
 
-fun main(args: Array<String>) {
-    val c: C = C()
-    val d: D = D()
-    c.caller(d)
-
+class TestC5 {
+    @Test
+    fun test() {
+        val c5: C5 = C5()
+        val d5: D5 = D5()
+        c5.caller(d5)
+    }
 }
+
+
+/*
 实例执行输出结果为：
 
 D bar
 C bar
 以成员的形式定义的扩展函数, 可以声明为 open , 而且可以在子类中覆盖. 也就是说, 在这类扩展函数的派 发过程中, 针对分发接受者是虚拟的(virtual), 但针对扩展接受者仍然是静态的。
+*/
 
-open class D {
+open class D6 {
 }
 
-class D1 : D() {
+class D16 : D6() {
 }
 
-open class C {
-    open fun D.foo() {
-        println("D.foo in C")
+open class C6 {
+    open fun D6.foo() {
+        println("D6.foo in C6")
     }
 
-    open fun D1.foo() {
+    open fun D16.foo() {
         println("D1.foo in C")
     }
 
-    fun caller(d: D) {
-        d.foo()   // 调用扩展函数
+    fun caller(d6: D6) {
+        d6.foo()   // 调用扩展函数
     }
 }
 
-class C1 : C() {
-    override fun D.foo() {
+class C16 : C6() {
+    override fun D6.foo() {
         println("D.foo in C1")
     }
 
-    override fun D1.foo() {
-        println("D1.foo in C1")
+    override fun D16.foo() {
+        println("D16.foo in C16")
     }
 }
 
+class TestC6 {
+    @Test
+    fun test() {
+        C6().caller(D6())   // 输出 "D.foo in C"
+        C16().caller(D6())  // 输出 "D.foo in C1" —— 分发接收者虚拟解析
+        C6().caller(D16())  // 输出 "D.foo in C" —— 扩展接收者静态解析
 
-fun main(args: Array<String>) {
-    C().caller(D())   // 输出 "D.foo in C"
-    C1().caller(D())  // 输出 "D.foo in C1" —— 分发接收者虚拟解析
-    C().caller(D1())  // 输出 "D.foo in C" —— 扩展接收者静态解析
-
+    }
 }
+/*
 实例执行输出结果为：
 
 D.foo in C
 D.foo in C1
 D.foo in C
+
+*/
+
