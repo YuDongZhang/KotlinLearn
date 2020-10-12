@@ -71,7 +71,7 @@ by 关键字之后的表达式就是委托, 属性的 get() 方法(以及set() �
 
 // 定义包含属性委托的类
 class Example {
-    var p: String by Delegate()
+    var p: String by Delegate() //其实就是把属性委托这个这个类来处理 , 就是setValue 和 getValue方法
 }
 
 // 委托的类
@@ -345,7 +345,9 @@ Kotlin 编译器在参数中提供了关于 prop 的所有必要信息：
 
 
 提供委托
+
 通过定义 provideDelegate 操作符，可以扩展创建属性实现所委托对象的逻辑。
+
 如果 by 右侧所使用的对象将 provideDelegate 定义为成员或扩展函数，那么会调用该函数来 创建属性委托实例。
 
 provideDelegate 的一个可能的使用场景是在创建属性时（而不仅在其 getter 或 setter 中）检查属性一致性。
@@ -355,6 +357,7 @@ provideDelegate 的一个可能的使用场景是在创建属性时（而不仅�
  */
 
 /*
+//这个地方你需要对比属性委托来查看
 
 class ResourceLoader<T>(id: ResourceIDd<T>) {
     operator fun provideDelegate(
@@ -386,7 +389,7 @@ class ResourceIDd<T> {
 
 }
 
-class MyUI {
+class MyUI {//这里相当于把属性委托给 bindResurce 这个类
     val image by bindResource(ResourceIDd.image_id)
 
 
@@ -395,11 +398,6 @@ class MyUI {
 }
 */
 
-/*
-
-
-
-*/
 
 /*
 
@@ -448,3 +446,43 @@ class C {
 }*/
 
 //请注意，provideDelegate 方法只影响辅助属性的创建，并不会影响为 getter 或 setter 生成的代码。
+
+//提供委托的完整的例子
+class Test19 {
+    @Test
+    fun main() {
+        val myui: MyUI2 = MyUI2()
+        println(myui.image)
+        println(myui.text)
+    }
+}
+
+class dge<T>(t: T) {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+        return "$thisRef, 这里委托了 ${property.name} 属性"
+    }
+}
+
+class ResourceLoader2<T>(id: Int) {
+
+    operator fun provideDelegate(thisRef: MyUI2, prop: KProperty<*>):dge<T?> {
+
+        checkProperty(thisRef, prop.name) //这一步是我注销测试的
+        // 创建委托
+        var t: T? = null
+        return dge(t)
+    }
+
+    private fun checkProperty(thisRef: MyUI2, name: String) {
+        println(name)
+    }
+}
+
+fun <T> bindResource2(id: Int): ResourceLoader2<T> {
+    return ResourceLoader2<T>(id)
+}
+
+class MyUI2 {
+    val image by bindResource2<String>(1)
+    val text by bindResource2<String>(2)
+}
