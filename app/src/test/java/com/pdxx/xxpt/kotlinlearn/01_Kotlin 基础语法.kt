@@ -5,7 +5,7 @@ import junit.framework.Assert.assertEquals
 import org.junit.Test
 import java.lang.reflect.Type
 
-class `1_ObjectExpression` {
+class `01_Kotlin 基础语法` {
 
     @Test
     fun addition_isCorrect() {
@@ -23,7 +23,6 @@ class `1_ObjectExpression` {
 //        printSum_1(1, 2)
 //        vars(1,3,5)
         lambda_test()
-
     }
 
     // Int 参数，返回值 Int
@@ -47,7 +46,7 @@ class `1_ObjectExpression` {
         print(a + b)
     }
 
-    //    可变长参数函数
+//    可变长参数函数
 //    函数的变长参数可以用 vararg 关键字进行标识：
     fun vars(vararg v: Int) {
         for (vt in v) {
@@ -55,7 +54,7 @@ class `1_ObjectExpression` {
         }
     }
 
-    //    lambda(匿名函数)
+//   lambda(匿名函数)
 //    lambda表达式使用实例：
     fun lambda_test() {
         val sumLambda: (Int, Int) -> Int = { x, y -> x + y }

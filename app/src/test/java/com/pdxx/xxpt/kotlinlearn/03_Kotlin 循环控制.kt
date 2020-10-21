@@ -5,7 +5,7 @@ import org.junit.Test
 /**
  * Kotlin 循环控制
  */
-class `3_Test` {
+class `03_Kotlin 循环控制` {
     //    For 循环
     @Test
     fun test1() {

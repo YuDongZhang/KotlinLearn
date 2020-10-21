@@ -5,7 +5,7 @@ import org.junit.Test
 /**
  * Kotlin 条件控制
  */
-class `2_Test` {
+class `02_Kotlin 条件控制` {
     //一个 if 语句包含一个布尔表达式和一条或多条语句。
     @Test
     fun test1() {

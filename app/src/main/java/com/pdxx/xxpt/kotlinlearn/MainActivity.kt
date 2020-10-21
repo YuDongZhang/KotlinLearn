@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     fun onClickView(view: View) {
         when (view.id) {
             R.id.tv1 -> {
-
+                Toast.makeText(this, "点击了按钮1", Toast.LENGTH_SHORT).show()
             }
             R.id.tv2 -> {
 
