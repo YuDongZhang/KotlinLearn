@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.pdxx.xxpt.kotlinlearn.MainActivity">
+    tools:context="com.pdxx.kotlinlearn.MainActivity">
 
     <TextView
         android:id="@+id/content"
@@ -35,7 +35,7 @@
             android:layout_marginRight="5dp"
             android:background="@color/divider_txt"
             android:padding="5dp"
-            android:text="2.可变长函数"
+            android:text="2.recyclerview"
             android:textSize="20sp" />
 
         <TextView
@@ -45,10 +45,10 @@
             android:layout_marginRight="5dp"
             android:background="@color/delbg"
             android:padding="5dp"
-            android:text="1.lambda(匿名函数)"
+            android:text="3.fragment"
             android:textSize="20sp" />
-
-
     </LinearLayout>
+
+
 
 </LinearLayout>
