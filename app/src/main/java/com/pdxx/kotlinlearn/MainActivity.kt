@@ -34,6 +34,10 @@ class MainActivity : AppCompatActivity() {
                 var intent:Intent = Intent(this,ListActivity::class.java)
                 startActivity(intent)
             }
+            R.id.tv3 ->{
+                var intent = Intent(this,SwitchFragmentActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

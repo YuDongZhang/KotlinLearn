@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SwitchFragmentActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <RadioButton
+            android:text="测试1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <RadioButton
+            android:text="测试1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <RadioButton
+            android:text="测试1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </RadioGroup>
+
+
+
+
+</LinearLayout>
