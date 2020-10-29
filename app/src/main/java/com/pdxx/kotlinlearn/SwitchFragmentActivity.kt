@@ -3,8 +3,10 @@ package com.pdxx.kotlinlearn
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.widget.RadioGroup
 import com.pdxx.kotlinlearn.frag.ItemFragment
 
 class SwitchFragmentActivity : AppCompatActivity() {
@@ -16,6 +18,9 @@ class SwitchFragmentActivity : AppCompatActivity() {
 
     private fun initView() {
         val itemFragment = ItemFragment()
+        val mRadioGroup = findViewById<RadioGroup>(R.id.radioGroup)
+//        mRadioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener())
+
         supportFragmentManager.inTransaction {
             add(R.id.frame_layout, itemFragment)
         }
@@ -30,4 +35,29 @@ class SwitchFragmentActivity : AppCompatActivity() {
         fragmentTransaction.func()
         fragmentTransaction.commit()
     }
+
+
+    /*
+    现在再次对inTransaction函数进行一次升级，可以将传入的Lambda函数添加一个返回值，返回FragmentTransaction对象。这样会使得我们的代码更加简洁。
+     */
+    inline fun FragmentManager.inTransactionTwo(func: FragmentTransaction.() -> FragmentTransaction){
+        beginTransaction().func().commit()
+    }
+
+    /*
+    使用扩展函数来替代ActivityUtil
+     */
+
+    fun AppCompatActivity.addFragment(fragment:Fragment,frameId :Int){
+        supportFragmentManager.inTransactionTwo {
+            add(frameId,fragment)
+        }
+    }
+
+    fun AppCompatActivity.replaceFragment(fragment: Fragment,frameId: Int){
+        supportFragmentManager.inTransactionTwo {
+            replace(frameId,fragment)
+        }
+    }
+
 }
