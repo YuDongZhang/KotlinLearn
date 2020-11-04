@@ -2,34 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SwitchFragmentActivity">
 
     <FrameLayout
-        android:layout_weight="1"
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
         <RadioButton
-            android:text="测试1"
+            android:id="@+id/rb_1"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:text="测试1" />
+
         <RadioButton
-            android:text="测试1"
+            android:id="@+id/rb_2"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:text="测试1" />
+
         <RadioButton
-            android:text="测试1"
+            android:id="@+id/rb_3"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:text="测试1" />
     </RadioGroup>
 
 </LinearLayout>

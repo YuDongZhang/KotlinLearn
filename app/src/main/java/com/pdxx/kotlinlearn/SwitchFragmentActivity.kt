@@ -8,8 +8,16 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.widget.RadioGroup
 import com.pdxx.kotlinlearn.frag.ItemFragment
+import com.pdxx.kotlinlearn.frag.ScrollingFragment
+import com.pdxx.kotlinlearn.frag.ViewPagerFragment
+import java.text.FieldPosition
 
 class SwitchFragmentActivity : AppCompatActivity() {
+
+    var mItemFragment: ItemFragment? =null
+    var mViewPagerFragment:ViewPagerFragment?=null
+    var mScrollingFragment: ScrollingFragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_switch_fragment)
@@ -17,13 +25,53 @@ class SwitchFragmentActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        val itemFragment = ItemFragment()
+
+
         val mRadioGroup = findViewById<RadioGroup>(R.id.radioGroup)
 //        mRadioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener())
+        mRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId){
+                R.id.rb_1->{
+                        if (mItemFragment==null){
+                            mItemFragment = ItemFragment();
+                            addFragment(mItemFragment!!,R.id.frame_layout)
+                        }else{
+                            showFragment(mItemFragment!!)
+                        }
+
+                }
+
+            }
+        }
+
 
         supportFragmentManager.inTransaction {
-            add(R.id.frame_layout, itemFragment)
+            add(R.id.frame_layout, mItemFragment)
         }
+    }
+
+
+    /**
+     * 切换fragment 根据下标
+     */
+    private fun switchFragment(position: Int){
+        val transaction = supportFragmentManager.beginTransaction()
+        hideFragments(transaction)
+        when(position){
+            0->mItemFragment?.let {  }
+        }
+    }
+
+
+
+    /**
+     * 隐藏所有的Fragment
+     * @param transaction transaction
+     */
+    private fun hideFragments(transaction: FragmentTransaction) {
+        mItemFragment?.let { transaction.hide(it) }
+        mViewPagerFragment?.let { transaction.hide(it) }
+        mScrollingFragment?.let { transaction.hide(it) }
     }
 
 
@@ -45,9 +93,8 @@ class SwitchFragmentActivity : AppCompatActivity() {
     }
 
     /*
-    使用扩展函数来替代ActivityUtil
+    使用扩展函数来替代ActivityUtil , 对方法封装 用起来很方便
      */
-
     fun AppCompatActivity.addFragment(fragment:Fragment,frameId :Int){
         supportFragmentManager.inTransactionTwo {
             add(frameId,fragment)
@@ -58,6 +105,11 @@ class SwitchFragmentActivity : AppCompatActivity() {
         supportFragmentManager.inTransactionTwo {
             replace(frameId,fragment)
         }
+    }
+
+    fun AppCompatActivity.showFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.show(fragment)
     }
 
 }
