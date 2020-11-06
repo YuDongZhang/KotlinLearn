@@ -58,7 +58,12 @@ class SwitchFragmentActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         hideFragments(transaction)
         when(position){
-            0->mItemFragment?.let {  }
+            0->mItemFragment?.let {
+                transaction.show(it)
+            }?:ItemFragment().let {
+                mItemFragment = it
+                transaction.add(R.id.frame_layout,it)
+            }
         }
     }
 
