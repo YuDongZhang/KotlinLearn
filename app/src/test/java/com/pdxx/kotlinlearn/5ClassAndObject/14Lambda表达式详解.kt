@@ -69,24 +69,24 @@ class `14Lambda表达式详解` {
     @Test
     fun test3() {
         // 源代码
-        fun test(a : Int , b : Int) : Int{
+        fun test(a: Int, b: Int): Int {
             return a + b
         }
 
-        fun sum(num1 : Int , num2 : Int) : Int{
+        fun sum(num1: Int, num2: Int): Int {
             return num1 + num2
         }
 
         // 调用
-        test(10,sum(3,5)) // 结果为：18
+        test(10, sum(3, 5)) // 结果为：18
 
         // lambda
-        fun test(a : Int , b : (num1 : Int , num2 : Int) -> Int) : Int{
-            return a + b.invoke(3,5)
+        fun test(a: Int, b: (num1: Int, num2: Int) -> Int): Int {
+            return a + b.invoke(3, 5)
         }
 
         // 调用
-        test(10,{ num1: Int, num2: Int ->  num1 + num2 })  // 结果为：18
+        test(10, { num1: Int, num2: Int -> num1 + num2 })  // 结果为：18
     }
 
     /**
@@ -97,4 +97,128 @@ class `14Lambda表达式详解` {
     所以，我们在调用此高阶函数的时候我们要为该Lambda表达式写出它的具体实现。
     invoke()函数：表示为通过函数变量调用自身，因为上面例子中的变量b是一个匿名函数。
      */
+
+    /** 3、Lambda实践 */
+
+    /**
+    3.1、it
+    it并不是Kotlin中的一个关键字(保留字)。
+    it是在当一个高阶函数中Lambda表达式的参数只有一个的时候可以使用it来使用此参数。it可表示为单个参数的隐式名称，是Kotlin语言约定的。
+    例1：
+     */
+    @Test
+    fun test4() {
+        //例1：
+        val it: Int = 0  // 即it不是`Kotlin`中的关键字。可用于变量名称
+
+        //例2：单个参数的隐式名称
+
+        // 这里举例一个语言自带的一个高阶函数filter,此函数的作用是过滤掉不满足条件的值。
+        val arr = arrayOf(1, 3, 5, 7, 9)
+        // 过滤掉数组中元素小于2的元素，取其第一个打印。这里的it就表示每一个元素。
+        println(arr.filter { it < 5 }.component1()) //这里取第一个
+
+
+        fun test(num1: Int, bool: (Int) -> Boolean): Int {
+            return if (bool(num1)) {
+                num1
+            } else 0
+        }
+
+        println(test(10, { it > 5 }))
+        println(test(4, { it > 5 }))
+        //代码讲解：上面的代码意思是，在高阶函数test中，其返回值为Int类型，Lambda表达式以num1位条件。其中如果Lambda表达式的值为false的时候返回0，反之返回num1。
+        // 故而当条件为num1 > 5这个条件时，当调用test函数，num1 = 10返回值就是10，num1 = 4返回值就是0。
+    }
+
+
+    /** 3.2、下划线（_）*/
+    /*
+    在使用Lambda表达式的时候，可以用下划线(_)表示未使用的参数，表示不处理这个参数。
+    同时在遍历一个Map集合的时候，这当非常有用。
+     */
+    @Test
+    fun test5() {
+        val map = mapOf("key1" to "value1", "key2" to "value2", "key3" to "value3")
+        map.forEach { key, value ->
+            println("$key \t $value")
+        }
+
+        // 不需要key的时候
+        map.forEach { _, value ->
+            println("$value")
+        }
+    }
+
+    /** 3.3 匿名函数 */
+    /*
+    匿名函数的特点是可以明确指定其返回值类型。
+    它和常规函数的定义几乎相似。他们的区别在于，匿名函数没有函数名。
+     */
+    @Test
+    fun test6() {
+        // 常规函数：
+        fun test(x: Int, y: Int): Int {
+            return x + y
+        }
+
+        // 匿名函数：
+        fun(x: Int, y: Int): Int {
+            return x + y
+        }
+
+        /*
+        常规函数 ： fun test(x : Int , y : Int) : Int = x + y
+        匿名函数 ： fun(x : Int , y : Int) : Int = x + y
+
+        在前面的Kotlin——初级篇（七）：函数（方法）基础总结我们讲解过单表达式函数。故而，可以简写成下面的方式。
+
+        常规函数 ： fun test(x : Int , y : Int) : Int = x + y
+        匿名函数 ： fun(x : Int , y : Int) : Int = x + y
+        从上面的两个例子可以看出，匿名函数与常规函数的区别在于一个有函数名，一个没有。
+
+        实例演练：
+
+        val test1 = fun(x : Int , y : Int) = x + y  // 当返回值可以自动推断出来的时候，可以省略，和函数一样
+        val test2 = fun(x : Int , y : Int) : Int = x + y
+        val test3 = fun(x : Int , y : Int) : Int{
+            return x + y
+        }
+
+        println(test1(3,5))
+        println(test2(4,6))
+        println(test3(5,7))
+        输出结果为：
+
+        8
+        10
+        12
+        从上面的代码我们可以总结出匿名函数与Lambda表达式的几点区别：
+
+        匿名函数的参数传值，总是在小括号内部传递。而Lambda表达式传值，可以有省略小括号的简写写法。
+        在一个不带标签的return语句中，匿名函数时返回值是返回自身函数的值，而Lambda表达式的返回值是将包含它的函数中返回。
+
+        比较像 : 要做区分
+         */
+
+    }
+
+    /** 3.4、带接收者的函数字面值 */
+    /*
+    在kotlin中，提供了指定的接受者对象调用Lambda表达式的功能。在函数字面值的函数体中，可以调用该接收者对象上的方法而无需任何额外的限定符。
+    它类似于扩展函数，它允你在函数体内访问接收者对象的成员。
+     */
+
+    @Test
+    fun test7() {
+        /*
+        匿名函数作为接收者类型
+    匿名函数语法允许你直接指定函数字面值的接收者类型，如果你需要使用带接收者的函数类型声明一个变量，并在之后使用它，这将非常有用。
+
+    例：
+         */
+        val iop = fun Int.(other: Int): Int = this + other
+
+    }
+
 }
