@@ -2,9 +2,13 @@ package com.pdxx.kotlinlearn.`5ClassAndObject`
 
 import org.junit.Test
 
+
+
 /**
- * 写测试类的时候 , 不能有main 的方法
- *
+ 写测试类的时候 , 不能有main 的方法
+ */
+
+/**
 Kotlin 扩展
 Kotlin 可以对一个类的属性和方法进行扩展，且不需要继承或使用 Decorator 模式。
 
