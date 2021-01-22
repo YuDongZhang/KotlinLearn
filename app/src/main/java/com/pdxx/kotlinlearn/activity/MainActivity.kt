@@ -1,4 +1,4 @@
-package com.pdxx.kotlinlearn
+package com.pdxx.kotlinlearn.activity
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -10,6 +10,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
+import com.pdxx.kotlinlearn.R
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,11 +32,11 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "点击了按钮1", Toast.LENGTH_SHORT).show()
             }
             R.id.tv2 -> {
-                var intent:Intent = Intent(this,ListActivity::class.java)
+                var intent:Intent = Intent(this, ListActivity::class.java)
                 startActivity(intent)
             }
             R.id.tv3 ->{
-                var intent = Intent(this,SwitchFragmentActivity::class.java)
+                var intent = Intent(this, SwitchFragmentActivity::class.java)
                 startActivity(intent)
             }
         }

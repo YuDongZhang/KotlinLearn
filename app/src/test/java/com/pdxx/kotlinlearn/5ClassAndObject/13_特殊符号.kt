@@ -85,7 +85,6 @@ class `13_特殊符号` {
     }
 
 
-
     /**
     ::  成员引用或类引用或函数引用
     这个符号不能理解 , 可以看下 startactivity   startActivity(Intent(this@KotlinActivity, MainActivity::class.java)) , 的到 类class 对象
@@ -96,6 +95,13 @@ class `13_特殊符号` {
         fun isOdd(s: String) = s == "brillig" || s == "slithy" || s == "tove"
         val numbers: List<Int> = listOf(1, 2, 3)
         println(numbers.filter(::isOdd)) // refers to is0dd (x: Int)[1，3]
+    }
+
+    @Test
+    fun test6() {
+        var xx: Int? = null
+
+        xx?.let { println("不为空") } ?: 5.let { println("为空" + it) }
     }
 
 

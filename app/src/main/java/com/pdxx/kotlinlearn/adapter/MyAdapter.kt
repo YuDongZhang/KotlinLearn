@@ -1,10 +1,11 @@
-package com.pdxx.kotlinlearn
+package com.pdxx.kotlinlearn.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.pdxx.kotlinlearn.R
 import com.pdxx.kotlinlearn.bean.PersonEntity
 
 /**

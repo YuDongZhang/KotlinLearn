@@ -1,18 +1,19 @@
-package com.pdxx.kotlinlearn
+package com.pdxx.kotlinlearn.activity
 
-import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.Toast
+import com.pdxx.kotlinlearn.R
+import com.pdxx.kotlinlearn.adapter.MyAdapter
 import com.pdxx.kotlinlearn.bean.PersonEntity
 
 class ListActivity : AppCompatActivity() {
 
     private var mRecyclerView: RecyclerView?=null
-    private var mMyAdapter:MyAdapter?=null
+    private var mMyAdapter: MyAdapter?=null
     private val personList = ArrayList<PersonEntity>()
 
 
@@ -45,7 +46,7 @@ class ListActivity : AppCompatActivity() {
     private fun initView() {
         mRecyclerView = findViewById<RecyclerView>(R.id.recycler)
         mMyAdapter = MyAdapter(personList)
-        mMyAdapter!!.setOnItemClickListener(object :MyAdapter.OnItemClickListener{
+        mMyAdapter!!.setOnItemClickListener(object : MyAdapter.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
                 Toast.makeText(this@ListActivity, "this is toast message", Toast.LENGTH_SHORT).show()
             }

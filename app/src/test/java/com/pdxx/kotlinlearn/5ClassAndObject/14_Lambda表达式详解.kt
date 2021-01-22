@@ -165,7 +165,6 @@ class `14_Lambda表达式详解` {
         // 常规函数：
         fun test(x: Int, y: Int): Int {
             return x + y
-
         }
 
         // 匿名函数：
@@ -174,8 +173,6 @@ class `14_Lambda表达式详解` {
         }
 
         /*
-        常规函数 ： fun test(x : Int , y : Int) : Int = x + y
-        匿名函数 ： fun(x : Int , y : Int) : Int = x + y
 
         在前面的Kotlin——初级篇（七）：函数（方法）基础总结我们讲解过单表达式函数。故而，可以简写成下面的方式。
 
@@ -183,19 +180,30 @@ class `14_Lambda表达式详解` {
         匿名函数 ： fun(x : Int , y : Int) : Int = x + y
         从上面的两个例子可以看出，匿名函数与常规函数的区别在于一个有函数名，一个没有。
 
-        实例演练：
+         实例演练：
+         */
 
-        val test1 = fun(x : Int , y : Int) = x + y  // 当返回值可以自动推断出来的时候，可以省略，和函数一样
-        val test2 = fun(x : Int , y : Int) : Int = x + y
-        val test3 = fun(x : Int , y : Int) : Int{
+
+
+        val test1 = fun(x: Int, y: Int) = x + y  // 当返回值可以自动推断出来的时候，可以省略，和函数一样
+        val test2 = fun(x: Int, y: Int): Int = x + y
+        val test3 = fun(x: Int, y: Int): Int {
             return x + y
         }
 
-        println(test1(3,5))
-        println(test2(4,6))
-        println(test3(5,7))
-        输出结果为：
+        //lambda 表达式
+        val test4 = {a:Int,b:Int->a+b}
+        val test5:(Int,Int)->Int = {a,b->a+b}
 
+        println(test1(3, 5))
+        println(test2(4, 6))
+        println(test3(5, 7))
+
+        println(test4(7,8))
+        println(test5(8,9))
+
+        /*
+        输出结果为：
         8
         10
         12
@@ -206,7 +214,7 @@ class `14_Lambda表达式详解` {
         在一个不带标签的return语句中，匿名函数时返回值是返回自身函数的值，而Lambda表达式的返回值是将包含它的函数中返回。
 
         比较像 : 要做区分
-         */
+        */
 
     }
 
@@ -221,13 +229,12 @@ class `14_Lambda表达式详解` {
     fun test7() {
         /*
         匿名函数作为接收者类型
-
-         匿名函数语法允许你直接指定函数字面值的接收者类型，如果你需要使用带接收者的函数类型声明一个变量，并在之后使用它，这将非常有用。
-
-            例：
+        匿名函数语法允许你直接指定函数字面值的接收者类型，如果你需要使用带接收者的函数类型声明一个变量，并在之后使用它，这将非常有用。
+        例：
          */
         val iop = fun Int.(other: Int): Int = this + other
 
+        println(iop.invoke(1,3))
     }
 
 }
