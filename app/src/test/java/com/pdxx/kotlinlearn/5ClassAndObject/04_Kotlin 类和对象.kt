@@ -33,16 +33,19 @@ class `04_Kotlin 类和对象` {
         var city: String = "测试3"
     }
 
-    class TestRun4 {
+    @Test
+    fun TestRun4() {
         //我们可以像使用普通函数那样使用构造函数创建类实例：
         val site = Runoob4() // Kotlin 中没有 new 关键字
 
         //要使用一个属性，只要用名称引用它即可
         var s = site.name           // 使用 . 号来引用
         var y = site.url
+        println(s+"---"+y)
     }
 
     /**构造器*/
+
     /**Koltin 中的类可以有一个 主构造器，以及一个或多个次构造器，主构造器是类头部的一部分，位于类名称之后:*/
     class Person5 constructor(firstName: String) {
 
@@ -75,28 +78,30 @@ class `04_Kotlin 类和对象` {
 
     /**
     1.4、什么时候constructor可以省略
+
     在构造函数不具有注释符或者默认的可见性修饰符时，constructor关键字可以省略。
-    默认的可见性修饰符时public。可以省略不写。请阅读我的另一篇文章Kotlin——中级篇（三）：可见性修饰符详解
+    默认的可见性修饰符时public。可以省略不写。请阅读我的另一篇文章Kotlin——中级篇
+
+    （三）：可见性修饰符详解
      */
 
-    /*
-    class Test private constructor(num: Int){
+    class Test9 private constructor(num: Int){
     }
 
-    class Test @Inject constructor(num: Int){
-    }
-    */
+    /*class Test8 @Inject constructor(num: Int){
+    }*/
 
     /**
-     2、辅助（二级）构造函数
+    2、辅助（二级）构造函数
 
-     Kotlin中支持二级构造函数。它们以constructor关键字作为前缀。
+    Kotlin中支持二级构造函数。它们以constructor关键字作为前缀。
 
-     class Test{
-         constructor(参数列表){
+    class Test{
 
-        }
-     }
+    constructor(参数列表){
+
+    }
+    }
      */
 
     /**
@@ -106,13 +111,13 @@ class `04_Kotlin 类和对象` {
      */
 
     // 这里是为了代码清晰，故而没有隐藏constructor关键字
-    class Person_7 constructor(num: Int){
+    class Person_7 constructor(num: Int) {
 
         init {
             println("num = $num")
         }
 
-        constructor(num : Int, num2: Int) : this(num) {  //这个地方用到了 this
+        constructor(num: Int, num2: Int) : this(num) {  //这个地方用到了 this
             println(num + num2)
         }
     }
@@ -120,20 +125,21 @@ class `04_Kotlin 类和对象` {
     @Test
     fun test2_2() {
         var p1 = Person_7(1)
-        var p2 = Person_7(1,2)
+        println("---------------------------")
+        var p2 = Person_7(2, 3)
     }
 
-      /*
-      说明：二级构造函数中的参数1(num)，是委托了主构造函数的参数num。
+    /*
+    说明：二级构造函数中的参数1(num)，是委托了主构造函数的参数num。
 
-        可以看出，当实例化类的时候只传1个参数的时候，只会执行init代码块中的代码。当传2个参数的时候，除了执行了init代码块中代码外，还执行了二级构造函数中的代码。
+      可以看出，当实例化类的时候只传1个参数的时候，只会执行init代码块中的代码。当传2个参数的时候，除了执行了init代码块中代码外，还执行了二级构造函数中的代码。
 
-        输出结果为：
+      输出结果为：
 
-      num = 1
-      num = 1
-         3
-       */
+    num = 1
+    num = 1
+       3
+     */
 
     /**
     2.3、当类的主构造函数都存在默认值时的情况
@@ -170,7 +176,6 @@ class `04_Kotlin 类和对象` {
         num1 = 4	 num2 = 5 	 num3 = 6
         说明： 当实例化无参的构造函数时。使用了参数的默认值。
      */
-
 
 
     //getter 和 setter

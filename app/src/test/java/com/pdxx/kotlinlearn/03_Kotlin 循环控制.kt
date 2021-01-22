@@ -11,8 +11,12 @@ class `03_Kotlin 循环控制` {
     fun test1() {
         //for 循环可以对任何提供迭代器（iterator）的对象进行遍历，语法如下:
         var collection = setOf<Int>(1, 2, 3)
-        for (item in collection) print(item)
-        println()
+        //最好把括号补充完整
+//        for (item in collection) print(item)
+        for (item in collection) {
+            println(item)
+        }
+
         println("---------------------------------------")
 //        循环体可以是一个代码块:
 //
@@ -24,7 +28,7 @@ class `03_Kotlin 循环控制` {
 //        如果你想要通过索引遍历一个数组或者一个 list，你可以这么做：
         var array: List<Int> = listOf(1, 2, 3)
         for (i in array.indices) {
-            print(array[i])
+            println(array[i])
         }
         println("---------------------------------------")
 //        注意这种"在区间上遍历"会编译成优化的实现而不会创建额外对象。

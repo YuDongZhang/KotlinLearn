@@ -7,8 +7,7 @@ class `01_Kotlin 基础语法` {
 
     @Test
     fun addition_isCorrect() {
-        //  assertEquals(4, (2 + 2).toLong())
-        // print(sum(1, 3))
+
     }
 
     /**
@@ -44,7 +43,7 @@ class `01_Kotlin 基础语法` {
         print(a + b)
     }
 
-//    可变长参数函数
+    //    可变长参数函数
 //    函数的变长参数可以用 vararg 关键字进行标识：
     fun vars(vararg v: Int) {
         for (vt in v) {
@@ -52,7 +51,7 @@ class `01_Kotlin 基础语法` {
         }
     }
 
-//   lambda(匿名函数)
+    //   lambda(匿名函数)
 //    lambda表达式使用实例：
     fun lambda_test() {
         val sumLambda: (Int, Int) -> Int = { x, y -> x + y }
@@ -61,8 +60,10 @@ class `01_Kotlin 基础语法` {
 
     /**
      * 定义常量与变量
+     *
+     * var : 就是 变量
      */
-    /*
+    /**
     可变变量定义：var 关键字
 
     var <标识符> : <类型> = <初始化值>
@@ -77,7 +78,7 @@ class `01_Kotlin 基础语法` {
     fun variable_test() {
         var b: Int = 2;
         var c: Int;
-        val e = 1;
+        val e = 1;//给 e 重新赋值会报错
 
         var a = 1
         // 模板中的简单名称：
@@ -88,6 +89,7 @@ class `01_Kotlin 基础语法` {
         val s2 = "${s1.replace("is", "was")}, but now is $a"
 
         print(s2)
+
     }
 
     /**
@@ -183,8 +185,6 @@ class `01_Kotlin 基础语法` {
             println(i)
         }
     }
-
-
 
 
 }

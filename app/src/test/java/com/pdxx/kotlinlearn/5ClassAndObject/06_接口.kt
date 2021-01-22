@@ -2,7 +2,7 @@ package com.pdxx.kotlinlearn.`5ClassAndObject`
 
 import org.junit.Test
 
-class `06接口` {
+class `06_接口` {
 
     /**
     在Kotlin中冒号 (:) 使用的地方很多：
@@ -27,8 +27,8 @@ class `06接口` {
             println("foo")
         }
     }
-/*实现接口
-一个类或者对象可以实现一个或多个接口。*/
+    /*实现接口
+    一个类或者对象可以实现一个或多个接口。*/
 
     class Child1 : MyInterface1 {
         override fun bar() {

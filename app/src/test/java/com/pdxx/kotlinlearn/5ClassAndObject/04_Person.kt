@@ -7,27 +7,14 @@ import org.junit.Test
  */
 class `04_Person` {
 
-    @Test
-    fun test() {
-        var person: Person = Person()
-        person.lastName = "wang"
-        println("lastName:${person.lastName}")
-
-        person.no = 9
-        println("no:${person.no}")
-
-        person.no = 20
-        println("no:${person.no}")
-    }
-
-
     class Person {
         var lastName: String = "zhang"
             get() = field.toUpperCase()   // 将变量赋值后转换为大写
             set
 
         var no: Int = 100
-            get() = field                /**后端变量 ,就是传入的值是可以改变的 , 判断的*/
+            get() = field
+            /**后端变量 ,就是传入的值是可以改变的 , 判断的 */
             set(value) {
                 if (value < 10) {       // 如果传入的值小于 10 返回该值
                     field = value
@@ -43,28 +30,50 @@ class `04_Person` {
     }
 
     @Test
+    fun test() {
+        var person: Person = Person()
+        person.lastName = "wang"
+        println("lastName:${person.lastName}")
+
+        person.no = 9
+        println("no:${person.no}")
+
+        person.no = 20
+        println("no:${person.no}")
+    }
+
+
+    @Test
     fun test1_1() {
 
 
     }
 
 
+    class TestSubject {
+        fun method() {
 
+        }
 
-//    非空属性必须在定义的时候初始化,kotlin提供了一种可以延迟初始化的方案,使用 lateinit 关键字描述属性：
-//public class MyTest {
-//    lateinit var subject: TestSubject
-//
-//    @SetUp
-//    fun setup() {
-//        subject = TestSubject()
-//    }
-//
-//    @Test
-//    fun test() {
-//        subject.method()  // dereference directly
-//    }
-//}
+    }
+
+    //    非空属性必须在定义的时候初始化,kotlin提供了一种可以 延迟初始化的方案,使用 lateinit 关键字描述属性：
+    class MyTest {
+        lateinit var subject: TestSubject
+
+        init {
+            setup()
+        }
+
+        fun setup() {
+            subject = TestSubject()
+        }
+
+        @Test
+        fun test() {
+            subject.method()  // dereference directly
+        }
+    }
 
     /**
      * 主构造器
@@ -126,7 +135,7 @@ class `04_Person` {
      */
     class Person5(val name: String) {
         constructor (name: String, age: Int) : this(name) {
-// 初始化...
+        // 初始化...
         }
     }
 
@@ -180,16 +189,28 @@ class `04_Person` {
 
     /**
     抽象类
-    抽象是面向对象编程的特征之一，类本身，或类中的部分成员，都可以声明为abstract的。抽象成员在类中不存在具体的实现。
+
+    抽象是面向对象编程的特征之一，类本身，或类中的部分成员，都可以声明为 abstract 的。抽象成员在类中不存在具体的实现。
     注意：无需对抽象类或抽象成员标注open注解。
      */
-    open class Base {
-        open fun f() {}
+    open class Son {
+        open fun f() {
+            println("我是base.f()方法")
+        }
     }
 
-    abstract class Derived : Base() {
+    abstract class Derived : Son() {
+
         override abstract fun f()
     }
+
+    @Test
+    fun test9(){
+        var son = Son()
+        println(son.f())
+    }
+
+
 
     /**
     嵌套类
@@ -198,9 +219,9 @@ class `04_Person` {
 
     class Outer {                  // 外部类
         private val bar: Int = 1
-
         class Nested {             // 嵌套类
             fun foo() = 2
+
         }
     }
 
@@ -290,6 +311,7 @@ class `04_Person` {
     enum        // 枚举类
     open        // 类可继承，类默认是final的
     annotation  // 注解类
+
     accessModifier: 访问权限修饰符
 
     private    // 仅在同一个文件中可见

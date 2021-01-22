@@ -15,7 +15,7 @@ class `02_Kotlin 条件控制` {
         var max1 = a
         if (a < b) max1 = b
 
-// 使用 else
+    // 使用 else
         var max2: Int
         if (a > b) {
             max2 = a
@@ -23,7 +23,7 @@ class `02_Kotlin 条件控制` {
             max2 = b
         }
 
-// 作为表达式
+        // 作为表达式
         val max3 = if (a > b) a else b
 
         //我们也可以把 IF 表达式的结果赋值给一个变量。
@@ -35,15 +35,15 @@ class `02_Kotlin 条件控制` {
             b
         }
 
-//        这也说明我也不需要像Java那种有一个三元操作符，因为我们可以使用它来简单实现：
+        // 这也说明我也不需要像Java那种有一个三元操作符，因为我们可以使用它来简单实现：
 
-//        val c = if (condition) a else b
+        // val c = if (condition) a else b
 
         println("-----------------------------------------")
-       /* 使用区间
-        使用 in 运算符来检测某个数字是否在指定区间内，区间格式为 x..y ：
+        /* 使用区间
+         使用 in 运算符来检测某个数字是否在指定区间内，区间格式为 x..y ：
 
-        实例*/
+         实例*/
 
         val x = 5
         val y = 9
@@ -61,12 +61,12 @@ class `02_Kotlin 条件控制` {
     when 类似其他语言的 switch 操作符。其最简单的形式如下：
      */
     @Test
-    fun test2(){
-        var x =2
-        when(x){
+    fun test2() {
+        var x = 2
+        when (x) {
             1 -> println("x==1")
             2 -> println("x==2")
-            else ->{// 注意这个块
+            else -> {// 注意这个块
                 println("x 不是 1 ，也不是 2")
             }
         }
@@ -89,7 +89,7 @@ class `02_Kotlin 条件控制` {
         println("---------------------------------------------------")
 
         //    另一种可能性是检测一个值是（is）或者不是（!is）一个特定类型的值。注意： 由于智能转换，你可以访问该类型的方法和属性而无需 任何额外的检测。
-        fun hasPrefix(x: Any) = when(x) {
+        fun hasPrefix(x: Any) = when (x) {
             is String -> x.startsWith("prefix")
             else -> false
         }
@@ -99,7 +99,7 @@ class `02_Kotlin 条件控制` {
 //        x.isEven() -> print("x is even")
 //        else -> print("x is funny")
         println("---------------------------------------------------")
-      //when 中使用 in 运算符来判断集合内是否包含某实例：
+        //when 中使用 in 运算符来判断集合内是否包含某实例：
         val items = setOf("apple", "banana", "kiwi")
         when {
             "orange" in items -> println("juicy")

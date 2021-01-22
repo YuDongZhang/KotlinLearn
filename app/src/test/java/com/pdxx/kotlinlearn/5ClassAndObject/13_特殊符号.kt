@@ -2,7 +2,7 @@ package com.pdxx.kotlinlearn.`5ClassAndObject`
 
 import org.junit.Test
 
-class `13特殊符号` {
+class `13_特殊符号` {
     /** 一、? 与 !! 的比较 */
     val a: String = "aa"
     /** 直接这样定义 , a 是 非空类型 , 比如 a = null , 是报错的*/
@@ -19,12 +19,13 @@ class `13特殊符号` {
         /**
          * b是可空类型，直接访问可空类型将编译不通过，需要通过?.或者!!.来访问
          * */
-//        b.length  这样是错误
+        // b.length  这样是错误 , 编译都不能通过
+
         b?.length
         b!!.length
 
         /**
-         * 对于一个不可为空类型：
+        对于一个不可为空类型：
         如果直接给不可为空类型赋值一个可能为空的对象就在编译阶段就不能通过
         对于一个可空类型：
         通过？声明，在访问该类型的时候直接访问不能编译通过，需要通过?.或者!!.
@@ -42,10 +43,12 @@ class `13特殊符号` {
 
     @Test
     fun test2() {
-        /** let函数默认当前这个对象作为闭包的it参数，返回值是函数里面最后一行，或者指定return。
+        /**
+         * let函数默认当前这个对象作为闭包的it参数，返回值是函数里面最后一行，或者指定return。
          *
          * 通过let语句，在?.let之后，如果为空不会有任何操作，只有在非空的时候才会执行let之后的操作
          * */
+
         var e = c?.let {
             it.javaClass
             it.length
@@ -75,12 +78,13 @@ class `13特殊符号` {
     /**当调用函数的时候，不给参数。此时defaultValue() 进行默认参数赋值。*/
     @Test
     fun test4() {
+        fun defaultValue(h: Int = 1, i: Int = 2): Int {
+            return h + i
+        }
         print(defaultValue())
     }
 
-    fun defaultValue(h: Int = 1, i: Int = 2): Int {
-        return h + i
-    }
+
 
     /**
     ::  成员引用或类引用或函数引用

@@ -3,7 +3,7 @@ package com.pdxx.kotlinlearn.`5ClassAndObject`
 import android.widget.Button
 import org.junit.Test
 
-class `14Lambda表达式详解` {
+class `14_Lambda表达式详解` {
     /** Lambda表达式的本质其实是匿名函数，因为在其底层实现中还是通过匿名函数来实现 */
     var bt: Button? = null
 
@@ -39,7 +39,7 @@ class `14Lambda表达式详解` {
             println("无参数")
         }
 
-        // lambda代码
+        // lambda代码 , 写法
         val test = { println("无参数") }
 
         // 调用
@@ -51,16 +51,21 @@ class `14Lambda表达式详解` {
     @Test
     fun test2() {
         // 源代码
-//        fun test(a: Int, b: Int): Int {
-//            return a + b
-//        }
+        fun test(a: Int, b: Int): Int {
+            return a + b
+        }
 
-        // lambda
-        val test: (Int, Int) -> Int = { a, b -> a + b }  //这种直接说了返回类型
+        // lambda 写法
+        val test2: (Int, Int) -> Int = { a, b -> a + b }  //这种直接说了返回类型
         //或者
         val test3 = { a: Int, b: Int -> a + b } //这种推断类型
 
+        /** 可不可以这么理解 , 箭头指向的都是结果 ,
+         * 第一行 : 箭头指向 Int 其实就是结果是一个 Int , 而这个 Int 等于的就是 大括号 里面的东西
+         * 第二行 : 大括号中的箭头 , 指向是 a + b  , 其实就是 a + b之后的结果
+         */
         test(1, 2)
+        test2(5, 6)
         test3(3, 4)
     }
 
@@ -80,9 +85,9 @@ class `14Lambda表达式详解` {
         // 调用
         test(10, sum(3, 5)) // 结果为：18
 
-        // lambda
+        // lambda 方式
         fun test(a: Int, b: (num1: Int, num2: Int) -> Int): Int {
-            return a + b.invoke(3, 5)
+            return a + b.invoke(3, 5) //invoke()函数：表示为通过函数变量调用自身，因为上面例子中的变量b是一个匿名函数。
         }
 
         // 调用
@@ -90,8 +95,9 @@ class `14Lambda表达式详解` {
     }
 
     /**
-    lambda表达式总是被大括号括着。
-    定义完整的Lambda表达式如上面实例中的语法2，它有其完整的参数类型标注，与表达式返回值。当我们把一些类型标注省略的情况下，
+    1. lambda表达式总是被大括号括着。
+    定义完整的Lambda表达式如上面实例中的语法
+    2，它有其完整的参数类型标注，与表达式返回值。当我们把一些类型标注省略的情况下，
     就如上面实例中的语法2的另外一种类型。当它推断出的返回值类型不为'Unit'时，它的返回值即为->符号后面代码的最后一个（或只有一个）表达式的类型。
     在上面例子中语法3的情况表示为：高阶函数，当Lambda表达式作为其一个参数时，只为其表达式提供了参数类型与返回类型，
     所以，我们在调用此高阶函数的时候我们要为该Lambda表达式写出它的具体实现。
@@ -103,6 +109,7 @@ class `14Lambda表达式详解` {
     /**
     3.1、it
     it并不是Kotlin中的一个关键字(保留字)。
+
     it是在当一个高阶函数中Lambda表达式的参数只有一个的时候可以使用it来使用此参数。it可表示为单个参数的隐式名称，是Kotlin语言约定的。
     例1：
      */
@@ -118,7 +125,6 @@ class `14Lambda表达式详解` {
         // 过滤掉数组中元素小于2的元素，取其第一个打印。这里的it就表示每一个元素。
         println(arr.filter { it < 5 }.component1()) //这里取第一个
 
-
         fun test(num1: Int, bool: (Int) -> Boolean): Int {
             return if (bool(num1)) {
                 num1
@@ -130,7 +136,6 @@ class `14Lambda表达式详解` {
         //代码讲解：上面的代码意思是，在高阶函数test中，其返回值为Int类型，Lambda表达式以num1位条件。其中如果Lambda表达式的值为false的时候返回0，反之返回num1。
         // 故而当条件为num1 > 5这个条件时，当调用test函数，num1 = 10返回值就是10，num1 = 4返回值就是0。
     }
-
 
     /** 3.2、下划线（_）*/
     /*
@@ -160,6 +165,7 @@ class `14Lambda表达式详解` {
         // 常规函数：
         fun test(x: Int, y: Int): Int {
             return x + y
+
         }
 
         // 匿名函数：
@@ -193,6 +199,7 @@ class `14Lambda表达式详解` {
         8
         10
         12
+
         从上面的代码我们可以总结出匿名函数与Lambda表达式的几点区别：
 
         匿名函数的参数传值，总是在小括号内部传递。而Lambda表达式传值，可以有省略小括号的简写写法。
@@ -204,6 +211,7 @@ class `14Lambda表达式详解` {
     }
 
     /** 3.4、带接收者的函数字面值 */
+
     /*
     在kotlin中，提供了指定的接受者对象调用Lambda表达式的功能。在函数字面值的函数体中，可以调用该接收者对象上的方法而无需任何额外的限定符。
     它类似于扩展函数，它允你在函数体内访问接收者对象的成员。
@@ -213,9 +221,10 @@ class `14Lambda表达式详解` {
     fun test7() {
         /*
         匿名函数作为接收者类型
-    匿名函数语法允许你直接指定函数字面值的接收者类型，如果你需要使用带接收者的函数类型声明一个变量，并在之后使用它，这将非常有用。
 
-    例：
+         匿名函数语法允许你直接指定函数字面值的接收者类型，如果你需要使用带接收者的函数类型声明一个变量，并在之后使用它，这将非常有用。
+
+            例：
          */
         val iop = fun Int.(other: Int): Int = this + other
 

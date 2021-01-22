@@ -52,6 +52,11 @@ class `04_类的Getter和Setter` {
         val isEmpty: Boolean
             get() = this.size == 0
 
+         //有set()会报错
+         //  set(value) {
+         //   field = value
+         //    }
+
         // 另一个例子
         val num = 2
             get() = if (field > 5) 10 else 0

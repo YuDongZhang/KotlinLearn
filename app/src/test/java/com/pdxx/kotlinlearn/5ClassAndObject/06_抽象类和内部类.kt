@@ -2,7 +2,7 @@ package com.pdxx.kotlinlearn.`5ClassAndObject`
 
 import org.junit.Test
 
-class `06抽象类和内部类` {
+class `06_抽象类和内部类` {
     /**
     抽象类
 

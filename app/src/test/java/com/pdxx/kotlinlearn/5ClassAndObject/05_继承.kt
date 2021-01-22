@@ -25,7 +25,7 @@ class Derived(p: Int) : Base(p)
 
  */
 
-class `05继承` {
+class `05_继承` {
 
     /**
     格式
@@ -69,7 +69,7 @@ class `05继承` {
     分析：从上面的代码可以看出，DemoTest类只是继承了Demo类，并没有实现任何的代码结构。一样可以使用Demo类中的属性与函数。这就是继承的好处。
      */
 
-    //Kotlin类，可以有一个主构造函数，或者多个辅助函数。或者没有构造函数的情况
+    /** Kotlin类，可以有一个主构造函数，或者多个辅助函数。或者没有构造函数的情况 */
 
     /**这里当实现类无主构造函数，和存在主构造函数的情况。*/
 
@@ -80,7 +80,11 @@ class `05继承` {
      *
      * */
 
-    /*class MyView() : View() {
+    class  FatherOne constructor(index: Int){
+
+    }
+
+   /* class MyView() : View() {
 
         constructor(context: Context) : super(context)
 
@@ -118,7 +122,9 @@ class `05继承` {
 
     不管是Java还是Kotlin，重写基类型里面的方法，则称为重写，或者是覆盖基类型方法。不过这里介绍两点Kotlin一点特殊的地方
 
-    当基类中的函数，没有用open修饰符修饰的时候，实现类中出现的函数的函数名不能与基类中没有用open修饰符修饰的函数的函数名相同，不管实现类中的该函数有无override修饰符修饰。
+    当基类中的函数，
+    没有用open修饰符修饰的时候，
+    实现类中出现的函数的函数名不能与基类中没有用open修饰符修饰的函数的函数名相同，不管实现类中的该函数有无override修饰符修饰。
     读着有点绕，直接看例子你就明白了。
      */
 
@@ -261,25 +267,25 @@ class `05继承` {
      */
     open class A {
         open fun f() {
-            print("A")
+            print("A.f()")
         }
 
         fun a() {
-            print("a")
+            print("A.a()")
         }
     }
 
     interface B {
         fun f() {
-            print("B")
+            print("B.f()")
         } //接口的成员变量默认是 open 的
 
         fun b() {
-            print("b")
+            print("B.b()")
         }
     }
 
-    class C() : A(), B {
+    class C() : A(), B {//C后面可以加() 也可以不加
         override fun f() {
             super<A>.f()//调用 A.f()
             super<B>.f()//调用 B.f()
@@ -297,7 +303,8 @@ class `05继承` {
     @Test
     fun test5() {
         val c = C()
-        c.f();
+        c.f()
+        c.a()
     }
 
 
@@ -361,11 +368,11 @@ fun main(arge: Array<String>>){
      *
      * 这一个高级功能去替代掉继承。
      *
-     *如果你有过其他面向对象语言的编程经验的话，你只要掌握其
+     * 如果你有过其他面向对象语言的编程经验的话，你只要掌握其
 
-     *关键字、属性/函数重写、以及覆盖规则
+     * 关键字、属性/函数重写、以及覆盖规则
 
-     *这三个知识点就可以了。
+     * 这三个知识点就可以了。
      */
 
 }
