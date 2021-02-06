@@ -77,11 +77,13 @@ class SwitchFragmentActivity : AppCompatActivity() {
             1 -> mFragment01?.let {
                 transaction.show(it)
             } ?: Fragment01().let {
+                mFragment01 = it
                 transaction.add(R.id.frame_layout, it)
             }
             2 -> mFragment02?.let {
                 transaction.show(it)
             } ?: Fragment02().let {
+                mFragment02 = it
                 transaction.add(R.id.frame_layout, it)
             }
         }
