@@ -25,18 +25,22 @@ class MainActivity : AppCompatActivity() {
         unbinder = ButterKnife.bind(this)
     }
 
-    @OnClick(R.id.tv1, R.id.tv2, R.id.tv3)
+    @OnClick(R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4)
     fun onClickView(view: View) {
         when (view.id) {
             R.id.tv1 -> {
                 Toast.makeText(this, "点击了按钮1", Toast.LENGTH_SHORT).show()
             }
             R.id.tv2 -> {
-                var intent:Intent = Intent(this, ListActivity::class.java)
+                var intent = Intent(this, ListActivity::class.java)
                 startActivity(intent)
             }
-            R.id.tv3 ->{
+            R.id.tv3 -> {
                 var intent = Intent(this, SwitchFragmentActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.tv4 -> {
+                var intent = Intent(this, ViewPagerActivity::class.java)
                 startActivity(intent)
             }
         }
