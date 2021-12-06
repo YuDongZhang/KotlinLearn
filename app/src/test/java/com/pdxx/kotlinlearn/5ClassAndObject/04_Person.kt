@@ -33,20 +33,13 @@ class `04_Person` {
     fun test() {
         var person: Person = Person()
         person.lastName = "wang"
-        println("lastName:${person.lastName}")
+        println("lastName set和get : ${person.lastName}")
 
         person.no = 9
-        println("no:${person.no}")
+        println("no的 set get 后端变量: ${person.no}")
 
         person.no = 20
-        println("no:${person.no}")
-    }
-
-
-    @Test
-    fun test1_1() {
-
-
+        println("no的 set get 后端变量: ${person.no}")
     }
 
 
@@ -75,6 +68,7 @@ class `04_Person` {
         }
     }
 
+
     /**
      * 主构造器
     主构造器中不能包含任何代码，初始化代码可以放在初始化代码段中，初始化代码段使用 init 关键字作为前缀。
@@ -85,12 +79,22 @@ class `04_Person` {
         }
     }
 
+
 //注意：主构造器的参数可以在初始化代码段中使用，也可以在类主体n定义的属性初始化代码中使用。
 // 一种简洁语法，可以通过主构造器来定义属性并初始化属性值（可以是var或val）：
 
     class People(val firstName: String, val lastName: String) {
         //...
     }
+
+
+    @Test
+    fun test1_1() {
+        Person2("主构造函数 init 初始化")
+    }
+
+
+
 
     //如果构造器有注解，或者有可见度修饰符，这时constructor关键字是必须的，注解和修饰符要放在它之前。
     class Person3 constructor(name: String) {  // 类名为 Runoob
@@ -125,19 +129,33 @@ class `04_Person` {
     类也可以有二级构造函数，需要加前缀 constructor:
      */
     class Person4 {
-        constructor(parent: Person4) {
-//        parent.children.add(this)
+        constructor(parent: String) {
+          println("次级构造函数")
         }
     }
+
+    @Test
+    fun test21(){
+        Person4("11");
+    }
+
 
     /**
     如果类有主构造函数，每个次构造函数都要，或直接或间接通过另一个次构造函数代理主构造函数。在同一个类中代理另一个构造函数使用 this 关键字：
      */
     class Person5(val name: String) {
         constructor (name: String, age: Int) : this(name) {
-        // 初始化...
+            // 初始化...
+            println(name)
         }
     }
+
+    @Test
+    fun test22(){
+        Person5("11")
+    }
+
+
 
     /**
     如果一个非抽象类没有声明构造函数(主构造函数或次构造函数)，它会产生一个没有参数的构造函数。构造函数是 public 。
@@ -200,16 +218,14 @@ class `04_Person` {
     }
 
     abstract class Derived : Son() {
-
         override abstract fun f()
     }
 
     @Test
-    fun test9(){
+    fun test9() {
         var son = Son()
         println(son.f())
     }
-
 
 
     /**
@@ -219,6 +235,7 @@ class `04_Person` {
 
     class Outer {                  // 外部类
         private val bar: Int = 1
+
         class Nested {             // 嵌套类
             fun foo() = 2
 

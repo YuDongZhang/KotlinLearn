@@ -24,11 +24,9 @@ class SwitchFragmentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_switch_fragment)
         initView()
-
         // testManager()  测试 第一个 扩展方法
 
 //        test03()
-
 
     }
 
@@ -46,8 +44,6 @@ class SwitchFragmentActivity : AppCompatActivity() {
                          showFragment(mItemFragment!!)
                      }*/
                     switchFragment(0)
-
-
                 }
                 R.id.rb_2 -> {
                     switchFragment(1)
@@ -110,10 +106,11 @@ class SwitchFragmentActivity : AppCompatActivity() {
      */
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
         val fragmentTransaction = beginTransaction()
-
         fragmentTransaction.func()
         fragmentTransaction.commit()
     }
+
+
     /*
     上面这段代码是一个扩展函数，他接收的参数是一个带有接收者的Lambda函数。这个Lambda函数没有任何参数并且返回的是Unit。
     在这个inTransaction扩展函数体内首先调用beginTransaction()获取FragmentTransaction对象，然后在执行Lambda函数之后执行commit()方法。

@@ -41,7 +41,7 @@ class `04_Kotlin 类和对象` {
         //要使用一个属性，只要用名称引用它即可
         var s = site.name           // 使用 . 号来引用
         var y = site.url
-        println(s+"---"+y)
+        println(s + "---" + y)
     }
 
     /**构造器*/
@@ -85,7 +85,8 @@ class `04_Kotlin 类和对象` {
     （三）：可见性修饰符详解
      */
 
-    class Test9 private constructor(num: Int){
+    class Test9 private constructor(num: Int) {
+
     }
 
     /*class Test8 @Inject constructor(num: Int){

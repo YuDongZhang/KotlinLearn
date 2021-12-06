@@ -22,6 +22,9 @@ class `01_Kotlin 基础语法` {
         lambda_test()
     }
 
+    /**
+        : 的意思就是参数后面有类型 , 一般都是指类型
+     */
     // Int 参数，返回值 Int
     fun sum(a: Int, b: Int): Int {
         return a + b
@@ -107,7 +110,7 @@ class `01_Kotlin 基础语法` {
         val age2 = age?.toInt()
         //age为空返回-1
         val age3 = age?.toInt() ?: -1
-
+        println(age);
         println(age1);
         println(age2);
         println(age3);

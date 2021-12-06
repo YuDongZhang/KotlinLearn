@@ -17,6 +17,7 @@ enum class Color2(val rgb: Int) {
     GREEN(0x00FF00),
     BLUE(0x0000FF)
 }
+
 /**
 默认名称为枚举字符名，值从0开始。若需要指定值，则可以使用其构造函数：
 */
@@ -24,6 +25,7 @@ enum class Shape(value:Int){
     ovel(100),
     rectangle(200)
 }
+
 /**
 枚举还支持以声明自己的匿名类及相应的方法、以及覆盖基类的方法。如：*/
 
@@ -38,6 +40,7 @@ enum class ProtocolState {
 
     abstract fun signal(): ProtocolState
 }
+
 /**
 如果枚举类定义任何成员，要使用分号将成员定义中的枚举常量定义分隔开
 
@@ -64,7 +67,6 @@ fun main(args: Array<String>) {
     println(color.ordinal)
 
 }
-
  */
 //自 Kotlin 1.1 起，可以使用 enumValues<T>() 和 enumValueOf<T>() 函数以泛型的方式访问枚举类中的常量 ：
 
