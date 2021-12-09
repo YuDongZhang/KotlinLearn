@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         unbinder = ButterKnife.bind(this)
     }
 
-    @OnClick(R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4)
+    @OnClick(R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4, R.id.tv5)
     fun onClickView(view: View) {
         when (view.id) {
             R.id.tv1 -> {
@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.tv4 -> {
                 var intent = Intent(this, ViewPagerActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.tv5 -> {
+                var intent = Intent(this, GeneralActivity::class.java)
                 startActivity(intent)
             }
         }
