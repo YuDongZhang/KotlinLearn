@@ -71,7 +71,8 @@ class `04_Person` {
 
     /**
      * 主构造器
-    主构造器中不能包含任何代码，初始化代码可以放在初始化代码段中，初始化代码段使用 init 关键字作为前缀。
+     *
+     *主构造器中不能包含任何代码，初始化代码可以放在初始化代码段中，初始化代码段使用 init 关键字作为前缀。
      */
     class Person2 constructor(firstName: String) {
         init {
@@ -92,8 +93,6 @@ class `04_Person` {
     fun test1_1() {
         Person2("主构造函数 init 初始化")
     }
-
-
 
 
     //如果构造器有注解，或者有可见度修饰符，这时constructor关键字是必须的，注解和修饰符要放在它之前。
@@ -130,18 +129,23 @@ class `04_Person` {
      */
     class Person4 {
         constructor(parent: String) {
-          println("次级构造函数")
+            println("次级构造函数")
+        }
+
+        constructor(parent: String, son: String) {
+            println("次级构造函数")
         }
     }
 
     @Test
-    fun test21(){
+    fun test21() {
         Person4("11");
     }
 
 
     /**
-    如果类有主构造函数，每个次构造函数都要，或直接或间接通过另一个次构造函数代理主构造函数。在同一个类中代理另一个构造函数使用 this 关键字：
+    如果类有主构造函数，每个次构造函数都要，或直接或间接通过另一个次构造函数代理主构造函数。
+    在同一个类中代理另一个构造函数使用 this 关键字：
      */
     class Person5(val name: String) {
         constructor (name: String, age: Int) : this(name) {
@@ -151,10 +155,9 @@ class `04_Person` {
     }
 
     @Test
-    fun test22(){
+    fun test22() {
         Person5("11")
     }
-
 
 
     /**

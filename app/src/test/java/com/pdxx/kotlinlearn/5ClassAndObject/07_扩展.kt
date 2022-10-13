@@ -27,6 +27,7 @@ class `07_扩展` {
     receiverType：表示函数的接收者，也就是函数扩展的对象
     functionName：扩展函数的名称
     params：扩展函数的参数，可以为NULL
+
     以下实例扩展 User 类 ：
      */
     class User(var name: String)
@@ -52,16 +53,16 @@ class `07_扩展` {
 
      */
 
-// 扩展函数 swap,调换不同位置的值
-    fun MutableList<Int>.swap(index1: Int, index2: Int) {
-        val tmp = this[index1]     //  this 对应该列表
-        this[index1] = this[index2]
-        this[index2] = tmp
-    }
-
-
     @Test
     fun test2() {
+        // 扩展函数 swap,调换不同位置的值
+        fun MutableList<Int>.swap(index1: Int, index2: Int) {
+            val tmp = this[index1]     //  this 对应该列表
+            this[index1] = this[index2]
+            this[index2] = tmp
+        }
+
+
         val l = mutableListOf(1, 2, 3)
         // 位置 0 和 2 的值做了互换
         l.swap(0, 2) // 'swap()' 函数内的 'this' 将指向 'l' 的值
@@ -77,11 +78,30 @@ class `07_扩展` {
     this关键字指代接收者对象(receiver object)(也就是调用扩展函数时, 在点号之前指定的对象实例)。
      */
 
+    /**
+     * 泛型的扩展 , 看源码 ,可以突破上一个的类型的限制
+     */
+    @Test
+    fun test21() {
+
+        fun <T> MutableList<T>.swap2(index1: Int, index2: Int) {
+            val tmp = this[index1]     //  this 对应该列表
+            this[index1] = this[index2]
+            this[index2] = tmp
+        }
+
+        val listString = mutableListOf("A", "B", "C")
+        listString.swap2(0, 2)
+        println("$listString")
+
+    }
+
 
     /**
     扩展函数是静态解析的
 
-    扩展函数是静态解析的，并不是接收者类型的虚拟成员，在调用扩展函数时，具体被调用的的是哪一个函数，由调用函数的的对象表达式来决定的，而不是动态的类型决定的:
+    扩展函数是静态解析的，并不是接收者类型的虚拟成员，在调用扩展函数时，具体被调用的的是哪一个函数，
+    由调用函数的的对象表达式来决定的，而不是动态的类型决定的:
      */
 
     open class C2
@@ -175,6 +195,21 @@ class `07_扩展` {
     val Foo.bar = 1 // 错误：扩展属性不能有初始化器
     扩展属性只能被声明为 val。
      */
+
+    //为String添加一个lastChar属性，用于获取字符串的最后一个字符
+    val String.lastChar: Char get() = this.get(this.length - 1)
+  //为List添加一个last属性用于获取列表的最后一个元素，this可以省略
+     val <T>List<T>.last: T get() = get(size - 1)
+
+    @Test
+    fun Test22() {
+
+        println("123456".lastChar)
+
+        val listString = listOf("Android Q", "Android N", "Android M")
+        println("listString.last${listString.last}")
+
+    }
 
 
     /**

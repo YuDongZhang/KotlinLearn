@@ -21,7 +21,7 @@ class `06_抽象类和内部类` {
     }
 
     /**
-     * 抽象类Lanauage的实现类TestAbstarctA
+     * 抽象类Lanauage 的 实现类TestAbstarctA
      */
     class TestAbstarctA : Lanauage() {
 

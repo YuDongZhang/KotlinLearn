@@ -52,10 +52,10 @@ class `04_类的Getter和Setter` {
         val isEmpty: Boolean
             get() = this.size == 0
 
-         //有set()会报错
-         //  set(value) {
-         //   field = value
-         //    }
+        //有set()会报错
+        //  set(value) {
+        //   field = value
+        //    }
 
         // 另一个例子
         val num = 2
@@ -236,7 +236,31 @@ class `04_类的Getter和Setter` {
     //  关于后期初始化属性这一个知识点，我在讲解讲解变量的定义这一章节时，已经详细讲解过了。这里不做累赘。
     //  不过关于这一知识点，一般都是在Android开发中或者在依赖注入时会用到。
 
+    class Shop {
+        var address: String = ""
+    }
 
+
+    class TestShop {
+        lateinit var shop: Shop
+        fun setup() {
+            shop = Shop()
+            shop.address = "beijing"
+        }
+
+        fun test() {
+            //::表示创建成员引用或者类引用
+            if (::shop.isInitialized)
+                println(shop.address)
+        }
+    }
+
+    @Test
+    fun test3() {
+        var testShop = TestShop()
+        testShop.setup()
+        TestShop().test()
+    }
 
 
 }

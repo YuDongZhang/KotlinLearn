@@ -197,4 +197,21 @@ class `04_Kotlin 类和对象` {
 
 //例子查看 Person
 
+    /**
+     * 静态类
+     */
+    object NumUtil {
+        fun double(num: Int): Int {
+            return num * 2
+        }
+    }
+
+    //通过这样可以实现java的工具类的方法
+    @Test
+    fun test1(){
+        NumUtil.double(2)
+    }
+
+
+
 }

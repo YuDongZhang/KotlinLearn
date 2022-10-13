@@ -6,7 +6,7 @@ import org.junit.Test
 class `09_泛型` {
 
 
-    /*
+    /**
     泛型，即 "参数化类型"，将类型参数化，可以用在类，接口，方法上。
 
     与 Java 一样，Kotlin 也提供泛型，为类型安全提供保证，消除类型强转的烦恼。
@@ -18,7 +18,6 @@ class `09_泛型` {
     }
 
     //创建类的实例时我们需要指定类型参数:
-
     val box: Box<Int> = Box<Int>(1)
 
     // 或者
@@ -51,6 +50,66 @@ class `09_泛型` {
     // 以下都是合法语句
     val box4 = boxIn<Int>(1)
     val box5 = boxIn(1)     // 编译器会进行类型推断
+
+    /**泛型接口*/
+    interface Drinks<T> {
+        fun taste(): T
+        fun price(t: T)
+    }
+
+    class Sweet {
+        val price = 5
+    }
+
+    class coke : Drinks<Sweet> {
+        override fun taste(): Sweet {
+            println("sweet")
+            return Sweet()
+        }
+
+        override fun price(t: Sweet) {
+            println("price${t.price}")
+        }
+    }
+
+    @Test
+    fun test11() {
+        println(coke().taste().price)
+    }
+
+    /**----------------泛型类--------------------*/
+    abstract class Color<T>(var t: T/*泛型字段*/) {
+        abstract fun printColor()
+    }
+
+    class Blue {
+        val color = "blue"
+    }
+
+    class BlueColor(t: Blue) : Color<Blue>(t) {
+        override fun printColor() {
+            println("color:${t.color}")
+        }
+    }
+
+    @Test
+    fun test12() {
+        BlueColor(Blue()).printColor()
+    }
+
+    /**----------------泛型字段--------------------*/
+    //定义泛型类型字段，可以完整地写明类型参数，如果编译器可以自动推定类型参数，也可以省略类型参数
+    abstract class Color2<T>(var t: T/*泛型字段*/) {
+        abstract fun printColor()
+    }
+
+    /**----------------泛型字段--------------------*/
+    fun <T> fromJson(json: String, tClass: Class<T>): T? {
+        /*获取T的实例*/
+        val t: T? = tClass.newInstance()
+        return t
+    }
+
 
     /**
     在调用泛型函数时，如果可以推断出类型参数，可以省略泛型参数。
@@ -110,6 +169,25 @@ class `09_泛型` {
     }
      */
 
+    //上界
+    fun <T : Comparable<T>?> sort(list: List<T>?) {}
+
+    //多个上界
+    fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
+            where T : CharSequence,
+                  T : Comparable<T> {
+        return list.filter { it > threshold }.map { it.toString() }
+    }
+
+    @Test
+    fun test4() {
+        sort(listOf(1, 2, 3))//OK。Int 是 Comparable<Int> 的子类型
+//        sort(listOf(Blue()))//blue()不是
+
+        val listString = listOf("A","B","C")
+        val list = copyWhenGreater(listString,"B")
+        println(list)
+    }
 
     /**
     型变
@@ -148,9 +226,6 @@ class `09_泛型` {
         fun foo(a: A) {
         }
     }
-
-
-
 
 
     @Test

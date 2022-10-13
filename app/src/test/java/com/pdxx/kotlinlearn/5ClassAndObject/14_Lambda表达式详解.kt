@@ -110,7 +110,8 @@ class `14_Lambda表达式详解` {
     3.1、it
     it并不是Kotlin中的一个关键字(保留字)。
 
-    it是在当一个高阶函数中Lambda表达式的参数只有一个的时候可以使用it来使用此参数。it可表示为单个参数的隐式名称，是Kotlin语言约定的。
+    it是在当一个高阶函数中Lambda表达式的参数只有一个的时候可以使用it来使用此参数。it可表示为单个参数的隐式名称，
+    是Kotlin语言约定的。
     例1：
      */
     @Test
@@ -184,7 +185,6 @@ class `14_Lambda表达式详解` {
          */
 
 
-
         val test1 = fun(x: Int, y: Int) = x + y  // 当返回值可以自动推断出来的时候，可以省略，和函数一样
         val test2 = fun(x: Int, y: Int): Int = x + y
         val test3 = fun(x: Int, y: Int): Int {
@@ -192,15 +192,15 @@ class `14_Lambda表达式详解` {
         }
 
         //lambda 表达式
-        val test4 = {a:Int,b:Int->a+b}
-        val test5:(Int,Int)->Int = {a,b->a+b}
+        val test4 = { a: Int, b: Int -> a + b }
+        val test5: (Int, Int) -> Int = { a, b -> a + b }
 
         println(test1(3, 5))
         println(test2(4, 6))
         println(test3(5, 7))
 
-        println(test4(7,8))
-        println(test5(8,9))
+        println(test4(7, 8))
+        println(test5(8, 9))
 
         /*
         输出结果为：
@@ -234,7 +234,7 @@ class `14_Lambda表达式详解` {
          */
         val iop = fun Int.(other: Int): Int = this + other
 
-        println(iop.invoke(1,3))
+        println(iop.invoke(1, 3))
     }
 
 }

@@ -45,12 +45,21 @@ class `05_继承` {
 
         open fun foo() = "foo"
 
-        open fun bar() = "bar"
+        fun bar() = "bar"
 
     }
 
-    class DemoTest : Demo() {
 
+    class DemoTest : Demo() {
+        //继承父类的方法用 override
+        override fun foo(): String {
+            return super.foo()
+        }
+
+        //没有 fun 修饰的不能继承
+//         override fun bar(): String {
+//            return super.foo()
+//        }
     }
 
     @Test
@@ -66,7 +75,8 @@ class `05_继承` {
     3
     foo
     bar
-    分析：从上面的代码可以看出，DemoTest类只是继承了Demo类，并没有实现任何的代码结构。一样可以使用Demo类中的属性与函数。这就是继承的好处。
+    分析：从上面的代码可以看出，DemoTest类只是继承了Demo类，
+    并没有实现任何的代码结构。一样可以使用Demo类中的属性与函数。这就是继承的好处。
      */
 
     /** Kotlin类，可以有一个主构造函数，或者多个辅助函数。或者没有构造函数的情况 */
@@ -80,20 +90,20 @@ class `05_继承` {
      *
      * */
 
-    class  FatherOne constructor(index: Int){
+    class FatherOne constructor(index: Int) {
 
     }
 
-   /* class MyView() : View() {
+    /* class MyView() : View() {
 
-        constructor(context: Context) : super(context)
+         constructor(context: Context) : super(context)
 
-        constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+         constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
-        constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
-                : super(context, attrs, defStyleAttr)
+         constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
+                 : super(context, attrs, defStyleAttr)
 
-    }*/
+     }*/
 
     /** 可以看出，当实现类无主构造函数时，分别使用了super()去实现了基类的三个构造函数。*/
 
@@ -285,7 +295,8 @@ class `05_继承` {
         }
     }
 
-    class C() : A(), B {//C后面可以加() 也可以不加
+    class C() : A(), B {
+        //C后面可以加() 也可以不加
         override fun f() {
             super<A>.f()//调用 A.f()
             super<B>.f()//调用 B.f()

@@ -203,8 +203,15 @@ class `11_对象表达式和对象声明` {
         }
     }
 
+
     @Test
     fun test5() {
+
+        val boy = object{
+            var x : Int = 11
+            var y : Int = 12
+        }
+        println(boy.x+boy.y)
 
         var c = DataTest.provider(9)
         println(c)

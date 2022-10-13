@@ -67,6 +67,8 @@ Kotlin 可以创建一个只包含数据的类，关键字为 data：
         println("$name, $age years of age") // prints "Jane, 35 years of age"
     }
 
+
+
     /**
     标准数据类
     标准库提供了 Pair 和 Triple 。在大多数情形中，命名数据类是更好的设计选择，因为这样代码可读性更强而且提供了有意义的名字和属性。
