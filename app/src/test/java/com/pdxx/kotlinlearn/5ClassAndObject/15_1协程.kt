@@ -196,12 +196,13 @@ class `15_1协程` {
     //七、协程是轻量级的
     //运行以下代码：
 
-
+    fun log(msg: String) = println("[${Thread.currentThread().name}] $msg")
     @Test
     fun test8()= runBlocking {
         repeat(100_000) { // launch a lot of coroutines
             launch {
                 delay(1000L)
+                log("--")
                 print(".")
             }
         }
