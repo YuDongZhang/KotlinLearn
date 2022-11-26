@@ -1,7 +1,29 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.5.10'
+
+    ext {
+
+        kotlin_version = '1.5.10'
+
+        compile_sdk_version = 30
+
+        build_tools_version = '30.0.3'
+
+        minSdkVersion = 21
+
+        target_sdk_version = 30
+
+        lib_version_code = 1
+        lib_version_name = "1.0"
+
+        navigation_version = '2.3.1'
+
+        koin_version = "3.0.2"  // koin v3版本号
+
+        dokitx_version = "3.4.0-alpha04"    // dokit版本号
+    }
+
 
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
@@ -11,8 +33,9 @@ buildscript {
         //jcenter()
 
     }
+
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.2'
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
