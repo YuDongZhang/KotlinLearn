@@ -1,2 +1,2 @@
 include ':app'
-include ':livedatadeam'
+include ':livedatademo'
