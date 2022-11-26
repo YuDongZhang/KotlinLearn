@@ -1,11 +1,11 @@
 package com.pdxx.kotlinlearn.adapter
 
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.pdxx.kotlinlearn.R
 import com.pdxx.kotlinlearn.bean.GeneralBean
 

@@ -1,6 +1,5 @@
 package com.pdxx.kotlinlearn.`5ClassAndObject`
 
-import android.support.v4.media.MediaMetadataCompat
 import org.junit.Test
 
 class `09_泛型` {

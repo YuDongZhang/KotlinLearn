@@ -1,11 +1,13 @@
 package com.pdxx.kotlinlearn.activity
 
-import android.support.v7.app.AppCompatActivity
+
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.pdxx.kotlinlearn.R
 import com.pdxx.kotlinlearn.adapter.MyAdapter
 import com.pdxx.kotlinlearn.bean.PersonEntity
