@@ -10,9 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
-import kotlinx.android.synthetic.main.fg_apple.*
+import com.caoniaowo.app.databinding.FgAppleBinding
 
 class AppleFragment : Fragment() {
+    private lateinit var binding: FgAppleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +25,8 @@ class AppleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fg_apple, container, false)
+        binding = FgAppleBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +35,7 @@ class AppleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as LiveActivity).apply {
             liveAppleData.observe(viewLifecycleOwner, Observer {
-                tv_live_apple.text = it
+                binding.tvLiveApple.text = it
                 Log.i("AppleFragment", "LiveData在AppleFragment中 $it")
             })
 
@@ -45,7 +47,7 @@ class AppleFragment : Fragment() {
 
             liveMapApple.observe(viewLifecycleOwner, Observer {
                 val s = "mapped 后的值: $it"
-                tv_mapped_live_apple.setText(s)
+                binding.tvMappedLiveApple.setText(s)
                 Log.w("AppleFragment", "LiveData在AppleFragment中 map后的数据 $it")
             })
 
@@ -53,7 +55,7 @@ class AppleFragment : Fragment() {
             mediatorLive.observe(viewLifecycleOwner, Observer {
                 //如果在inactive状态下，one two都变化了，它resume后只接受 代码顺序 最新添加的 source 的最后的值
                 val s = "mediator it $it"
-                tv_media_live_apple.setText(s)
+                binding.tvMediaLiveApple.setText(s)
                 Log.w("AppleFragment", "AppleFragment中 mediatorLive ---> $it")
             })
 
@@ -64,7 +66,7 @@ class AppleFragment : Fragment() {
             }
             //UI可以看出，不论是one，还是 two，改变的话，只有满足条件，才会生效。
             swLive.observe(viewLifecycleOwner, Observer {
-                tv_switch_live_apple.text = it
+                binding.tvSwitchLiveApple.text = it
                 Log.w("AppleFragment", "AppleFragment中 switchMap ---> $it")
             })
 
