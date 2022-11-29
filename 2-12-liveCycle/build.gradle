@@ -1,0 +1,11 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: '../dependencies.gradle'
+
+android {
+    defaultConfig {
+        applicationId "com.cniao5.lifecycle"
+    }
+}

@@ -1,2 +1,6 @@
 include ':app'
 include ':2-7-livedatadem'
+include ':2-8-viewModel'
+include ':2-9-databinding'
+include ':2-12-liveCycle'
+include ':mvvm'

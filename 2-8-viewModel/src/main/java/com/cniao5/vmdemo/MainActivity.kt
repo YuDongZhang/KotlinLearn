@@ -3,11 +3,12 @@ package com.cniao5.vmdemo
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         Log.i("MainActivity", "vm2.getNum ${vm2.getNum()}")
         Log.i("MainActivity", "vmodel2.getNum ${vmodel2.getNum()}")
 
-        button.setOnClickListener {
+        findViewById<Button>(R.id.button).setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
