@@ -11,9 +11,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding =
-            DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        //赋值
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        //经过测试布局中是不能加注释的
+
+        //赋值    apply对这个作用对象,对他做一系列的操作
         binding.apply {
 
             name = null
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
             adapter = BdAdapter()
             info = ItemBean(0, "include 的item")
-
+//bdtool中去查看
 //            imgRes = getDrawable(R.drawable.ic_launcher_foreground)
 
         }

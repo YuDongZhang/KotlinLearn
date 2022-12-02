@@ -80,6 +80,7 @@ class LiveActivity : AppCompatActivity() {
             Log.d("LiveActivity", "LiveActivity中 LiveTwo ---> $it")
             mediatorLive.value = "two >>>>>" to it
         }
+
         mediatorLive.addSource(liveOne) {
             Log.d("LiveActivity", "LiveActivity中 LiveOne ---> $it")
             mediatorLive.value = "one >>" to it

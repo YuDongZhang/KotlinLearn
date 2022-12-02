@@ -15,6 +15,7 @@ class BdAdapter : RecyclerView.Adapter<BdAdapter.ItVH>() {
         }
     }
 
+    //itemrvbingding就是布局 , 可以直接使用
     class ItVH(private val binding: ItemRvBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(bean: ItemBean) {

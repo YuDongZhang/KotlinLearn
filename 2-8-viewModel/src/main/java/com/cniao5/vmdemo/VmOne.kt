@@ -24,7 +24,9 @@ class VmOne : ViewModel() {
     }
 }
 
-
+/**
+ * 用的少
+ */
 class VmTwo(application: Application) : AndroidViewModel(application) {
 
     init {

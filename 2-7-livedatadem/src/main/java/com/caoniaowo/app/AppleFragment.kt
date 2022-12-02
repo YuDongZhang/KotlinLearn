@@ -34,6 +34,7 @@ class AppleFragment : Fragment() {
         //在inActive状态下，是不会感知数据的，但是一旦resume，就会得到最新的数据
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as LiveActivity).apply {
+            //下面这个类里面的observer , 可以抽出来写也可以当匿名类
             liveAppleData.observe(viewLifecycleOwner, Observer {
                 binding.tvLiveApple.text = it
                 Log.i("AppleFragment", "LiveData在AppleFragment中 $it")

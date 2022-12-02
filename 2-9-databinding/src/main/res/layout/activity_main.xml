@@ -2,7 +2,6 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -154,7 +153,7 @@
         <include
             info="@{info}"
             layout="@layout/item_rv" />
-
+<!--        image 这个属性是不存在的  , 要在bdtool.kt中找-->
         <androidx.appcompat.widget.AppCompatImageView
             image="@{imgRes}"
             android:layout_width="wrap_content"
