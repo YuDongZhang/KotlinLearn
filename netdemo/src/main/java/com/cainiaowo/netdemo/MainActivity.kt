@@ -17,46 +17,53 @@ class MainActivity : AppCompatActivity() {
         val getResult: TextView = findViewById(R.id.tv_get_result)
         val postResult: TextView = findViewById(R.id.tv_post_result)
 
-        val map = mapOf("key" to "free", "appid" to "0", "msg" to "你好")
-        val httpApi: IHttpApi = OkHttpApi()
-        // get请求
-        httpApi.get(map, "api.php", object : IHttpCallback {
-            override fun onSuccess(data: Any?) {
-                LogUtils.d("success result : ${data.toString()}")
-                runOnUiThread {
-                    getResult.text = data.toString()
-                }
-            }
+        val httpApi: IHttpApi = OkHttpApi.getInstance()
 
-            override fun onFailed(error: Any?) {
-                LogUtils.d("failed msg : ${error.toString()}")
-            }
-        })
+        // get请求
+        httpApi.get(
+            emptyMap(),
+            "https://course.api.cniao5.com/member/userinfo",
+            object : IHttpCallback {
+                override fun onSuccess(data: Any?) {
+                    LogUtils.d("success result : ${data.toString()}")
+                    runOnUiThread {
+                        getResult.text = data.toString()
+                    }
+                }
+
+                override fun onFailed(error: Any?) {
+                    LogUtils.d("failed msg : ${error.toString()}")
+                }
+            })
 
         // post请求
         val loginBody = LoginReq()
-        httpApi.post(loginBody, "https://course.api.cniao5.com/accounts/course/10301/login", object : IHttpCallback {
-            override fun onSuccess(data: Any?) {
-                LogUtils.d("success result : ${data.toString()}")
-                runOnUiThread {
-                    val result = data.toString()
-                    //这种写法可以把三个参数都解析出来
-                    val (_, dataObj, _) = GsonUtils.fromJson<NetResponse>(
-                        result,
-                        NetResponse::class.java
-                    )
-                    postResult.text = CaiNiaoUtils.decodeData(dataObj.toString())
+        httpApi.post(
+            loginBody,
+            "https://course.api.cniao5.com/accounts/course/10301/login",
+            object : IHttpCallback {
+                override fun onSuccess(data: Any?) {
+                    LogUtils.d("success result : ${data.toString()}")
+                    runOnUiThread {
+                        val result = data.toString()
+                        //这种写法可以把三个参数都解析出来
+                        val (_, dataObj, _) = GsonUtils.fromJson<NetResponse>(
+                            result,
+                            NetResponse::class.java
+                        )
+                        postResult.text = CaiNiaoUtils.decodeData(dataObj?.toString())
+                    }
                 }
-            }
 
-            override fun onFailed(error: Any?) {
-                LogUtils.d("failed msg : ${error.toString()}")
-            }
-        })
+                override fun onFailed(error: Any?) {
+                    LogUtils.d("failed msg : ${error.toString()}")
+                }
+            })
         // 取消post请求
-        SystemClock.sleep(200)
-        httpApi.cancelRequest(loginBody)
+      //  SystemClock.sleep(200)
+      //  httpApi.cancelRequest(loginBody)
     }
+
     data class LoginReq(val mobi: String = "13067732886", val password: String = "123456789")
-   // data class LoginReq(val mobi: String = "13067732886", val password: String = "66666666")
+    // data class LoginReq(val mobi: String = "13067732886", val password: String = "66666666")
 }

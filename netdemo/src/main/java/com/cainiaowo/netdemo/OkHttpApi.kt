@@ -9,6 +9,7 @@ import com.cainiaowo.netdemo.support.IHttpCallback
 import com.google.gson.Gson
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.IOException
@@ -17,13 +18,8 @@ import java.util.concurrent.TimeUnit
 /**
  * IHttpApi的实现类：使用OkHttp
  */
-class OkHttpApi : IHttpApi {
+class OkHttpApi private constructor(): IHttpApi {
 
-    companion object {
-        private const val TAG = "OkHttpApi"   // TAG,用于日志观察
-    }
-
-    private var baseUrl = "http://api.qingyunke.com/"
 
     /**
      * 最大重试次数
@@ -36,7 +32,7 @@ class OkHttpApi : IHttpApi {
     private val callMap = SimpleArrayMap<Any, Call>()
 
     // OkHttpClient
-    private val mClient = OkHttpClient.Builder()
+    private val defaultClient = OkHttpClient.Builder()
         .callTimeout(10, TimeUnit.SECONDS)       // 完整请求超时时长,从发起到接收返回数据,默认值0,不限定
         .connectTimeout(10, TimeUnit.SECONDS)   // 与服务器建立连接的时长,默认10s
         .readTimeout(10, TimeUnit.SECONDS)      // 读取服务器返回数据的时长
@@ -55,11 +51,38 @@ class OkHttpApi : IHttpApi {
         .build()
 
     /**
+     * mClient可以根据自己配置修改,defaultClient是OkHttpApi中默认配置的client
+     */
+    private var mClient = defaultClient
+
+    fun getClient() = mClient
+
+    /**
+     * 配置自定义client
+     */
+    fun initClientConfig(client: OkHttpClient) {
+        this.mClient = client
+    }
+
+    /**
+     * 单例实现
+     */
+    companion object{
+
+        @Volatile
+        private var api:OkHttpApi?=null
+
+        @Synchronized
+        fun getInstance() : OkHttpApi {
+            return api ?:OkHttpApi().also {api = it}
+        }
+    }
+
+    /**
      * [params]参数 , 回调
      */
-    override fun get(params: Map<String, Any>, path: String, callback: IHttpCallback) {
-        val url = "$baseUrl$path"
-        val urlBuilder = url.toHttpUrl().newBuilder()
+    override fun get(params: Map<String, Any>, urlStr: String, callback: IHttpCallback) {
+        val urlBuilder = urlStr.toHttpUrl().newBuilder()
         params.forEach { entry ->
             urlBuilder.addEncodedQueryParameter(entry.key, entry.value.toString())
         }
@@ -86,12 +109,13 @@ class OkHttpApi : IHttpApi {
     /**
      * 异步
      */
-    override fun post(body: Any, path: String, callback: IHttpCallback) {
-        val url = "$baseUrl$path"
+    override fun post(body: Any, urlStr : String, callback: IHttpCallback) {
+        val reqBody = Gson().toJson(body).toRequestBody("application/json".toMediaType())
+
         val request = Request.Builder()
-            .post(Gson().toJson(body).toRequestBody())
+            .post(reqBody)
             .tag(body)
-            .url("https://testapi.cniao5.com/accounts/login")
+            .url(urlStr)
             .build()
         val newCall = mClient.newCall(request)
         // 存储请求,用于取消

@@ -2,6 +2,7 @@ package com.cainiaowo.netdemo.config
 
 import android.util.Log
 import okhttp3.*
+import okio.Buffer
 import java.net.URLDecoder
 import java.text.SimpleDateFormat
 import java.util.*
@@ -106,6 +107,10 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
     // region requestLog
     private fun logBodyReq(sb: StringBuffer, request: Request, connection: Connection?) {
         logHeadersReq(sb, request, connection)
+        // 读取RequestBody的内容
+        val req = request.newBuilder().build()
+        val sink = Buffer()
+        req.body?.writeTo(sink)
         sb.append("RequestBody:${request.body.toString()}")
     }
 
