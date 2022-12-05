@@ -1,6 +1,7 @@
 package com.cainiaowo.netdemo
 
 import androidx.collection.SimpleArrayMap
+import com.cainiaowo.netdemo.config.CaiNiaoInterceptor
 import com.cainiaowo.netdemo.config.KtHttpLogInterceptor
 import com.cainiaowo.netdemo.config.LocalCookieJar
 import com.cainiaowo.netdemo.config.RetryInterceptor
@@ -45,12 +46,17 @@ class OkHttpApi : IHttpApi {
         .cache(Cache(File("sdcard/cache", "okhttp"), 1024L))    // 网络请求的缓存数据
 //        .cookieJar(CookieJar.NO_COOKIES)      // 实现 接口CookieJar的实现类,以此来设置cookie相关的信息,NO_COOKIES只适合无COOKIE使用
         .cookieJar(LocalCookieJar())
+        .addNetworkInterceptor(CaiNiaoInterceptor())    // 公共Header拦截器,放在打印日志拦截器前可以观察是否添加成功
         .addNetworkInterceptor(KtHttpLogInterceptor {
+            //可以看到上面那个类里面的数据 ,这样可以直接传方法 , 显得B格高
             logLevel(KtHttpLogInterceptor.LogLevel.BODY)
         })
         .addNetworkInterceptor(RetryInterceptor(maxRetry))
         .build()
 
+    /**
+     * [params]参数 , 回调
+     */
     override fun get(params: Map<String, Any>, path: String, callback: IHttpCallback) {
         val url = "$baseUrl$path"
         val urlBuilder = url.toHttpUrl().newBuilder()
@@ -77,6 +83,9 @@ class OkHttpApi : IHttpApi {
         })
     }
 
+    /**
+     * 异步
+     */
     override fun post(body: Any, path: String, callback: IHttpCallback) {
         val url = "$baseUrl$path"
         val request = Request.Builder()

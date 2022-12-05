@@ -22,7 +22,7 @@ interface IHttpApi {
     fun post(body: Any, path: String, callback: IHttpCallback)
 
     /**
-     * 抽象的Http的post请求封装,同步请求
+     * 抽象的Http的post请求封装,同步请求 , = null 也是一种 return
      */
     fun syncPost(body: Any, path: String): Any? = null
 

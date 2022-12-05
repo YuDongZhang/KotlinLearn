@@ -8,7 +8,8 @@ import java.util.*
 
 /**
  * 记录OkHttp网络日志的拦截器
- */
+ * [block] 这种写法是将函数块作为默认参数传进来,并且默认值为null
+ */                      //参数名  //形参类型          //.()就是里面所有方法  //->unit 返回为空的 unit函数的执行
 class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : Interceptor {
 
     /**
@@ -25,6 +26,11 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
 
     init {
         block?.invoke(this)
+    //invoke 的时候就会运行   OkHttpApi
+        //.addNetworkInterceptor(KtHttpLogInterceptor {
+        //            //可以看到上面那个类里面的数据 ,这样可以直接传方法 , 显得B格高
+        //            logLevel(KtHttpLogInterceptor.LogLevel.BODY)
+        //        })
     }
 
     /**

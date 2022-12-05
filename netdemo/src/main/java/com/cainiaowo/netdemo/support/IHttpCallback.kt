@@ -9,7 +9,7 @@ interface IHttpCallback {
      * 网络请求成功的回调
      * [data] 返回回调的数据结果
      */
-    fun onSuccess(data: Any?)
+    fun onSuccess(data: Any?) //加?  可能为null
 
     /**
      * 接口回调失败
