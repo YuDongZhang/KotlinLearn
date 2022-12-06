@@ -2,7 +2,7 @@ package com.cainiaowo.netdemo.retrofit.model
 
 import retrofit2.Response
 
-// region 数据响应封装方式一
+// region 数据响应封装方式一  //密封类  类似枚举
 sealed class DataResult<out R> {
     /**
      * 成功状态的时候

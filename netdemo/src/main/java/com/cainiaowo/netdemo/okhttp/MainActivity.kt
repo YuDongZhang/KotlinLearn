@@ -3,12 +3,26 @@ package com.cainiaowo.netdemo.okhttp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.LogUtils
 import com.cainiaowo.netdemo.R
 import com.cainiaowo.netdemo.okhttp.model.NetResponse
 import com.cainiaowo.netdemo.okhttp.support.CaiNiaoUtils
 import com.cainiaowo.netdemo.okhttp.support.IHttpCallback
+import com.cainiaowo.netdemo.retrofit.KtRetrofit
+import com.cainiaowo.netdemo.retrofit.model.ApiEmptyResponse
+import com.cainiaowo.netdemo.retrofit.model.ApiErrorResponse
+import com.cainiaowo.netdemo.retrofit.model.ApiResponse
+import com.cainiaowo.netdemo.retrofit.model.ApiSuccessResponse
+import com.hym.netdemo.serverRsp
+import com.hym.netdemo.toLivedata
+import kotlinx.coroutines.launch
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,53 +31,77 @@ class MainActivity : AppCompatActivity() {
         val getResult: TextView = findViewById(R.id.tv_get_result)
         val postResult: TextView = findViewById(R.id.tv_post_result)
 
-        val httpApi: IHttpApi = OkHttpApi.getInstance()
 
-        // get请求
-        httpApi.get(
-            emptyMap(),
-            "https://course.api.cniao5.com/member/userinfo",
-            object : IHttpCallback {
-                override fun onSuccess(data: Any?) {
-                    LogUtils.d("success result : ${data.toString()}")
-                    runOnUiThread {
-                        getResult.text = data.toString()
-                    }
-                }
+        //region retrofit 请求
+        val retrofitCall = KtRetrofit.initConfig("https://course.api.cniao5.com/")
+            .getService(CniaoService::class.java)
+            .userInfo()
 
-                override fun onFailed(error: Any?) {
-                    LogUtils.d("failed msg : ${error.toString()}")
+        //ktx的livedata
+        val liveInfo = retrofitCall.toLivedata()
+        liveInfo.observe(this, Observer {
+            LogUtils.d("mika retrofit userinfo ${it.toString()}")
+            getResult.text = it.toString()
+        })
+
+
+
+        val loginCall = KtRetrofit.initConfig(
+            "https://course.api.cniao5.com/",
+            OkHttpApi.getInstance().getClient()
+        )
+            .getService(CniaoService::class.java)
+            .login(LoginReq())
+
+        //lifecycleScope 他可以启动协程 , 协程里面启动异步的函数
+        lifecycleScope.launch {
+            //表达式声明，使用when,协程，同步的代码形式，执行异步的操作
+            when (val serverRsp = loginCall.serverRsp()) {//serverRsp 用到的就是扩展函数  , 这块执行了网络请求得到网络请求的结果
+               //下面就是成功失败的打印
+                is ApiSuccessResponse -> {
+                    LogUtils.i("mika apiservice ${serverRsp.body.toString()}")
+                    // tvHello1.text = HymUtils.decodeData(serverRsp.body.data.toString())
                 }
+                is ApiErrorResponse -> {
+                    LogUtils.e("mika apiservice ${serverRsp.errorMessage}")
+                   // tvHello1.text = serverRsp.errorMessage
+                }
+                is ApiEmptyResponse -> {
+                    LogUtils.d("mika empty apireoponese")
+                   // tvHello1.text = "empty apireoponese"
+                }
+            }
+        }
+
+
+
+        KtRetrofit.initConfig("https://course.api.cniao5.com/")
+            .getService(CniaoService::class.java)
+            .userInfo2().observe(this, Observer {
+                LogUtils.d("mika retrofit liveRsp ${it.toString()}")
             })
+        //endregion
 
-        // post请求
-        val loginBody = LoginReq()
-        httpApi.post(
-            loginBody,
-            "https://course.api.cniao5.com/accounts/course/10301/login",
-            object : IHttpCallback {
-                override fun onSuccess(data: Any?) {
-                    LogUtils.d("success result : ${data.toString()}")
-                    runOnUiThread {
-                        val result = data.toString()
-                        //这种写法可以把三个参数都解析出来
-                        val (_, dataObj, _) = GsonUtils.fromJson<NetResponse>(
-                            result,
-                            NetResponse::class.java
-                        )
-                        postResult.text = CaiNiaoUtils.decodeData(dataObj?.toString())
-                    }
-                }
-
-                override fun onFailed(error: Any?) {
-                    LogUtils.d("failed msg : ${error.toString()}")
-                }
-            })
-        // 取消post请求
-      //  SystemClock.sleep(200)
-      //  httpApi.cancelRequest(loginBody)
     }
 
-    data class LoginReq(val mobi: String = "13067732886", val password: String = "123456789")
-    // data class LoginReq(val mobi: String = "13067732886", val password: String = "66666666")
+
+    data class LoginReq(
+        val mobi: String = "18648957777",
+        val password: String = "cn5123456"
+    )
 }
+
+
+interface CniaoService {
+    @POST("accounts/course/10301/login")
+    fun login(@Body body: MainActivity.LoginReq): retrofit2.Call<NetResponse>
+
+    @GET("member/userinfo")
+    fun userInfo(): retrofit2.Call<NetResponse>
+
+    @GET("member/userinfo")
+    fun userInfo2(): LiveData<ApiResponse<NetResponse>>
+}
+
+data class LoginReq(val mobi: String = "13067732886", val password: String = "123456789")
+// data class LoginReq(val mobi: String = "13067732886", val password: String = "66666666")

@@ -1,12 +1,14 @@
 package com.cainiaowo.netdemo.okhttp
 
 import androidx.collection.SimpleArrayMap
+import com.cainiaowo.netdemo.okhttp.config.CaiNiaoInterceptor
 import com.cainiaowo.netdemo.okhttp.config.KtHttpLogInterceptor
 import com.cainiaowo.netdemo.okhttp.config.LocalCookieJar
 import com.cainiaowo.netdemo.okhttp.config.RetryInterceptor
-import com.cainiaowo.netdemo.okhttp.config.CaiNiaoInterceptor
 import com.cainiaowo.netdemo.okhttp.support.IHttpCallback
 import com.google.gson.Gson
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.MediaType.Companion.toMediaType
@@ -17,9 +19,9 @@ import java.util.concurrent.TimeUnit
 
 /**
  * IHttpApi的实现类：使用OkHttp
+ * 单例模式
  */
-class OkHttpApi private constructor(): IHttpApi {
-
+class OkHttpApi private constructor() : IHttpApi {
 
     /**
      * 最大重试次数
@@ -44,7 +46,6 @@ class OkHttpApi private constructor(): IHttpApi {
         .cookieJar(LocalCookieJar())
         .addNetworkInterceptor(CaiNiaoInterceptor())    // 公共Header拦截器,放在打印日志拦截器前可以观察是否添加成功
         .addNetworkInterceptor(KtHttpLogInterceptor {
-            //可以看到上面那个类里面的数据 ,这样可以直接传方法 , 显得B格高
             logLevel(KtHttpLogInterceptor.LogLevel.BODY)
         })
         .addNetworkInterceptor(RetryInterceptor(maxRetry))
@@ -67,25 +68,22 @@ class OkHttpApi private constructor(): IHttpApi {
     /**
      * 单例实现
      */
-    companion object{
-
+    companion object {
         @Volatile
-        private var api: OkHttpApi?=null
+        private var api: OkHttpApi? = null
 
         @Synchronized
-        fun getInstance() : OkHttpApi {
-            return api ?: OkHttpApi().also { api = it}
+        fun getInstance(): OkHttpApi {
+            return api ?: OkHttpApi().also { api = it }
         }
     }
 
-    /**
-     * [params]参数 , 回调
-     */
     override fun get(params: Map<String, Any>, urlStr: String, callback: IHttpCallback) {
         val urlBuilder = urlStr.toHttpUrl().newBuilder()
         params.forEach { entry ->
             urlBuilder.addEncodedQueryParameter(entry.key, entry.value.toString())
         }
+
         val request = Request.Builder()
             .get()
             .tag(params)
@@ -106,10 +104,7 @@ class OkHttpApi private constructor(): IHttpApi {
         })
     }
 
-    /**
-     * 异步
-     */
-    override fun post(body: Any, urlStr : String, callback: IHttpCallback) {
+    override fun post(body: Any, urlStr: String, callback: IHttpCallback) {
         val reqBody = Gson().toJson(body).toRequestBody("application/json".toMediaType())
 
         val request = Request.Builder()
@@ -146,4 +141,59 @@ class OkHttpApi private constructor(): IHttpApi {
             callMap.get(callMap.keyAt(i))?.cancel()
         }
     }
+
+
+    /**
+     * 使用协程形式的get请求，使用runblocking，也可以使用suspend修饰
+     */
+//    fun get(params: Map<String, Any>, urlStr: String) = runBlocking {
+//        val urlBuilder = urlStr.toHttpUrl().newBuilder()
+//        params.forEach { entry ->
+//            urlBuilder.addEncodedQueryParameter(entry.key, entry.value.toString())
+//        }
+//
+//        val request = Request.Builder()
+//            .get()
+//            .tag(params)
+//            .url(urlBuilder.build())
+//            .cacheControl(CacheControl.FORCE_NETWORK)
+//            .build()
+//        val newCall = mClient.newCall(request)
+//
+//        //存储请求，用户取消
+//        callMap.put(request.tag(), newCall)
+//        newCall.call()
+    //  得到请求的结果会返回给runbolocking  get()得到的就是 response
+//    }
+//
+//    /**
+//     * 自定义扩展函数，扩展okhttp的call的异步执行方式，结合协程，返回dataresult的数据响应
+//     */
+//    private suspend fun Call.call(async: Boolean = true): Response {
+//        return suspendCancellableCoroutine { continuation ->
+//            if (async) {
+//                enqueue(object : Callback {
+//                    override fun onFailure(call: Call, e: IOException) {
+//                        //避免不必要的冗余调用
+//                        if (continuation.isCancelled) return
+//                        //continuation.resumeWithException(e)
+//                    }
+//
+//                    override fun onResponse(call: Call, response: Response) {
+//                        continuation.resume(response)
+//                    }
+//                })
+//            } else {
+//                continuation.resume(execute())
+//            }
+//            //协程取消的时候网络请求取消
+//            continuation.invokeOnCancellation {
+//                try {
+//                    cancel()
+//                } catch (ex: Exception) {
+//                    ex.printStackTrace()
+//                }
+//            }
+//        }
+//    }
 }

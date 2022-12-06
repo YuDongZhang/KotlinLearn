@@ -23,6 +23,7 @@ class LiveDataCallAdapter<R>(private val responseType: Type) :
             private var started = AtomicBoolean(false)
             override fun onActive() {
                 super.onActive()
+                //避免重复请求
                 if (started.compareAndSet(false, true)) {
                     call.enqueue(object : Callback<R> {
                         override fun onResponse(call: Call<R>, response: Response<R>) {
