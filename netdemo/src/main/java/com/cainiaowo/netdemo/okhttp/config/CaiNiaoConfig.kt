@@ -1,4 +1,4 @@
-package com.cainiaowo.netdemo.config
+package com.cainiaowo.netdemo.okhttp.config
 
 /**
  * 菜鸟窝App相关配置

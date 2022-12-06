@@ -1,4 +1,4 @@
-package com.cainiaowo.netdemo.support
+package com.cainiaowo.netdemo.okhttp.support
 
 /**
  * 网络请求的接口回调

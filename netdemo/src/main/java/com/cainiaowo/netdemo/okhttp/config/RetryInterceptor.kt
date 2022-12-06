@@ -1,4 +1,4 @@
-package com.cainiaowo.netdemo.config
+package com.cainiaowo.netdemo.okhttp.config
 
 import android.util.Log
 import okhttp3.Interceptor

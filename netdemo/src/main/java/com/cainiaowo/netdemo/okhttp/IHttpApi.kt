@@ -1,6 +1,6 @@
-package com.cainiaowo.netdemo
+package com.cainiaowo.netdemo.okhttp
 
-import com.cainiaowo.netdemo.support.IHttpCallback
+import com.cainiaowo.netdemo.okhttp.support.IHttpCallback
 
 /**
  * 网络请求统一接口

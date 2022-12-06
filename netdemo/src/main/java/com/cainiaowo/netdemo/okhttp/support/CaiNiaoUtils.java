@@ -1,9 +1,9 @@
-package com.cainiaowo.netdemo.support;
+package com.cainiaowo.netdemo.okhttp.support;
 
 import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.EncryptUtils;
-import com.cainiaowo.netdemo.config.CaiNiaoConfigKt;
+import com.cainiaowo.netdemo.okhttp.config.CaiNiaoConfigKt;
 
 
 import java.util.regex.Matcher;

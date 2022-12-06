@@ -1,9 +1,6 @@
 package com.cainiaowo.netdemo.okhttp.config
 
 import com.blankj.utilcode.util.*
-import com.cainiaowo.netdemo.config.NET_CONFIG_APPID
-import com.cainiaowo.netdemo.config.NET_CONFIG_APPKEY
-import com.cainiaowo.netdemo.config.SP_KEY_USER_TOKEN
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import okhttp3.CacheControl

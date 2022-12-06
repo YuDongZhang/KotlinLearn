@@ -1,14 +1,14 @@
-package com.cainiaowo.netdemo
+package com.cainiaowo.netdemo.okhttp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.SystemClock
 import android.widget.TextView
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.LogUtils
-import com.cainiaowo.netdemo.model.NetResponse
-import com.cainiaowo.netdemo.support.CaiNiaoUtils
-import com.cainiaowo.netdemo.support.IHttpCallback
+import com.cainiaowo.netdemo.R
+import com.cainiaowo.netdemo.okhttp.model.NetResponse
+import com.cainiaowo.netdemo.okhttp.support.CaiNiaoUtils
+import com.cainiaowo.netdemo.okhttp.support.IHttpCallback
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

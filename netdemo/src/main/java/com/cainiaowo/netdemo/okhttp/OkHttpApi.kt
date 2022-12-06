@@ -1,11 +1,11 @@
-package com.cainiaowo.netdemo
+package com.cainiaowo.netdemo.okhttp
 
 import androidx.collection.SimpleArrayMap
-import com.cainiaowo.netdemo.config.KtHttpLogInterceptor
-import com.cainiaowo.netdemo.config.LocalCookieJar
-import com.cainiaowo.netdemo.config.RetryInterceptor
+import com.cainiaowo.netdemo.okhttp.config.KtHttpLogInterceptor
+import com.cainiaowo.netdemo.okhttp.config.LocalCookieJar
+import com.cainiaowo.netdemo.okhttp.config.RetryInterceptor
 import com.cainiaowo.netdemo.okhttp.config.CaiNiaoInterceptor
-import com.cainiaowo.netdemo.support.IHttpCallback
+import com.cainiaowo.netdemo.okhttp.support.IHttpCallback
 import com.google.gson.Gson
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrl
@@ -70,11 +70,11 @@ class OkHttpApi private constructor(): IHttpApi {
     companion object{
 
         @Volatile
-        private var api:OkHttpApi?=null
+        private var api: OkHttpApi?=null
 
         @Synchronized
         fun getInstance() : OkHttpApi {
-            return api ?:OkHttpApi().also {api = it}
+            return api ?: OkHttpApi().also { api = it}
         }
     }
 
