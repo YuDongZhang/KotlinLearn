@@ -1,6 +1,9 @@
-package com.cainiaowo.netdemo.config
+package com.cainiaowo.netdemo.okhttp.config
 
 import com.blankj.utilcode.util.*
+import com.cainiaowo.netdemo.config.NET_CONFIG_APPID
+import com.cainiaowo.netdemo.config.NET_CONFIG_APPKEY
+import com.cainiaowo.netdemo.config.SP_KEY_USER_TOKEN
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import okhttp3.CacheControl
@@ -88,7 +91,7 @@ class CaiNiaoInterceptor : Interceptor {
         val newBuilder = originRequest.newBuilder()
             .cacheControl(CacheControl.FORCE_NETWORK)
         attachHeaders.forEach { newBuilder.header(it.first, it.second) }
-        newBuilder.header("sign", EncryptUtils.encryptMD5ToString(signValue))//最后sign加入到请求头里面,md5加密 
+        newBuilder.header("sign", EncryptUtils.encryptMD5ToString(signValue))//最后sign加入到请求头里面,md5加密
 
         if (originRequest.method == "POST" && requestBody != null) {
             newBuilder.post(requestBody)

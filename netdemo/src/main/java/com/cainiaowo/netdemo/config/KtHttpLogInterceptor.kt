@@ -111,7 +111,7 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
         val req = request.newBuilder().build()
         val sink = Buffer()
         req.body?.writeTo(sink)
-        sb.append("RequestBody:${request.body.toString()}")
+        sb.append("RequestBody:${sink.readUtf8()}")
     }
 
     private fun logHeadersReq(sb: StringBuffer, request: Request, connection: Connection?) {

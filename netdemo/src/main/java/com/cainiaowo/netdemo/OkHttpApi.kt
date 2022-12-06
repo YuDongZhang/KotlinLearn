@@ -1,10 +1,10 @@
 package com.cainiaowo.netdemo
 
 import androidx.collection.SimpleArrayMap
-import com.cainiaowo.netdemo.config.CaiNiaoInterceptor
 import com.cainiaowo.netdemo.config.KtHttpLogInterceptor
 import com.cainiaowo.netdemo.config.LocalCookieJar
 import com.cainiaowo.netdemo.config.RetryInterceptor
+import com.cainiaowo.netdemo.okhttp.config.CaiNiaoInterceptor
 import com.cainiaowo.netdemo.support.IHttpCallback
 import com.google.gson.Gson
 import okhttp3.*
