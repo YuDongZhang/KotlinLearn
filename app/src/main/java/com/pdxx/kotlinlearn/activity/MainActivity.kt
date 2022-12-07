@@ -2,11 +2,18 @@ package com.pdxx.kotlinlearn.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.pdxx.kotlinlearn.R
+import com.pdxx.kotlinlearn.bean.PersonEntity
+import com.pdxx.kotlinlearn.bean.Student
 import com.pdxx.kotlinlearn.databinding.ActivityMainBinding
+import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
+import org.koin.core.qualifier.named
+import org.koin.core.qualifier.qualifier
 
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +21,15 @@ class MainActivity : AppCompatActivity() {
     // @BindView(R.id.content)
     lateinit var tvContent: TextView
     //  var unbinder: Unbinder? = null
+
+    val p :PersonEntity by inject<PersonEntity> () //lazy 模式
+
+    val p2 : PersonEntity = get()
+
+    val s1 = get<Student>(named("name"))
+
+    val s2= get<Student>(qualifier<PersonEntity>())
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             var intent = Intent(this, GeneralActivity::class.java)
             startActivity(intent)
         }
-
+        Log.d("TAG", "onCreate: "+p2.company)
     }
 
 }
