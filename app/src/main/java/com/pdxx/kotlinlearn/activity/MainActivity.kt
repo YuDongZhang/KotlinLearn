@@ -9,9 +9,11 @@ import androidx.databinding.DataBindingUtil
 import com.pdxx.kotlinlearn.R
 import com.pdxx.kotlinlearn.bean.PersonEntity
 import com.pdxx.kotlinlearn.bean.Student
+import com.pdxx.kotlinlearn.bean.ViewInfo
 import com.pdxx.kotlinlearn.databinding.ActivityMainBinding
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 import org.koin.core.qualifier.qualifier
 
@@ -29,6 +31,10 @@ class MainActivity : AppCompatActivity() {
     val s1 = get<Student>(named("name"))
 
     val s2= get<Student>(qualifier<PersonEntity>())
+
+    //外部参数
+    var tv :TextView ?=null
+    val viewInfo:ViewInfo by inject<ViewInfo> { parametersOf(tv) }//parametersOf可接多个参数
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
