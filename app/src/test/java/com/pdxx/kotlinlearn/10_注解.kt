@@ -2,7 +2,7 @@ package com.pdxx.kotlinlearn
 
 import org.junit.Test
 
-class `07_注解` {
+class `10_注解` {
 
     // Kotlin注解的声明
     //和一般的声明很类似，只是在class前面加上了annotation修饰符

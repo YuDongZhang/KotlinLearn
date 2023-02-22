@@ -1,10 +1,10 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package com.pdxx.kotlinlearn
 
 import org.junit.Test
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
-class `12_委托` {
+class `18_委托` {
 
     //委托的字面的理解 , 就是  就是委托给别人 , 关键字 记忆 : by
 

@@ -1,4 +1,4 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package coroutine
 
 import org.junit.Test
 

@@ -1,8 +1,8 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package com.pdxx.kotlinlearn
 
 import org.junit.Test
 
-class `09_泛型` {
+class `15_泛型` {
 
 
     /**

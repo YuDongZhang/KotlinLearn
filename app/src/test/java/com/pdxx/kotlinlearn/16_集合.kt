@@ -1,4 +1,4 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package com.pdxx.kotlinlearn
 
 import org.junit.Test
 

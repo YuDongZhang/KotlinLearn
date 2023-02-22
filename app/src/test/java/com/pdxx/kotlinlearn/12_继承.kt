@@ -1,10 +1,5 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package com.pdxx.kotlinlearn
 
-import android.content.Context
-import android.os.Parcel
-import android.os.Parcelable
-import android.util.AttributeSet
-import android.view.View
 import org.junit.Test
 
 /**

@@ -1,4 +1,4 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package com.pdxx.kotlinlearn
 
 import org.junit.Test
 
@@ -102,9 +102,9 @@ Kotlin 可以创建一个只包含数据的类，关键字为 data：
        // 使用密封类的关键好处在于使用 when 表达式 的时候，如果能够 验证语句覆盖了所有情况，就不需要为该语句再添加一个 else 子句了。
 
         fun eval2(expr: Expr): Double = when(expr) {
-            is Expr.Const -> expr.number
-            is Expr.Sum -> eval(expr.e1) + eval(expr.e2)
-            Expr.NotANumber -> Double.NaN
+            is Const -> expr.number
+            is Sum -> eval(expr.e1) + eval(expr.e2)
+            NotANumber -> Double.NaN
             // 不再需要 `else` 子句，因为我们已经覆盖了所有的情况
         }
 

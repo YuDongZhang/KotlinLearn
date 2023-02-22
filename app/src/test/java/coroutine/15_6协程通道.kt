@@ -1,4 +1,4 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package coroutine
 
 class `15_6协程通道` {
 

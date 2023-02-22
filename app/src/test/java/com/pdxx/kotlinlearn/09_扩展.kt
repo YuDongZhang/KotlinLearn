@@ -1,8 +1,8 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package com.pdxx.kotlinlearn
 
 import org.junit.Test
 
-class `07_扩展` {
+class `09_扩展` {
 
     /**
     写测试类的时候 , 不能有main 的方法

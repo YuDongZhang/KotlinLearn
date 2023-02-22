@@ -56,6 +56,7 @@ class `01_Kotlin 基础语法` {
 
     //   lambda(匿名函数)
 //    lambda表达式使用实例：
+    @Test
     fun lambda_test() {
         val sumLambda: (Int, Int) -> Int = { x, y -> x + y }
         println(sumLambda(1, 2))  // 输出 3
@@ -103,7 +104,7 @@ class `01_Kotlin 基础语法` {
     @Test
     fun null_test() {
         //类型后面加?表示可为空
-        var age: String? = "0";
+        var age: String? = null;
         //抛出空指针异常
         val age1 = age!!.toInt()
         //不做处理返回 null

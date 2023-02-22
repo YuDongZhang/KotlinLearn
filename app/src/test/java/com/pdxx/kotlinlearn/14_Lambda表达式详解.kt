@@ -1,4 +1,4 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package com.pdxx.kotlinlearn
 
 import android.widget.Button
 import org.junit.Test

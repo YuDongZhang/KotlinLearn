@@ -1,7 +1,6 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package com.pdxx.kotlinlearn
 
 import org.junit.Test
-import kotlin.math.atan2
 
 class `11_对象表达式和对象声明` {
 
@@ -239,9 +238,9 @@ class `11_对象表达式和对象声明` {
     fun test6() {
         var s1 = Site1
         var s2 = Site1
-        s1.url = "www.runoob.com"
-        println(s1.url)
-        println(s2.url)
+        Site1.url = "www.runoob.com"
+        println(Site1.url)
+        println(Site1.url)
         println(s1 == s2)
     }
 
@@ -350,7 +349,7 @@ class `11_对象表达式和对象声明` {
         }
     }
 
-    val x = MyClass2.Companion
+    val x = MyClass2
 
     /**注意：
 

@@ -2,7 +2,7 @@ package com.pdxx.kotlinlearn
 
 import org.junit.Test
 
-class `04_方法进阶` {
+class `05_方法进阶` {
     /**
      * 高阶函数是将函数用作参数或返回值的函数
      */
@@ -15,12 +15,13 @@ class `04_方法进阶` {
             result += v
             callback(v)
         }
-        return result; }
+        return result;
+    }
 
     @Test
     fun test1() {
         val list = listOf(1, 2, 3)
-        var result = list.sum { println("it:${it}") }//这里打印的就是回调
+        var result = list.sum { println("it:${it}") }//这里打印的就是回调  , it 可以理解为你传入的这个函数的结果 (单次)
         println(result)
     }
 
@@ -66,6 +67,7 @@ class `04_方法进阶` {
 //    同时能够返回一个声明为(v2: Int, (Int) -> Unit)的函数，
 //    并且这个函数能够计算v1与v2的和
     //(Int, (Int) -> Unit) -> Unit 返回的类型
+
     fun testClosure(v1: Int): (Int, (Int) -> Unit) -> Unit { //(Int, (Int) -> Unit就是方法
         return fun(v2: Int, printer: (Int) -> Unit) {//和上面的类型对应的
             printer(v1 + v2)//printer 就是上面的方法
@@ -84,7 +86,6 @@ class `04_方法进阶` {
 
 //    testClosure接收一个Int类型的参数，返回一个带有如下参数的方法(Int, (Int) -> Unit)，该方法第一个参数是Int类型，
 //    第二个参数是一个接收Int类型参数的方法。 testClosure也是高阶方法
-
 
 
 }

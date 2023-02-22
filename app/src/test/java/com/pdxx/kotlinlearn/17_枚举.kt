@@ -1,4 +1,4 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package com.pdxx.kotlinlearn
 
 /**Kotlin 枚举类
 枚举类最基本的用法是实现一个类型安全的枚举。

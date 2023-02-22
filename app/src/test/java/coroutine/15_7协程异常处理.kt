@@ -1,8 +1,7 @@
-package com.pdxx.kotlinlearn.`5ClassAndObject`
+package coroutine
 
-import org.junit.Test
+class `15_7协程异常处理` {
 
-class `15_9` {
 //本节讨论协程关于异常的处理和取消异常。我们已经知道，取消协程会使得在挂起点抛出 CancellationException，而协程机制会忽略这个异常。但是，如果在取消期间抛出异常，或者协程的多个子协程抛出异常，此时会发生什么情况呢?
 //一、异常的传播
 //协程构建器有两种类型：自动传播异常（launch 和 actor）和向用户公开异常（async 和 product）。前者将异常视为未捕获异常，类似于 Java 的 Thread.uncaughtExceptionHandler，而后者则需要由开发者自己来处理最终的异常，例如通过 await 或 receive（product 和 receive 在 Channels 章节介绍）
@@ -339,4 +338,94 @@ class `15_9` {
 //来源：稀土掘金
 //著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
- }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

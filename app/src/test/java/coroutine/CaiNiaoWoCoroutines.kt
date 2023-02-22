@@ -1,4 +1,4 @@
-package com.pdxx.kotlinlearn
+package coroutine
 
 import kotlinx.coroutines.*
 import org.junit.Test
