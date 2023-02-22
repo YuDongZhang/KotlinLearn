@@ -25,7 +25,6 @@ class Derived(p: Int) : Base(p)
 
  */
 
-class `05_继承` {
 
     /**
     格式
@@ -56,18 +55,21 @@ class `05_继承` {
             return super.foo()
         }
 
-        //没有 fun 修饰的不能继承
+        //没有 open 修饰的不能继承
 //         override fun bar(): String {
 //            return super.foo()
 //        }
     }
 
-    @Test
-    fun test1() {
-        println(DemoTest().num)
-        DemoTest().foo()
-        DemoTest().bar()
+    class Test1{
+        @Test
+        fun test1() {
+            println(DemoTest().num)
+            DemoTest().foo()
+            DemoTest().bar()
+        }
     }
+
 
     /*
     输出结果为：
@@ -264,11 +266,13 @@ class `05_继承` {
         }
     }
 
+    class Test4{
+        @Test
+        fun test4() {
+            val s = Student4()
+            s.study();
+        }
 
-    @Test
-    fun test4() {
-        val s = Student4()
-        s.study();
     }
 
 
@@ -310,14 +314,14 @@ class `05_继承` {
     输出结果为:
      */
 
-
-    @Test
-    fun test5() {
-        val c = C()
-        c.f()
-        c.a()
+    class Test5 {
+        @Test
+        fun test5() {
+            val c = C()
+            c.f()
+            c.a()
+        }
     }
-
 
     /**
      * 属性重写
@@ -386,4 +390,3 @@ fun main(arge: Array<String>>){
      * 这三个知识点就可以了。
      */
 
-}
