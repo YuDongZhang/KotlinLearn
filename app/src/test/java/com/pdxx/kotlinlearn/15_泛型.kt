@@ -26,11 +26,15 @@ class `15_泛型` {
 
     @Test
     fun test() {
+        //这里可以看出泛型的好处 : <>里面传入不同的类型 , () 可以写入不同的参数
         var boxInt = Box<Int>(10)
         var boxString = Box<String>("Runoob")
 
+        var box3 = Box(1)
+
         println(boxInt.value)
         println(boxString.value)
+        println(box3.value)
     }
 
 //输出结果为：
@@ -93,6 +97,7 @@ class `15_泛型` {
 
     @Test
     fun test12() {
+        //这里传的是 blue() 的实现
         BlueColor(Blue()).printColor()
     }
 

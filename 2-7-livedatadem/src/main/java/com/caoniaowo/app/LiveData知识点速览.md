@@ -4,7 +4,6 @@
 
 > LiveData 是可被观察的数据持有类。具有生命周期（Activity/Fragment/Service）感知的（**确保active状态下接受data更新**）。
 
-1. 背景 [原文](https://medium.com/mobile-app-development-publication/understanding-live-data-made-simple-a820fcd7b4d0)
 
    ![img](https://upload-images.jianshu.io/upload_images/7273107-7d77106ca025f2ec.png)
 

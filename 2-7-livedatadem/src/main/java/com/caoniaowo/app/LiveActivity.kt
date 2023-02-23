@@ -17,6 +17,7 @@ class LiveActivity : AppCompatActivity() {
     //中介者MediatorLiveData使用演示：
     val liveOne = MutableLiveData<String>()
     val liveTwo = MutableLiveData<String>()
+
     val mediatorLive = MediatorLiveData<Pair<String, String>>()
 
     private lateinit var binding: ActivityMainBinding//要和名字结合的
@@ -28,10 +29,11 @@ class LiveActivity : AppCompatActivity() {
 
         //Fragment
         val appleFragment = AppleFragment()
+
         supportFragmentManager.beginTransaction()
             .add(R.id.fl_container_live, appleFragment)
             .commit()
-        //// TODO 注意 hide 和 show不会改变fragment的生命周期状态 所以用attach detach
+        // TODO 注意 hide 和 show不会改变fragment的生命周期状态 所以用attach detach
         //显示fragment
         binding.btnCreateFgLive.setOnClickListener {
             supportFragmentManager.beginTransaction()

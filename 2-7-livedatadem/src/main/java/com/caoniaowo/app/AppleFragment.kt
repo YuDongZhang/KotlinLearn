@@ -13,6 +13,7 @@ import androidx.lifecycle.switchMap
 import com.caoniaowo.app.databinding.FgAppleBinding
 
 class AppleFragment : Fragment() {
+
     private lateinit var binding: FgAppleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

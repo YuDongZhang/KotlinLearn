@@ -87,7 +87,7 @@ class Derived(p: Int) : Base(p)
      *
      * */
 
-    class FatherOne constructor(index: Int) {
+    class Fatherthree constructor(index: Int) {
 
     }
 

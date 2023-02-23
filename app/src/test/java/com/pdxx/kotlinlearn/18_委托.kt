@@ -32,7 +32,7 @@ class `18_委托` {
     // 实现此接口的被委托的类 , 这个就是实现了这个接口 , 你可以看到就是 和 对象声明很像 , 比如 var x : int
     class BaseImpl(val x: Int) : Base {
         override fun printTest() {
-            print(x)
+            print("BaseImpl"+x)
         }
     }
 
@@ -40,12 +40,10 @@ class `18_委托` {
     class Derived(b: Base) : Base by b    //这里的 b 要和括号中对应 , 你可以换成其他的字母类测试
 
 
-
-
     @Test
     fun test1() {
-        val b = BaseImpl(10)
-        Derived(b).printTest() // 输出 10
+        val bi = BaseImpl(10)
+        Derived(bi).printTest() // 输出 10
         //这个就相当于一个父类的两个子类 , 一个子类调用另外一个子类的方法 (本来正常的是不能做到的)
     }
 

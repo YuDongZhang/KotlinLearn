@@ -8,8 +8,10 @@ import androidx.lifecycle.Observer
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
- * 针对liveData用作event的时候，由于即使在inactive状态下，不论有无observer都能set值，并被持有，恢复active即被通知observer
- * 在特定场景下，不适用。（如vm中的liveData，在UI中感知，来跳转界面；就会出现返回界面后，会再次跳转的问题。参照liveData知识速览的问题一栏）
+ * 针对liveData用作event的时候，由于即使在inactive状态下，不论有无observer都能set值，并被持有，
+ * 恢复active即被通知observer
+ * 在特定场景下，不适用。（如vm中的liveData，在UI中感知，来跳转界面；就会出现返回界面后，会再次跳转的问题。
+ * 参照liveData知识速览的问题一栏）
  * 处理方案，是判断处理情况，再决定通知事件
  */
 

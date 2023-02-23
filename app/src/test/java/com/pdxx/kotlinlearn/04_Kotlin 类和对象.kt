@@ -32,6 +32,11 @@ class Runoob4 {
 class Test41 {
     @Test
     fun TestRun4() {
+
+        var runoob = Runoob()
+        var empty = Empty()
+
+
         //我们可以像使用普通函数那样使用构造函数创建类实例：
         val site = Runoob4() // Kotlin 中没有 new 关键字
 
@@ -55,6 +60,75 @@ class Person5 constructor(firstName: String) {
 class Person2(firstName: String) {
 
 }
+
+//注意：主构造器的参数可以在初始化代码段中使用，也可以在类主体n定义的属性初始化代码中使用。
+// 一种简洁语法，可以通过主构造器来定义属性并初始化属性值（可以是var或val）：
+
+class People2(val firstName: String, val lastName: String) {
+    //...
+}
+
+
+//如果构造器有注解，或者有可见度修饰符，这时constructor关键字是必须的，注解和修饰符要放在它之前。
+class Person3 constructor(name: String) {  // 类名为 Runoob
+    // 大括号内是类体构成
+    var url: String = "http://www.runoob.com"
+    var country: String = "CN"
+    var siteName = name
+
+    init {
+        println("初始化网站名: ${name}")
+    }
+
+    fun printTest() {
+        println("我是类的函数")
+    }
+
+}
+
+/**
+ * 注意：在 JVM 虚拟机中，如果主构造函数的所有参数都有默认值，编译器会生成一个附加的无参的构造函数，
+ * 这个构造函数会直接使用默认值。
+ * 这使得 Kotlin 可以更简单的使用像 Jackson 或者 JPA 这样使用无参构造函数来创建类实例的库。
+ * */
+
+class Customer(val customerName: String = "")
+
+/**
+ * 测试
+ */
+class Person46 constructor(name: String) {  // 类名为 Runoob
+    // 大括号内是类体构成
+    var url: String = "http://www.runoob.com"
+    var country: String = "CN"
+    var siteName = name
+
+    init {
+        println("初始化网站名: ${name}")
+    }
+
+    // 次构造函数
+    constructor (name: String, alexa: Int) : this(name) {
+        println("Alexa 排名 $alexa")
+    }
+
+    fun printTest() {
+        println("我是类的函数")
+    }
+}
+
+class Test400 {
+    @Test
+    fun test3() {
+        val runoob = Person46("菜鸟教程", 10000)
+        println(runoob.siteName)
+        println(runoob.url)
+        println(runoob.country)
+        runoob.printTest()
+    }
+
+}
+
 
 /**
 1.2、构造函数中的初始化代码块
@@ -94,6 +168,7 @@ class Test9 private constructor(num: Int) {
 /*class Test8 @Inject constructor(num: Int){
 }*/
 
+
 /**
 2、辅助（二级）构造函数
 
@@ -116,6 +191,7 @@ constructor(参数列表){
 class Person_7 constructor(num: Int) {
 
     init {
+        println("我是 init 方法")
         println("num = $num")
     }
 
@@ -155,32 +231,43 @@ num = 1
 同理可看出，当类存在主构造函数并且有默认值时，二级构造函数也适用
  */
 
+class Banana constructor(num1: Int = 10, num2: Int = 20) {
 
-/*
-fun main(args: Array<String>) {
-    var test = Test()
-    var test1 = Test(1,2)
-    var test2 = Test(4,5,6)
-   }
-
-    class Test constructor(num1: Int = 10 , num2: Int = 20){
-
-        init {
-            println("num1 = $num1\t num2 = $num2")
-        }
-
-        constructor(num1 : Int = 1, num2 : Int = 2, num3 : Int = 3) : this(num1 , num2){
-            println("num1 = $num1\t num2 = $num2 \t num3 = $num3")
-        }
+    init {
+        println("num1 = $num1\t num2 = $num2")
     }
-    输出结果为：
 
-    num1 = 10	 num2 = 20
-    num1 = 1	 num2 = 2
-    num1 = 4	 num2 = 5
-    num1 = 4	 num2 = 5 	 num3 = 6
-    说明： 当实例化无参的构造函数时。使用了参数的默认值。
+    constructor(num1: Int = 1, num2: Int = 2, num3: Int = 3) : this(num1, num2) {
+        println("num1 = $num1\t num2 = $num2 \t num3 = $num3")
+    }
+}
+
+class TestBanana {
+    @Test
+    fun main(args: Array<String>) {
+        var test = Banana()
+        var test1 = Banana(1, 2)
+        var test2 = Banana(4, 5, 6)
+    }
+}
+
+/*   输出结果为：
+
+   num1 = 10	 num2 = 20
+   num1 = 1	 num2 = 2
+   num1 = 4	 num2 = 5
+   num1 = 4	 num2 = 5 	 num3 = 6
+   说明： 当实例化无参的构造函数时。使用了参数的默认值。
+*/
+
+
+
+/**
+如果一个非抽象类没有声明构造函数(主构造函数或次构造函数)，它会产生一个没有参数的构造函数。构造函数是 public 。
+如果你不想你的类有公共的构造函数，你就得声明一个空的主构造函数：
  */
+class DontCreateMe private constructor() {
+}
 
 
 //getter 和 setter
@@ -288,174 +375,34 @@ class MyTest {
 
 
 /**
- * 主构造器
- *
- *主构造器中不能包含任何代码，初始化代码可以放在初始化代码段中，初始化代码段使用 init 关键字作为前缀。
- */
-class Person42 constructor(firstName: String) {
-    init {
-        println("FirstName is $firstName")
-    }
-}
-
-
-//注意：主构造器的参数可以在初始化代码段中使用，也可以在类主体n定义的属性初始化代码中使用。
-// 一种简洁语法，可以通过主构造器来定义属性并初始化属性值（可以是var或val）：
-
-class People(val firstName: String, val lastName: String) {
-    //...
-}
-
-class Test46 {
-    @Test
-    fun test1_1() {
-        Person2("主构造函数 init 初始化")
-    }
-}
-
-
-//如果构造器有注解，或者有可见度修饰符，这时constructor关键字是必须的，注解和修饰符要放在它之前。
-class Person3 constructor(name: String) {  // 类名为 Runoob
-    // 大括号内是类体构成
-    var url: String = "http://www.runoob.com"
-    var country: String = "CN"
-    var siteName = name
-
-    init {
-        println("初始化网站名: ${name}")
-    }
-
-    fun printTest() {
-        println("我是类的函数")
-    }
-
-}
-
-class Test47 {
-    @Test
-    fun test2() {
-        val runoob = Person3("菜鸟教程")
-        println(runoob.siteName)
-        println(runoob.url)
-        println(runoob.country)
-        runoob.printTest()
-    }
-}
-
-
-/**
-次构造函数
-类也可以有二级构造函数，需要加前缀 constructor:
- */
-class Person44 {
-    constructor(parent: String) {
-        println("次级构造函数")
-    }
-
-    constructor(parent: String, son: String) {
-        println("次级构造函数")
-    }
-}
-
-class Test48 {
-    @Test
-    fun test21() {
-        Person44("11");
-    }
-}
-
-
-/**
-如果类有主构造函数，每个次构造函数都要，或直接或间接通过另一个次构造函数代理主构造函数。
-在同一个类中代理另一个构造函数使用 this 关键字：
- */
-class Person45(val name: String) {
-    constructor (name: String, age: Int) : this(name) {
-        // 初始化...
-        println(name)
-    }
-}
-
-class Test49 {
-    @Test
-    fun test22() {
-        Person45("11")
-    }
-
-}
-
-
-/**
-如果一个非抽象类没有声明构造函数(主构造函数或次构造函数)，它会产生一个没有参数的构造函数。构造函数是 public 。
-如果你不想你的类有公共的构造函数，你就得声明一个空的主构造函数：
- */
-class DontCreateMe private constructor() {
-}
-
-/**
- * 注意：在 JVM 虚拟机中，如果主构造函数的所有参数都有默认值，编译器会生成一个附加的无参的构造函数，
- * 这个构造函数会直接使用默认值。这使得 Kotlin 可以更简单的使用像 Jackson 或者 JPA 这样使用无参构造函数来创建类实例的库。
- * */
-
-class Customer(val customerName: String = "")
-
-/**
- * 测试
- */
-class Person46 constructor(name: String) {  // 类名为 Runoob
-    // 大括号内是类体构成
-    var url: String = "http://www.runoob.com"
-    var country: String = "CN"
-    var siteName = name
-
-    init {
-        println("初始化网站名: ${name}")
-    }
-
-    // 次构造函数
-    constructor (name: String, alexa: Int) : this(name) {
-        println("Alexa 排名 $alexa")
-    }
-
-    fun printTest() {
-        println("我是类的函数")
-    }
-}
-
-class Test400 {
-    @Test
-    fun test3() {
-        val runoob = Person46("菜鸟教程", 10000)
-        println(runoob.siteName)
-        println(runoob.url)
-        println(runoob.country)
-        runoob.printTest()
-    }
-
-}
-
-
-/**
 抽象类
-
 抽象是面向对象编程的特征之一，类本身，或类中的部分成员，都可以声明为 abstract 的。抽象成员在类中不存在具体的实现。
 注意：无需对抽象类或抽象成员标注open注解。
  */
-open class Son {
-    open fun f() {
-        println("我是base.f()方法")
+open class Father {
+    open fun eat() {
+        println("我是父亲eat()方法")
     }
 }
 
-abstract class Derived : Son() {
-    override abstract fun f()
+abstract class Son : Father() {
+    override abstract fun eat()
+
+}
+
+class Grandson : Son() {
+    override fun eat() {
+        TODO("Not yet implemented")
+    }
+
 }
 
 class Test401 {
     @Test
     fun test9() {
-        var son = Son()
-        println(son.f())
+        var father = Father()
+        println(father.eat())
+
     }
 }
 
@@ -543,7 +490,6 @@ class Test404 {
          */
         test6.setInterFace(object : TestInterFace {
             override fun test() {
-                TODO("Not yet implemented")
                 println("对象表达式创建匿名内部类的实例")
             }
         })
@@ -717,14 +663,17 @@ class Apple {
     */
 }
 
-//如果，属性访问器的可见性修改为private或者该属性直接使用private修饰时，我们只能手动提供一个公有的函数去修改其属性了。就像Java中的Bean的setXXXX()
+//如果，属性访问器的可见性修改为private或者该属性直接使用private修饰时，
+// 我们只能手动提供一个公有的函数去修改其属性了。就像Java中的Bean的setXXXX()
 
 /** 三、后备字段 */
 
 /*
-Kotlin的类不能有字段。 但是，有时在使用自定义访问器时需要有一个后备字段。为了这些目的，Kotlin提供了可以使用字段标识符访问的自动备份字段
+Kotlin的类不能有字段。 但是，有时在使用自定义访问器时需要有一个后备字段。
+为了这些目的，Kotlin提供了可以使用字段标识符访问的自动备份字段
+ */
 
-例：
+/*
 
     var count = 0   // 初始化值会直接写入备用字段
         set(value){
@@ -778,7 +727,8 @@ class Orange {
 
 /** 五、编译时常数 */
 /*
-在开发中，难免会遇到一些已经确定的值的量。在Java中，我们可以称其为常量。在kotlin中，我们称其为编译时常数。我们可以用const关键字去声明它。其通常和val修饰符连用
+在开发中，难免会遇到一些已经确定的值的量。在Java中，我们可以称其为常量。在kotlin中，我们称其为编译时常数。
+我们可以用const关键字去声明它。其通常和val修饰符连用
 
 关键字：const
 满足const的三个条件：
@@ -794,8 +744,10 @@ const val CONST_STR = "Kotlin"
 
 /** 六、后期初始化属性 */
 /*
-通常，声明为非空类型的属性必须在构造函数中进行初始化。然而，这通常不方便。例如，可以通过依赖注入或单元测试的设置方法初始化属性。
-在这种情况下，不能在构造函数中提供非空的初始值设置，但是仍然希望在引用类的正文中的属性时避免空检查。故而，后期初始化属性就应运而生了。
+通常，声明为非空类型的属性必须在构造函数中进行初始化。然而，这通常不方便。
+例如，可以通过依赖注入或单元测试的设置方法初始化属性。
+在这种情况下，不能在构造函数中提供非空的初始值设置，但是仍然希望在引用类的正文中的属性时避免空检查。
+故而，后期初始化属性就应运而生了。
 
 关键字 ： lateinit
 该关键字必须声明在类的主体内，并且只能是用var修饰的属性。并且该属性没有自定义的setter()与getter()函数。
