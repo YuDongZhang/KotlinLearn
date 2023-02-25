@@ -10,6 +10,7 @@ class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         startKoin {
             modules(cnModules)
         }
@@ -17,6 +18,8 @@ class BaseApplication : Application() {
         //外部加载models
         loadKoinModules(otherMo)
     }
+
+    initConfig()
 }
 
 val otherMo = module {
