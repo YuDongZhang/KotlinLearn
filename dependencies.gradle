@@ -135,4 +135,8 @@ dependencies {
     // region livedata eventbus
     implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
     // endregion
+
+    // 调试工具
+    debugImplementation "io.github.didi.dokit:dokitx:$dokitx_version"
+    releaseImplementation "io.github.didi.dokit:dokitx-no-op:$dokitx_version"
 }

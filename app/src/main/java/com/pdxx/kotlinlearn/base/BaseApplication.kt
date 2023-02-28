@@ -6,7 +6,7 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
-class BaseApplication : Application() {
+abstract class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -17,10 +17,18 @@ class BaseApplication : Application() {
 
         //外部加载models
         loadKoinModules(otherMo)
+
+        initConfig()
     }
 
-    initConfig()
+    /**
+     * 初始化配置
+     */
+    protected open fun initConfig() {}
+
 }
+
+
 
 val otherMo = module {
 

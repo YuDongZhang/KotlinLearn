@@ -1,9 +1,9 @@
 package com.pdxx.kotlinlearn
 
-import com.cainiaowo.common.BaseApplication
-import com.cainiaowo.common.ktx.application
-import com.cainiaowo.service.assistant.AssistantApp
+
 import com.pdxx.kotlinlearn.base.BaseApplication
+import com.pdxx.kotlinlearn.ktx.application
+import com.pdxx.kotlinlearn.utils.AssistantApp
 
 class MyApplication : BaseApplication() {
     override fun initConfig() {
