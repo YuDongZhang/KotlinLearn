@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class VmFactory(private val application: Application) : ViewModelProvider.Factory {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(VmOne::class.java)) {
             return VmOne() as T
         } else if (modelClass.isAssignableFrom(VmTwo::class.java)) {
@@ -15,6 +15,8 @@ class VmFactory(private val application: Application) : ViewModelProvider.Factor
             throw ClassNotFoundException("class $modelClass 没有注册到工厂类这个viewModel啊")
         }
     }
+
+
 }
 
 class VmFc2 : ViewModelProvider.NewInstanceFactory() {
