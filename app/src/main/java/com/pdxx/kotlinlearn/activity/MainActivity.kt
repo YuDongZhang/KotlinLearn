@@ -55,6 +55,10 @@ class MainActivity : AppCompatActivity() {
             var intent = Intent(this, GeneralActivity::class.java)
             startActivity(intent)
         }
+        binding.tv6.setOnClickListener {
+            var intent = Intent(this, NavigationActivity::class.java)
+            startActivity(intent)
+        }
         Log.d("TAG", "onCreate: "+p2.company)
     }
 

@@ -10,6 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<!--        <activity-->
+<!--            android:name=".NavigationActivity"-->
+<!--            android:exported="false"-->
+<!--            android:label="@string/title_activity_navigation">-->
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+<!--        </activity>-->
         <activity
             android:name=".activity.LiveActivity"
             android:exported="false">
@@ -22,7 +30,9 @@
         <activity android:name=".activity.ViewPagerActivity" />
         <activity android:name=".activity.SwitchFragmentActivity" />
         <activity android:name=".activity.ListActivity" />
-        <activity android:name=".activity.MainActivity"
+        <activity android:name=".activity.NavigationActivity" />
+        <activity
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
