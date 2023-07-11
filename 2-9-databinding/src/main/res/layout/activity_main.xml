@@ -140,7 +140,7 @@
             android:background="#778899" />
 
         <!-- ***********************************************************-->
-
+<!--这个地方的 adapter 就是上面的 导入的 adapter-->
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -150,6 +150,7 @@
             tools:itemCount="5"
             tools:listitem="@layout/item_rv" />
 
+<!--        这个 info 你可以去布局里面看 -->
         <include
             info="@{info}"
             layout="@layout/item_rv" />

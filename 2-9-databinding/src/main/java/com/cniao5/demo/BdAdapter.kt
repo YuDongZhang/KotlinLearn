@@ -20,7 +20,7 @@ class BdAdapter : RecyclerView.Adapter<BdAdapter.ItVH>() {
 
         fun bind(bean: ItemBean) {
             binding.info = bean
-            binding.executePendingBindings()
+            binding.executePendingBindings() //让binding数据生效 必须写的一个函数回调
         }
     }
 

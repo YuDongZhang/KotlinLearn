@@ -18,6 +18,8 @@
         android:layout_marginTop="1dp"
         android:background="@android:color/darker_gray">
 
+<!-- BdToolKt 看上面   获取自定义里面的类   BdToolKt.getTitle 类名 . 静态的-->
+<!--        info也是引入的 -->
         <TextView
             android:layout_width="300dp"
             android:layout_height="wrap_content"

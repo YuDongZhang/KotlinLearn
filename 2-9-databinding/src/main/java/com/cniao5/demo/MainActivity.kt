@@ -11,12 +11,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //这个地方就是 DataBinding 在 activity 中使用
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         //经过测试布局中是不能加注释的
 
         //赋值    apply对这个作用对象,对他做一系列的操作
         binding.apply {
 
+            //这里这些参数都是直接通向界面的
             name = null
 
             address = "Beijing 海淀"
@@ -39,8 +41,8 @@ class MainActivity : AppCompatActivity() {
 
             adapter = BdAdapter()
             info = ItemBean(0, "include 的item")
-//bdtool中去查看
-//            imgRes = getDrawable(R.drawable.ic_launcher_foreground)
+            //bdtool中去查看
+            imgRes = getDrawable(R.drawable.ic_launcher_background)
 
         }
 
