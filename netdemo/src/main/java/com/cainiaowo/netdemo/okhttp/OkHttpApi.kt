@@ -86,7 +86,7 @@ class OkHttpApi private constructor() : IHttpApi {
 
         val request = Request.Builder()
             .get()
-            .tag(params)
+            .tag(params)//用于tag标记方便取消
             .url(urlBuilder.build())
             .cacheControl(CacheControl.FORCE_NETWORK) // 强制使用网络更新
             .build()

@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         //经过测试布局中是不能加注释的
 
-        //赋值    apply对这个作用对象,对他做一系列的操作
+        //赋值    apply对这个作用对象,对他做一系列的操作 , 对binding做一系列的操作
         binding.apply {
 
             //这里这些参数都是直接通向界面的

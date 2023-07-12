@@ -47,7 +47,7 @@ class CaiNiaoInterceptor : Interceptor {
         }
         val signHeaders = mutableListOf<Pair<String, String>>()
         signHeaders.addAll(attachHeaders)
-        // get的请求，参数 , 参数拼装
+        // get的请求，参数 , 参数拼装 , get请求参数 都是在url中 key value
         if (originRequest.method == "GET") {
             originRequest.url.queryParameterNames.forEach { key ->
                 signHeaders.add(key to (originRequest.url.queryParameter(key) ?: ""))
@@ -65,6 +65,7 @@ class CaiNiaoInterceptor : Interceptor {
             // json的body 需要将requestBody反序列化为json转为map application/json
             if (requestBody?.contentType()?.type == "application" && requestBody.contentType()?.subtype == "json") {
                 kotlin.runCatching {
+                    //这个是一个流的形式
                     val buffer = Buffer()
                     requestBody.writeTo(buffer)
                     buffer.readByteString().utf8()
@@ -82,16 +83,19 @@ class CaiNiaoInterceptor : Interceptor {
         //  最后拼接appkey和value）//32位的大写,
         val signValue = signHeaders
             .sortedBy { it.first }//前面的it.first就是前面的key , 前面的key用 ask码排序
-            .joinToString("&") { "${it.first}=${it.second}" }//就是一个语法糖 , key和value 用&就行拼接
+            .joinToString("&") { "${it.first}=${it.second}" }//就是一个语法糖 , key和value 用&就行拼接 , 最后一个不会有
             .plus("&appkey=$NET_CONFIG_APPKEY")//最后加上这个参数
 
+        //拦截器 拦截的是 originRequest 修改后拼装成为新的
         val newBuilder = originRequest.newBuilder()
             .cacheControl(CacheControl.FORCE_NETWORK)
+        //把值添加到header里面
         attachHeaders.forEach { newBuilder.header(it.first, it.second) }
+        //把sign 值加入
         newBuilder.header("sign", EncryptUtils.encryptMD5ToString(signValue))//最后sign加入到请求头里面,md5加密
 
         if (originRequest.method == "POST" && requestBody != null) {
-            newBuilder.post(requestBody)
+            newBuilder.post(requestBody) //要加上去, 构建新的请求体的时候
         } else if (originRequest.method == "GET") {
             newBuilder.get()
         }

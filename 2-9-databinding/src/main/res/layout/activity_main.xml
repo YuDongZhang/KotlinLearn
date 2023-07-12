@@ -80,6 +80,8 @@
             android:text="@{`name三目示例：` + (name==null?`null`:`nonull`)}"
             android:textSize="18sp" />
 
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -124,6 +126,8 @@
             android:layout_height="wrap_content"
             android:text="@{`Observable类型改变name：` + oUser.name+oUser.age}"
             android:textSize="18sp" />
+
+<!--        oUser.name 改变的时候会重新赋值 , 导致控件刷新 , age也改变-->
 
         <Button
             android:layout_width="wrap_content"
