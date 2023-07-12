@@ -14,6 +14,7 @@ class RetryInterceptor(private val maxRetry: Int = 0) : Interceptor {
      */
     private var retriedNum: Int = 0
 
+    //这个地方用的是责任链模式
     override fun intercept(chain: Interceptor.Chain): Response {
         val request: Request = chain.request()
         Log.d("RetryInterceptor", "intercept 19行:retriedNum=$retriedNum")

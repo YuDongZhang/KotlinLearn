@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val getResult: TextView = findViewById(R.id.tv_get_result)
         val postResult: TextView = findViewById(R.id.tv_post_result)
 

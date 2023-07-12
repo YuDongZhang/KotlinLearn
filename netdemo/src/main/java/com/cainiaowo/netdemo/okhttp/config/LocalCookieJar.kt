@@ -20,7 +20,7 @@ internal class LocalCookieJar : CookieJar {
         // 有效的cookie
         val validCookies: MutableList<Cookie> = ArrayList()
 
-        for (cookie in cache) {
+        for (cookie in cache) { //判断cookie的时候和当前时间对比
             if (cookie.expiresAt < System.currentTimeMillis()) {
                 // 判断是否过期
                 invalidCookies.add(cookie)

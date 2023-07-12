@@ -25,7 +25,7 @@ class CaiNiaoWoCoroutines {
      */
     @Test
     fun testKtCoroutines() {
-      //  testLaunch()
+        //  testLaunch()
 
 //        testAsync()
 
@@ -42,7 +42,7 @@ class CaiNiaoWoCoroutines {
      * 1. CoroutineScope.launch    异步,不阻塞线程,就是同时执行的.
      */
     @Test
-     fun testLaunch() {
+    fun testLaunch() {
         val time = measureTimeMillis {
             GlobalScope.launch {
                 Thread.sleep(1000)
@@ -55,6 +55,7 @@ class CaiNiaoWoCoroutines {
             }
 
             println("-----------testLaunch非launch部分,currentThread:--> ${Thread.currentThread()}")
+
             // 由于函数生命周期原因,执行完代码块后JVM销毁函数栈,所以如果没有Thread.sleep(1000),那么
             // 上面的两个launch的异步操作不会进行
             Thread.sleep(1000)
@@ -64,10 +65,10 @@ class CaiNiaoWoCoroutines {
 
     /**
      * 2. CoroutineScope.async    异步,不阻塞线程
-     *    返回Deferred
+     *    返回Deferred  可以用这种方式 val result = deferredResult.await()
      */
     @Test
-     fun testAsync() {
+    fun testAsync() {
         val time = measureTimeMillis {
             GlobalScope.async {
                 Thread.sleep(1000)
@@ -77,11 +78,24 @@ class CaiNiaoWoCoroutines {
                 Thread.sleep(1000)
                 println("testAsync第二个async,currentThread:--> ${Thread.currentThread()}")
             }
+
+            GlobalScope.launch {
+                val deffer = GlobalScope.async {
+                    Thread.sleep(1000)
+                    println("testAsync第三个async,currentThread:--> ${Thread.currentThread()}")
+                }
+                val result = deffer.await()  //这个调用会挂起当前协程，直到结果可用。
+                println(result) // 打印异步任务的结果
+            }
+
             println("testAsync非async部分,currentThread:--> ${Thread.currentThread()}")
             Thread.sleep(1000)
         }
         println("testAsync耗时:--> $time")
     }
+
+    //总结 , launch 启动的协程是轻量级的并发结构，不返回结果。
+    //async 启动的协程也是轻量级的并发结构，但返回一个 Deferred 对象，可以获取异步计算的结果。
 
 
     /**
@@ -89,7 +103,7 @@ class CaiNiaoWoCoroutines {
      *    可以用于桥接普通函数和协程
      */
     @Test
-     fun testRunBlocking() {
+    fun testRunBlocking() {
         val time = measureTimeMillis {
             runBlocking {
                 println("testRunBlocking在runBlocking内部delay前,currentThread:---> ${Thread.currentThread()}")
@@ -109,7 +123,7 @@ class CaiNiaoWoCoroutines {
      *    a2 是deferrod
      */
     @Test
-     fun testCancelJoin() = runBlocking {
+    fun testCancelJoin() = runBlocking {
         val time = measureTimeMillis {
             val L1 = launch {
                 println("testCancelJoin第一个launch,currentThread: ${Thread.currentThread()}")
@@ -160,7 +174,7 @@ class CaiNiaoWoCoroutines {
      * 6. await     可以获取async的异步Deferred结果
      */
     @Test
-     fun testAwait() = runBlocking {
+    fun testAwait() = runBlocking {
         val time = measureTimeMillis {
             val A1 = async {
                 println("testAwait第一个async,currentThread: ${Thread.currentThread()}")
@@ -180,10 +194,43 @@ class CaiNiaoWoCoroutines {
         println("testAwait耗时: $time")
     }
 
+    /*
+    suspend 是一个修饰符，用于标记挂起函数。挂起函数是一种特殊的函数，它可以暂停执行并在稍后恢复，而不会阻塞线程。
+     */
     private suspend fun getA2Value(): Int {
         println("testAwait第二个async,currentThread: ${Thread.currentThread()}")
         // delay属于suspend函数,只能在协程或者其它suspend函数中调用
         delay(1000)
         return 88888
     }
+
+    /*
+    再次学习 suspend 关键字
+     */
+    suspend fun doTask() {
+        delay(1000) // 模拟耗时操作
+        println("===44444  Task completed")
+    }
+
+    @Test
+    fun main() = runBlocking {
+        launch {
+            println("===11111  Coroutine started")
+            doTask() // 调用挂起函数
+            println("===22222  Coroutine resumed")
+        }
+        println("===33333   Main  thread  continues")
+    }
+
+    /*
+    Coroutine started
+    Main thread continues
+    Task completed
+    Coroutine resumed
+
+    在执行到挂起函数 doTask() 时，它会挂起当前协程的执行，让主线程继续执行。在耗时操作完成后，协程会在恢复点继续执行。
+
+    通过使用 suspend 修饰符，我们可以在协程中使用挂起函数，使协程能够以非阻塞的方式执行，提高代码的可读性和可维护性。
+     */
+
 }

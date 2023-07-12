@@ -7,7 +7,7 @@ import com.cainiaowo.netdemo.okhttp.support.IHttpCallback
  */
 interface IHttpApi {
     /**
-     * 抽象的Http的get请求封装,异步请求
+     * 抽象的Http的get请求封装,异步请求  params 参数 key  value , path 是路径
      */
     fun get(params: Map<String, Any>, path: String, callback: IHttpCallback)
 
