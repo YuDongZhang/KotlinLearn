@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pdxx.kotlinlearn.R
+import com.pdxx.kotlinlearn.bean.PersonEntity
 import com.pdxx.kotlinlearn.vm.VmOne
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class Fragment01 : Fragment() {

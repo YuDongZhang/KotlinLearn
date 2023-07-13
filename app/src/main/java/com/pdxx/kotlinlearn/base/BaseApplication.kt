@@ -37,3 +37,23 @@ val otherMo = module {
 class otherModule(){
 
 }
+
+//老版本的配置
+
+/*
+//    override fun onCreate() {
+//        super.onCreate()
+//        //Koin注解使用
+//        startKoin {
+//            androidLogger(Level.ERROR) //目前已知bug，除了level.error外，使用 androidloger会导致崩溃
+//            //context
+//            androidContext(this@MyApplication)
+//            //assets 资源数据
+//            androidFileProperties("ass.file")//默认取值assets下 properties文件内的属性配置，可自行配置
+//
+//            //加载需要的 module
+//            modules(cnModules)
+//        }
+//    }
+
+ */
