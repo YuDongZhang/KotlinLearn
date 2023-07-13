@@ -16,12 +16,13 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+import kotlin.coroutines.resumeWithException
 
 /**
  * IHttpApi的实现类：使用OkHttp
  * 单例模式
  */
-class OkHttpApi private constructor() : IHttpApi {
+class OkHttpApiTwo private constructor() : IHttpApi {
 
     /**
      * 最大重试次数
@@ -70,12 +71,12 @@ class OkHttpApi private constructor() : IHttpApi {
      */
     companion object {
         @Volatile
-        private var api: OkHttpApi? = null
+        private var api: OkHttpApiTwo? = null
 
         @Synchronized
-        fun getInstance(): OkHttpApi {
+        fun getInstance(): OkHttpApiTwo {
             //如果为空就 创建  OkHttpApi() 复制给 api   api = it   , 可以很好的理解 also
-            return api ?: OkHttpApi().also { api = it }
+            return api ?: OkHttpApiTwo().also { api = it }
         }
     }
 
@@ -146,57 +147,58 @@ class OkHttpApi private constructor() : IHttpApi {
 
     /**
      * 使用协程形式的get请求，使用runblocking，也可以使用suspend修饰
+     * runblocking衔接普通函数和挂起函数
      */
-//    fun get(params: Map<String, Any>, urlStr: String) = runBlocking {
-//        val urlBuilder = urlStr.toHttpUrl().newBuilder()
-//        params.forEach { entry ->
-//            urlBuilder.addEncodedQueryParameter(entry.key, entry.value.toString())
-//        }
-//
-//        val request = Request.Builder()
-//            .get()
-//            .tag(params)
-//            .url(urlBuilder.build())
-//            .cacheControl(CacheControl.FORCE_NETWORK)
-//            .build()
-//        val newCall = mClient.newCall(request)
-//
-//        //存储请求，用户取消
-//        callMap.put(request.tag(), newCall)
-//        newCall.call()
-    //  得到请求的结果会返回给runbolocking  get()得到的就是 response
-//    }
-//
-//    /**
-//     * 自定义扩展函数，扩展okhttp的call的异步执行方式，结合协程，返回dataresult的数据响应
-//     */
-//    private suspend fun Call.call(async: Boolean = true): Response {
-//        return suspendCancellableCoroutine { continuation ->
-//            if (async) {
-//                enqueue(object : Callback {
-//                    override fun onFailure(call: Call, e: IOException) {
-//                        //避免不必要的冗余调用
-                            // 这里就是协程被取消了 , 直接return 的判断
-//                        if (continuation.isCancelled) return
-//                        //continuation.resumeWithException(e) //返回异常
-//                    }
-//
-//                    override fun onResponse(call: Call, response: Response) {
-//                        continuation.resume(response)
-//                    }
-//                })
-//            } else {
-//                continuation.resume(execute())
-//            }
-//            //协程取消的时候网络请求取消
-//            continuation.invokeOnCancellation {
-//                try {
-    // //这里调用的是上面 call 的取消
-//                    cancel()
-//                } catch (ex: Exception) {
-//                    ex.printStackTrace()
-//                }
-//            }
-//        }
-//    }
+    fun get(params: Map<String, Any>, urlStr: String) = runBlocking {
+        val urlBuilder = urlStr.toHttpUrl().newBuilder()
+        params.forEach { entry ->
+            urlBuilder.addEncodedQueryParameter(entry.key, entry.value.toString())
+        }
+
+        val request = Request.Builder()
+            .get()
+            .tag(params)
+            .url(urlBuilder.build())
+            .cacheControl(CacheControl.FORCE_NETWORK)
+            .build()
+        val newCall = mClient.newCall(request)
+
+        //存储请求，用户取消
+        callMap.put(request.tag(), newCall)
+        newCall.call() //这地方调用的就是下面的 , 返回的就是下面的 response
+        // 得到请求的结果会返回给runbolocking  get()得到的就是 response
+    }
+
+    /**
+     * 自定义扩展函数，扩展okhttp的call的异步执行方式，结合协程，返回dataresult的数据响应
+     */
+    private suspend fun Call.call(async: Boolean = true): Response {
+        return suspendCancellableCoroutine { continuation ->
+            if (async) {
+                enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        //避免不必要的冗余调用
+                         //    这里就是协程被取消了 , 直接return 的判断
+                        if (continuation.isCancelled) return
+                        continuation.resumeWithException(e) //返回异常
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        continuation.resume(response,{})
+                    }
+                })
+            } else {
+                continuation.resume(execute(),{})
+            }
+            //协程取消的时候网络请求取消
+            continuation.invokeOnCancellation {
+                try {
+     //这里调用的是上面 call 的取消
+                    cancel()
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+            }
+        }
+    }
 }

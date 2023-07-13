@@ -29,7 +29,7 @@ object KtRetrofit {
         .build()
 
     private val retrofitBuilder = Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create())//gson的支持
         .addCallAdapterFactory(LiveDataCallAdapterFactory())
         .client(mOkHttpClient)
 
@@ -41,6 +41,7 @@ object KtRetrofit {
     /**
      * 初始化Retrofit配置
      * [baseUrl] 接口的基类url,以/结尾
+     * okHttpClient: OkHttpClient = mOkHttpClient 默认的可传 可不传
      */
     fun initConfig(baseUrl: String, okHttpClient: OkHttpClient = mOkHttpClient): KtRetrofit {
         retrofit = retrofitBuilder.baseUrl(baseUrl).client(okHttpClient).build()

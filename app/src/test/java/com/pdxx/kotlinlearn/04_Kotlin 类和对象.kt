@@ -799,4 +799,48 @@ class Test410 {
 }
 
 
+/*
+伴生类 类似于静态方法 可以直接调用
+ */
+class BanShengLei {
+    companion object {
+        // 静态属性
+        val staticProperty: Int = 10
 
+        // 静态方法
+        fun staticMethod() {
+            println("This is a static method.")
+        }
+    }
+
+    fun useCompanion(){
+        //在类的内部直接用 伴生类的方法
+        BanShengLei.staticMethod()
+    }
+
+    fun useCompanionTwo(){
+        //如果没有同名的可以直接使用
+        staticMethod()
+    }
+
+}
+
+interface BanShengInterface {
+    fun interfaceMethod()
+}
+class BanShengLeiTwo{
+    companion object:BanShengInterface{
+        override fun interfaceMethod() {
+            TODO("Not yet implemented")
+        }
+    }
+}
+
+class Test411 {
+    @Test
+    fun test4() {
+        val test = BanShengLei.staticProperty
+        println(test)
+        BanShengLei.staticMethod()
+    }
+}

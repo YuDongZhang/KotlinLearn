@@ -23,6 +23,7 @@ import java.io.IOException
 
 /**
  * okHttp的Call执行异步，并转化为liveData可观察结果
+ * 看最后的返回的值 , 就是一个 live
  */
 inline fun <reified T> okhttp3.Call.toLiveData(): LiveData<T?> {
     val live = MutableLiveData<T?>()
@@ -33,6 +34,7 @@ inline fun <reified T> okhttp3.Call.toLiveData(): LiveData<T?> {
 
         override fun onResponse(call: okhttp3.Call, response: Response) {
             if (response.isSuccessful) {
+                //这个扩展函数在下面
                 response.toEntity<T>()
             }
         }
@@ -44,19 +46,21 @@ inline fun <reified T> okhttp3.Call.toLiveData(): LiveData<T?> {
  * 将Response的对象，转化为需要的对象类型，也就是将body.string转为entity
  * @return 返回需要的类型对象，可能为null，如果json解析失败的话
  *
- * reified 用了泛型又想知道具体的类型 ,( T::class.java) 就应该用这个来休息
+ * reified 用了泛型又想知道具体的类型 ,( T::class.java) 就应该用这个来修饰
+ * 上面用了这个 下面的才可以这样使用
  *
- * inline内联函数
+ * inline内联函数 , 会作为一个代码块嵌入到调用地方 , 而不是作为函数
  */
 inline fun <reified T> Response.toEntity(): T? {
     if (!isSuccessful) return null
     //gson不允许我们将json对象采用String,所以单独处理   //类型判断
     if (T::class.java.isAssignableFrom(String::class.java)) {
         return kotlin.runCatching {
-            this.body?.string()
+            this.body?.string() //如果 实体是个 string 直接返回 , 因为不支持解析
         }.getOrNull() as? T
     }
     return kotlin.runCatching {
+        //这个地方才是真正的返回实体的类 解析后的
         Gson().fromJson(this.body?.string(), T::class.java)
     }.onFailure { e ->
         e.printStackTrace()
@@ -90,6 +94,7 @@ fun <T: Any> Call<T>.toLivedata(): LiveData<T?> {
 /**
  * 扩展retrofit的返回数据，调用await，并catch超时等异常
  * @return dataResult 返回格式为ApiResponse封装
+ * 这个和下面的返回的数据的结构类型不一样
  */
 suspend fun <T : Any> Call<T>.serverData(): DataResult<T> {
     var result: DataResult<T> = DataResult.Loading

@@ -13,8 +13,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 /**
  * 将Retrofit的Call回调数据转化为LiveData的Adapter
  */
-class LiveDataCallAdapter<R>(private val responseType: Type) :
-    CallAdapter<R, LiveData<ApiResponse<R>>> {
+class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, LiveData<ApiResponse<R>>> {
 
     override fun responseType(): Type = responseType
 

@@ -9,6 +9,7 @@ import java.lang.reflect.Type
 
 /**
  * 将Retrofit的返回数据,转化为LiveData的Adapter的工厂类
+ * 这个基本上就是模板代码的形式
  */
 class LiveDataCallAdapterFactory : CallAdapter.Factory() {
     override fun get(
@@ -28,6 +29,7 @@ class LiveDataCallAdapterFactory : CallAdapter.Factory() {
             throw IllegalArgumentException("resource must be parameterized")
         }
         val bodyType = getParameterUpperBound(0, observableType)
+        //点进去看
         return LiveDataCallAdapter<Any>(bodyType)
     }
 }
