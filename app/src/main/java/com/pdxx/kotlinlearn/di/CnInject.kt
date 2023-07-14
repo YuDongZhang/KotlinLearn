@@ -16,13 +16,14 @@ import org.koin.dsl.module
 
 
 val cnModules = module {
+    //此界面的效果可以从 mainactivity 去查看
     //空声明会报错
     //单例模式//为false用的时候创建
     single(createdAtStart = false) { PersonEntity() } bind Fragment01::class
     //bind的意思就是可以通过  get<Fragment01>()
     //工厂模式就是创建过程中眼不见为 干净
 
-    //覆盖声明  //这个注释掉 ,上面打印的就是 一样的对象 , 地址一样
+    //覆盖声明  //这个注释掉 ,上面打印的就是 一样的对象 , 地址一样  //这一段注销测试上面带
     factory(override = true) { PersonEntity() }
 
     //多构造函数

@@ -32,8 +32,11 @@ fun <T : ViewDataBinding> Activity.bindView(@LayoutRes layoutId: Int): T {
  * @return 返回Binding对象实例,可null
  *
  * 上面方法重写
- * 原型 :binding = ActivityMainBinding.inflate(layoutInflater)
- * setContentView(binding.root)
+ * 原型 : if (view == null) {
+                view = View.inflate(getActivity(), R.layout.fragment_service_detail, null);
+                }
+                binding = DataBindingUtil.bind(view);
+ *
  */
 fun <T : ViewDataBinding> Activity.bindView(root: View): T? {
     return DataBindingUtil.bind<T>(root)

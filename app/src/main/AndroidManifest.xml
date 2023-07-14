@@ -10,14 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<!--        <activity-->
-<!--            android:name=".NavigationActivity"-->
-<!--            android:exported="false"-->
-<!--            android:label="@string/title_activity_navigation">-->
-<!--            <meta-data-->
-<!--                android:name="android.app.lib_name"-->
-<!--                android:value="" />-->
-<!--        </activity>-->
+        <activity
+            android:name=".base.TestActivity"
+            android:exported="false" />
+        <!-- <activity -->
+        <!-- android:name=".NavigationActivity" -->
+        <!-- android:exported="false" -->
+        <!-- android:label="@string/title_activity_navigation"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.app.lib_name" -->
+        <!-- android:value="" /> -->
+        <!-- </activity> -->
         <activity
             android:name=".activity.LiveActivity"
             android:exported="false">
