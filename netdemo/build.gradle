@@ -12,21 +12,13 @@ android {
 
 dependencies {
 
-    // region okhttp
-    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
-    // okhttp 拦截器
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
-    // endregion
+
 
     // region gson
     implementation 'com.google.code.gson:gson:2.8.6'
     // endregion
 
-    // region retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    // 转换器
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    // endregion
+
 
     // region 一个开源的Android中好用的工具库
     implementation 'com.blankj:utilcodex:1.30.6'

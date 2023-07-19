@@ -69,13 +69,6 @@
                 android:padding="5dp"
                 android:text="4 .ViewPager翻页"
                 android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv5"
@@ -93,7 +86,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/tv6"
                 android:layout_width="wrap_content"
@@ -103,6 +95,28 @@
                 android:padding="5dp"
                 android:text="6 .navigation"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:background="@color/yello"
+                android:padding="5dp"
+                android:text="7 .paging"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+
+
+
         </LinearLayout>
 
     </LinearLayout>

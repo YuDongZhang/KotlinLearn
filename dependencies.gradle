@@ -139,4 +139,14 @@ dependencies {
     // 调试工具
     debugImplementation "io.github.didi.dokit:dokitx:$dokitx_version"
     releaseImplementation "io.github.didi.dokit:dokitx-no-op:$dokitx_version"
+
+    //retrofit 配置
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // okhttp
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    // okhttp 拦截器
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+
 }

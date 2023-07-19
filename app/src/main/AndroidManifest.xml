@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pdxx.kotlinlearn">
 
+
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -11,9 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".base.TestActivity"
+            android:name=".moduleFunny.PagingActivity"
             android:exported="false" />
-        <!-- <activity -->
+        <activity
+            android:name=".base.TestActivity"
+            android:exported="false" /> <!-- <activity -->
         <!-- android:name=".NavigationActivity" -->
         <!-- android:exported="false" -->
         <!-- android:label="@string/title_activity_navigation"> -->

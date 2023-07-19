@@ -11,6 +11,7 @@ import com.pdxx.kotlinlearn.R
 import com.pdxx.kotlinlearn.bean.PersonEntity
 import com.pdxx.kotlinlearn.bean.Student
 import com.pdxx.kotlinlearn.databinding.ActivityMainBinding
+import com.pdxx.kotlinlearn.moduleFunny.PagingActivity
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.core.component.KoinComponent
@@ -26,27 +27,28 @@ class MainActivity : AppCompatActivity() {
     lateinit var tvContent: TextView
     //  var unbinder: Unbinder? = null
 
-    val p :PersonEntity by inject<PersonEntity> () //lazy 模式
+    val p: PersonEntity by inject<PersonEntity>() //lazy 模式
 
-    val p2 : PersonEntity = get()
+    val p2: PersonEntity = get()
 
     val s1 = get<Student>(named("name"))
 
     //在使用的指明标记符
-    val s2= get<Student>(qualifier<PersonEntity>())
+    val s2 = get<Student>(qualifier<PersonEntity>())
 
-    var tv:TextView?=null //注意懒加载问题 ,如果都是 懒 可能为空
-    val viewInfo:ViewInfo by inject<ViewInfo> { parametersOf(tv,tvContent)}
+    var tv: TextView? = null //注意懒加载问题 ,如果都是 懒 可能为空
+    val viewInfo: ViewInfo by inject<ViewInfo> { parametersOf(tv, tvContent) }
 
-    private fun testLog(){
-        Log.d("testLog: ", ""+p.hashCode())
+    private fun testLog() {
+        Log.d("testLog: ", "" + p.hashCode())
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val binding =
+            DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         //  setContentView(R.layout.activity_main)
         binding.tv1.setOnClickListener {
 
@@ -71,12 +73,19 @@ class MainActivity : AppCompatActivity() {
             var intent = Intent(this, NavigationActivity::class.java)
             startActivity(intent)
         }
-        Log.d("TAG", "onCreate: "+p2.company)
+        binding.apply {
+            tv7.setOnClickListener {
+                var intent = Intent(this@MainActivity, PagingActivity::class.java)
+                startActivity(intent)
+            }
+
+        }
+        Log.d("TAG", "onCreate: " + p2.company)
     }
 
 }
 
 //假如说这个参数不在我们项目之类 , 怎么进行注入
-class ViewInfo(val view :View) :KoinComponent{
+class ViewInfo(val view: View) : KoinComponent {
 
 }
