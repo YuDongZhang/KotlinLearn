@@ -34,9 +34,14 @@ class MainActivity : AppCompatActivity() {
 
 
         //region retrofit 请求 , 看最下面的返回 , 返回的是 call
-        val retrofitCall = KtRetrofit.initConfig("https://course.api.cniao5.com/")
+//        val retrofitCall = KtRetrofit.initConfig("https://course.api.cniao5.com/")
+//            .getService(CniaoService::class.java)
+//            .userInfo()
+
+
+        val retrofitCall = KtRetrofit.initConfig("https://api.apiopen.top/")
             .getService(CniaoService::class.java)
-            .userInfo()
+            .getHaoKan()
 
         //ktx的livedata  用这个call.调用 toLivedata .这是扩展的函数
         val liveInfo = retrofitCall.toLivedata()
@@ -102,6 +107,9 @@ interface CniaoService {
 
     @GET("member/userinfo")
     fun userInfo(): retrofit2.Call<NetResponse>
+
+    @GET("api/getHaoKanVideo")
+    fun getHaoKan(): retrofit2.Call<NetResponse>
 
     @GET("member/userinfo")
     fun userInfo2(): LiveData<ApiResponse<NetResponse>>
