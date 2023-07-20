@@ -97,7 +97,7 @@ fun <T: Any> Call<T>.toLivedata(): LiveData<T?> {
  * @return dataResult 返回格式为ApiResponse封装
  * 这个和下面的返回的数据的结构类型不一样
  */
-suspend fun <T : Any> Call<T>.serverData(): DataResult<T> {
+suspend fun <T : Any> Call<T>.serverResult(): DataResult<T> {
     var result: DataResult<T> = DataResult.Loading
     kotlin.runCatching {
         this.await()

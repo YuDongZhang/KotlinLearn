@@ -49,6 +49,8 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+        // 添加注解@OptIn(ExperimentalContracts::class)时需要添加
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn",]
     }
 
 

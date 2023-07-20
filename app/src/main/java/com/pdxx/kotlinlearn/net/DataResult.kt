@@ -1,6 +1,9 @@
 package com.pdxx.kotlinlearn.net
 
 import retrofit2.Response
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 // region 数据响应封装方式一  //密封类  类似枚举
 sealed class DataResult<out R> {
@@ -34,7 +37,29 @@ sealed class DataResult<out R> {
  */
 val DataResult<*>.succeed
     get() = this is DataResult.Success && data != null
-// endregion
+
+@OptIn(ExperimentalContracts::class)
+inline fun <R> DataResult<R>.onSuccess(action: R.() -> Unit): DataResult<R> {
+    contract {
+        callsInPlace(action,InvocationKind.AT_LEAST_ONCE)
+    }
+    if (succeed)action.invoke((this as DataResult.Success).data)
+    return this
+}
+
+@OptIn(ExperimentalContracts::class)
+inline fun <R> DataResult<R>.onFailure(action: (exception: Throwable) -> Unit):DataResult<R>{
+    contract {
+        callsInPlace(action,InvocationKind.AT_LEAST_ONCE)
+    }
+
+    if (this is DataResult.Error) action.invoke(exception)
+    return this
+}
+
+
+
+
 
 
 
