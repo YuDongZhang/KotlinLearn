@@ -78,6 +78,10 @@ class MainActivity : AppCompatActivity() {
                 var intent = Intent(this@MainActivity, PagingActivity::class.java)
                 startActivity(intent)
             }
+            tv8.setOnClickListener {
+                var intent = Intent(this@MainActivity, CoroutinesActivity::class.java)
+                startActivity(intent)
+            }
 
         }
         Log.d("TAG", "onCreate: " + p2.company)

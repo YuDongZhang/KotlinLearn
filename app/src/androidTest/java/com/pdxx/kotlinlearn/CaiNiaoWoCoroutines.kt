@@ -12,7 +12,7 @@ class CaiNiaoWoCoroutines {
      说明 : 所有的协程和挂起函数只能在协程调用 , 你写了一个协程 , 可以在一个地方用runblocking
      调用你写的协程 ,就是这一块的生命周期是有效的 , runblocking要执行完才能执行下一步 .
 
-     runBlocking中是可以直接写launch 和 async 的 , 返回的对象是job , deferrod , 当他们调join方法,必须等这个
+     runBlocking中是可以直接写 launch 和 async 的 , 返回的对象是job , deferrod , 当他们调join方法,必须等这个
      协程执行完才执行下一步 ,调cancel()会直接取消执行 .
 
      withTimeout   超时会自动取消内部协程,并抛出异常
@@ -59,6 +59,7 @@ class CaiNiaoWoCoroutines {
             // 由于函数生命周期原因,执行完代码块后JVM销毁函数栈,所以如果没有Thread.sleep(1000),那么
             // 上面的两个launch的异步操作不会进行
             Thread.sleep(1000)
+
         }
         println("---------testLaunch耗时:--> $time")
     }
@@ -74,6 +75,7 @@ class CaiNiaoWoCoroutines {
                 Thread.sleep(1000)
                 println("testAsync第一个async,currentThread:--> ${Thread.currentThread()}")
             }
+
             GlobalScope.async {
                 Thread.sleep(1000)
                 println("testAsync第二个async,currentThread:--> ${Thread.currentThread()}")

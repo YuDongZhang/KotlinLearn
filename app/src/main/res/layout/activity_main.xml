@@ -106,6 +106,16 @@
                 android:text="7 .paging"
                 android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/tv8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:background="@color/pink"
+                android:padding="5dp"
+                android:text="8 .协程"
+                android:textSize="20sp" />
+
         </LinearLayout>
 
         <LinearLayout
