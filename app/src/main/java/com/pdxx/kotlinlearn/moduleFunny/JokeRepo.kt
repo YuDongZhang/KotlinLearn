@@ -1,5 +1,6 @@
 package com.pdxx.kotlinlearn.moduleFunny
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hym.netdemo.serverResult
@@ -7,7 +8,7 @@ import com.hym.netdemo.serverResult
 import com.pdxx.kotlinlearn.net.onFailure
 import com.pdxx.kotlinlearn.net.onSuccess
 
-class JokeRepo(private val service: IFunnyService) : IJokeResource {
+class JokeRepo(private val service: IJokeService) : IJokeResource {
 
     private val _liveJokeList = MutableLiveData<JokeBean>()
 
@@ -16,11 +17,10 @@ class JokeRepo(private val service: IFunnyService) : IJokeResource {
 
 
     override suspend fun getJokeList(page: Int, size: Int) {
-        TODO("Not yet implemented")
         service.getVideo(page,size)
             .serverResult()
             .onSuccess {
-
+                Log.i("TAG", "getJokeList: "+this@JokeRepo)
 
             }
             .onFailure {

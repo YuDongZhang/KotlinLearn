@@ -1,18 +1,16 @@
 package com.pdxx.kotlinlearn.moduleFunny
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import androidx.lifecycle.Observer
-
-import com.didichuxing.doraemonkit.util.LogUtils
 import com.hym.netdemo.toLivedata
 
 import com.pdxx.kotlinlearn.R
 import com.pdxx.kotlinlearn.base.BaseActivity
 import com.pdxx.kotlinlearn.databinding.ActivityPagingBinding
 import com.pdxx.kotlinlearn.net.KtRetrofit
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PagingActivity : BaseActivity<ActivityPagingBinding>(){
+
+    private val viewModel:JokeViewModel by viewModel()
 
     override fun getLayoutRes(): Int {
         return R.layout.activity_paging
@@ -22,7 +20,7 @@ class PagingActivity : BaseActivity<ActivityPagingBinding>(){
         super.initView()
 
        val retrofitCall =  KtRetrofit.initConfig("https://api.apiopen.top/")
-            .getService(IFunnyService::class.java)
+            .getService(IJokeService::class.java)
             .getVideo(1,1)
 
         val liveInfo = retrofitCall.toLivedata()
@@ -33,7 +31,7 @@ class PagingActivity : BaseActivity<ActivityPagingBinding>(){
 
         mBinding.apply {
             btTest.setOnClickListener {
-
+                viewModel.repoList()
             }
         }
     }

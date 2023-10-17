@@ -1,22 +1,15 @@
 package com.pdxx.kotlinlearn.moduleFunny
 
-import androidx.lifecycle.LiveData
-import com.pdxx.kotlinlearn.net.NetResponse
-
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface IFunnyService {
+interface IJokeService {
     /**
      * 使用协程
      */
     @GET("api/getHaoKanVideo")
-    fun getVideo( @Query("page") page: Int,
-        @Query("size") size: Int):Call<JokeBean>
-
-
-
+    fun getVideo( @Query("page") page: Int, @Query("size") size: Int):Call<JokeBean>
 
 
 

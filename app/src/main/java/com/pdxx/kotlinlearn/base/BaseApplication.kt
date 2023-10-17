@@ -2,17 +2,27 @@ package com.pdxx.kotlinlearn.base
 
 import android.app.Application
 import com.pdxx.kotlinlearn.di.cnModules
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import org.koin.dsl.module
 
 abstract class BaseApplication : Application() {
 
+
     override fun onCreate() {
         super.onCreate()
 
+
         startKoin {
-            modules(cnModules)
+            androidLogger(Level.ERROR)
+
+            // 把application传给Koin依赖框架,可以在其它地方使用
+            androidContext(this@BaseApplication)
+
+//            modules(cnModules)
         }
 
         //外部加载models
