@@ -33,7 +33,8 @@ class `01_Kotlin 基础语法` {
     //表达式作为函数体，返回类型自动推断：
     fun sum1(a: Int, b: Int) = a + b;
 
-    public fun sum3(a: Int, b: Int): Int = a + b   // public 方法则必须明确写出返回类型
+    // public 方法则必须明确写出返回类型
+    public fun sum3(a: Int, b: Int): Int = a + b
 
 
     //无返回值的函数(类似Java中的void)：
@@ -46,15 +47,15 @@ class `01_Kotlin 基础语法` {
         print(a + b)
     }
 
-    //    可变长参数函数
-//    函数的变长参数可以用 vararg 关键字进行标识：
+// 可变长参数函数
+// 函数的变长参数可以用 vararg 关键字进行标识：
     fun vars(vararg v: Int) {
         for (vt in v) {
             print(vt)
         }
     }
 
-    //   lambda(匿名函数)
+//    lambda(匿名函数)
 //    lambda表达式使用实例：
     @Test
     fun lambda_test() {
