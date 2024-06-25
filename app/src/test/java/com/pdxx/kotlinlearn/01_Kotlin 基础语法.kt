@@ -57,6 +57,7 @@ class `01_Kotlin 基础语法` {
 
 //    lambda(匿名函数)
 //    lambda表达式使用实例：
+//    这个很用容易看懂
     @Test
     fun lambda_test() {
         val sumLambda: (Int, Int) -> Int = { x, y -> x + y }
@@ -64,14 +65,15 @@ class `01_Kotlin 基础语法` {
     }
 
     /**
-     * 定义常量与变量
-     *
-     * var : 就是 变量
-     */
-    /**
+    定义常量与变量
+
+    var : 就是 变量
+
     可变变量定义：var 关键字
 
     var <标识符> : <类型> = <初始化值>
+    例子： var b: Int = 2;
+
     不可变变量定义：val 关键字，只能赋值一次的变量(类似Java中final修饰的变量)
 
     val <标识符> : <类型> = <初始化值>
@@ -131,6 +133,8 @@ class `01_Kotlin 基础语法` {
 
     }
 
+    //Int? Int? 表示一个可以为null的整数类型，也就是说这个整数不仅可以是普通的整数值（如0、1、2等），还可以是null。
+    //如果下面的 返回的不是 int 那就返回null  ，可以通过上面的来测试 。
     fun getStringLength(obj: Any): Int? {
         if (obj is String) {
             // 做过类型判断以后，obj会被系统自动转换为String类型

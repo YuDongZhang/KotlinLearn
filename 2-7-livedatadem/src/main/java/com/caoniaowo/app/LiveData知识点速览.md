@@ -2,7 +2,8 @@
 
 ###### 一、概念
 
-> LiveData 是可被观察的数据持有类。具有生命周期（Activity/Fragment/Service）感知的（**确保active状态下接受data更新**）。
+> LiveData 是可被观察的数据持有类。具有生命周期（Activity/Fragment/Service）感知的
+> （**确保active状态下接受data更新**）。
 
 
    ![img](https://upload-images.jianshu.io/upload_images/7273107-7d77106ca025f2ec.png)
