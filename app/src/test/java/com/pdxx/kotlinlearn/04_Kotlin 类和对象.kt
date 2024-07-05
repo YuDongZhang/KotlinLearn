@@ -9,6 +9,7 @@ class Runoob {  // 类名为 Runoob
 //我们也可以定义一个空类：
 class Empty
 
+
 //可以在类中定义成员函数：
 @Test
 fun foo() {

@@ -56,7 +56,7 @@ class Derived(p: Int) : Base(p)
 //        }
     }
 
-    class Test1{
+    class Test121{
         @Test
         fun test1() {
             println(DemoTest().num)
@@ -76,9 +76,13 @@ class Derived(p: Int) : Base(p)
     并没有实现任何的代码结构。一样可以使用Demo类中的属性与函数。这就是继承的好处。
      */
 
+
+
+
+
     /** Kotlin类，可以有一个主构造函数，或者多个辅助函数。或者没有构造函数的情况 */
 
-    /**这里当实现类无主构造函数，和存在主构造函数的情况。*/
+    /** 这里当实现类无主构造函数，和存在主构造函数的情况。*/
 
     /**无主构造函数
      *
@@ -194,7 +198,7 @@ class Derived(p: Int) : Base(p)
 //    }
     }
 
-
+class test131{
     @Test
     fun test() {
         val s = Student("Runoob", 18, "S12346", 89)
@@ -203,6 +207,8 @@ class Derived(p: Int) : Base(p)
         println("学生号： ${s.no}")
         println("成绩： ${s.score}")
     }
+}
+
 
 
     /**
