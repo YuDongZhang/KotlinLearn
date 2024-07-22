@@ -6,15 +6,17 @@ import org.junit.Test
 class `15_4协程上下文和调度器` {
 
     //协程总是在由 Kotlin 标准库中定义的 CoroutineContext 表示的某个上下文中执行
-//协程上下文包含多种子元素。主要的元素是协程作业（Job，我们之前见过），以及它的调度器（Dispatche，本节将介绍）
+    //协程上下文包含多种子元素。主要的元素是协程作业（Job，我们之前见过），以及它的调度器（Dispatche，本节将介绍）
 //一、调度器和线程
-//协程上下文（coroutine context）包含一个协程调度器（参阅 CoroutineDispatcher），
-// 协程调度器 用于确定执行协程的目标载体，即运行于哪个线程，包含一个还是多个线程。
-// 协程调度器可以将协程的执行操作限制在特定线程上，也可以将其分派到线程池中，或者让它无限制地运行
-//所有协程构造器（如 launch 和 async）都接受一个可选参数，即 CoroutineContext ，
-// 该参数可用于显式指定要创建的协程和其它上下文元素所要使用的调度器
-//请尝试以下示例：
-//import kotlinx.coroutines.*
+    /*
+    协程上下文（coroutine context）包含一个协程调度器（参阅 CoroutineDispatcher），
+     协程调度器 用于确定执行协程的目标载体，即运行于哪个线程，包含一个还是多个线程。
+     协程调度器可以将协程的执行操作限制在特定线程上，也可以将其分派到线程池中，或者让它无限制地运行
+    所有协程构造器（如 launch 和 async）都接受一个可选参数，即 CoroutineContext ，
+     该参数可用于显式指定要创建的协程和其它上下文元素所要使用的调度器
+     */
+    //请尝试以下示例：
+    //import kotlinx.coroutines.*
     @Test
     fun test1() = runBlocking<Unit> {
         //sampleStart
@@ -308,80 +310,80 @@ class `15_4协程上下文和调度器` {
 // CoroutineScope 的实例可以通过 CoroutineScope() 或 MainScope() 的工厂函数来构建。
 // 前者创建通用作用域，后者创建 UI 应用程序的作用域并使用 Dispatchers.Main 作为默认的调度器
 
-   /*
-    class Activity {
-        private val mainScope = MainScope()
+    /*
+     class Activity {
+         private val mainScope = MainScope()
 
-        fun destroy() {
-            mainScope.cancel()
-        }
-        // to be continued ...
-    }
+         fun destroy() {
+             mainScope.cancel()
+         }
+         // to be continued ...
+     }
 
-*/
+ */
 
     //复制代码
 //或者，我们可以在这个 Activity 类中实现 CoroutineScope 接口。
 // 最好的实现方式是对默认工厂函数使用委托。
 // 我们还可以将所需的调度器（在本例中使用Dispatchers.Default）与作用域结合起来：
 
-/*
+    /*
 
-    class Activity : CoroutineScope by CoroutineScope(Dispatchers.Default) {
-        // to be continued ...
+        class Activity : CoroutineScope by CoroutineScope(Dispatchers.Default) {
+            // to be continued ...
 
-        //现在，我们可以在这个 Activity 内启动协程，而不必显示地指定它们的上下文。为了演示，
-        // 我们启动了十个分别延时不同时间的协程：
-        // class Activity continues
-        fun doSomething() {
-            // launch ten coroutines for a demo, each working for a different time
-            repeat(10) { i ->
-                launch {
-                    delay((i + 1) * 200L) // variable delay 200ms, 400ms, ... etc
-                    println("Coroutine $i is done")
+            //现在，我们可以在这个 Activity 内启动协程，而不必显示地指定它们的上下文。为了演示，
+            // 我们启动了十个分别延时不同时间的协程：
+            // class Activity continues
+            fun doSomething() {
+                // launch ten coroutines for a demo, each working for a different time
+                repeat(10) { i ->
+                    launch {
+                        delay((i + 1) * 200L) // variable delay 200ms, 400ms, ... etc
+                        println("Coroutine $i is done")
+                    }
                 }
             }
-        }
-    } // class Activity ends
+        } // class Activity ends
 
-    //复制代码
-//在主函数中，我们创建 Activity 对象，调用测试 doSomething 函数，并在500毫秒后销毁该活动。
-// 这将取消从 doSomething 中启动的所有协程。我们可以看到这一点，因为在销毁 activity 对象后，
-// 即使我们再等待一会儿，也不会再打印消息
-//import kotlin.coroutines.*
-//import kotlinx.coroutines.*
-//
-    class Activity : CoroutineScope by CoroutineScope(Dispatchers.Default) {
+        //复制代码
+    //在主函数中，我们创建 Activity 对象，调用测试 doSomething 函数，并在500毫秒后销毁该活动。
+    // 这将取消从 doSomething 中启动的所有协程。我们可以看到这一点，因为在销毁 activity 对象后，
+    // 即使我们再等待一会儿，也不会再打印消息
+    //import kotlin.coroutines.*
+    //import kotlinx.coroutines.*
+    //
+        class Activity : CoroutineScope by CoroutineScope(Dispatchers.Default) {
 
-        fun destroy() {
-            cancel() // Extension on CoroutineScope
-        }
-        // to be continued ...
+            fun destroy() {
+                cancel() // Extension on CoroutineScope
+            }
+            // to be continued ...
 
-        // class Activity continues
-        fun doSomething() {
-            // launch ten coroutines for a demo, each working for a different time
-            repeat(10) { i ->
-                launch {
-                    delay((i + 1) * 200L) // variable delay 200ms, 400ms, ... etc
-                    println("Coroutine $i is done")
+            // class Activity continues
+            fun doSomething() {
+                // launch ten coroutines for a demo, each working for a different time
+                repeat(10) { i ->
+                    launch {
+                        delay((i + 1) * 200L) // variable delay 200ms, 400ms, ... etc
+                        println("Coroutine $i is done")
+                    }
                 }
             }
-        }
-    } // class Activity ends
+        } // class Activity ends
 
-    fun main() = runBlocking<Unit> {
-        //sampleStart
-        val activity = Activity()
-        activity.doSomething() // run test function
-        println("Launched coroutines")
-        delay(500L) // delay for half a second
-        println("Destroying activity!")
-        activity.destroy() // cancels all coroutines
-        delay(1000) // visually confirm that they don't work
-        //sampleEnd
-    }
-*/
+        fun main() = runBlocking<Unit> {
+            //sampleStart
+            val activity = Activity()
+            activity.doSomething() // run test function
+            println("Launched coroutines")
+            delay(500L) // delay for half a second
+            println("Destroying activity!")
+            activity.destroy() // cancels all coroutines
+            delay(1000) // visually confirm that they don't work
+            //sampleEnd
+        }
+    */
 //复制代码
 //输出结果：
 //Launched coroutines
@@ -400,8 +402,9 @@ class `15_4协程上下文和调度器` {
 //很容易在实践中证明：
 //import kotlinx.coroutines.*
 //
-val threadLocal = ThreadLocal<String?>() // declare thread-local variable
-//
+    val threadLocal = ThreadLocal<String?>() // declare thread-local variable
+
+    //
     @Test
     fun test12() = runBlocking<Unit> {
         //sampleStart
@@ -437,7 +440,6 @@ val threadLocal = ThreadLocal<String?>() // declare thread-local variable
 //有关高级用法，比如与 logging MDC, transactional contexts或其它在内部使用线程局部变量传递数据的库集成，
 // 请参阅实现了 ThreadContextElement 接口的文档
 //
-
 
 
 }

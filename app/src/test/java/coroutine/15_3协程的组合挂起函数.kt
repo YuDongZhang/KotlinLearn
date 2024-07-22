@@ -8,22 +8,24 @@ class `15_3协程的组合挂起函数` {
 
 
 //一、默认顺序
-//假设我们有两个定义于其它位置的挂起函数，它们用于执行一些有用操作，比如某种远程服务调用或者是计算操作。
-// 我们假设这两个函数是有实际意义的，但实际上它们只是为了模拟情况而延迟了一秒钟
-//suspend fun doSomethingUsefulOne(): Int {
-//    delay(1000L) // pretend we are doing something useful here
-//    return 13
-//}
-//
-//suspend fun doSomethingUsefulTwo(): Int {
-//    delay(1000L) // pretend we are doing something useful here, too
-//    return 29
-//}
-//复制代码
-//在实践中，如果我们需要依靠第一个函数的运行结果来决定是否需要调用或者如何调用第二个函数，
-// 此时我们就需要按顺序来运行这两个函数
-//我们使用默认顺序来调用这两个函数，因为协程中的代码和常规代码一样，在默认情况下是顺序的执行的。
-// 下面来计算两个挂起函数运行所需的总时间
+    /*
+    假设我们有两个定义于其它位置的挂起函数，它们用于执行一些有用操作，比如某种远程服务调用或者是计算操作。
+     我们假设这两个函数是有实际意义的，但实际上它们只是为了模拟情况而延迟了一秒钟
+    suspend fun doSomethingUsefulOne(): Int {
+        delay(1000L) // pretend we are doing something useful here
+        return 13
+    }
+
+    suspend fun doSomethingUsefulTwo(): Int {
+        delay(1000L) // pretend we are doing something useful here, too
+        return 29
+    }
+    复制代码
+    在实践中，如果我们需要依靠第一个函数的运行结果来决定是否需要调用或者如何调用第二个函数，
+     此时我们就需要按顺序来运行这两个函数
+    我们使用默认顺序来调用这两个函数，因为协程中的代码和常规代码一样，在默认情况下是顺序的执行的。
+     下面来计算两个挂起函数运行所需的总时间
+    */
 
     @Test
     fun test1() = runBlocking<Unit> {
@@ -31,9 +33,9 @@ class `15_3协程的组合挂起函数` {
         val time = measureTimeMillis {
             val one = doSomethingUsefulOne()
             val two = doSomethingUsefulTwo()
-            println("The answer is ${one + two}")
+            println("这个答案是--->  ${one + two}")
         }
-        println("Completed in $time ms")
+        println("计算的时间---> $time ms")
         //sampleEnd
     }
 
@@ -46,19 +48,21 @@ class `15_3协程的组合挂起函数` {
         delay(1000L) // pretend we are doing something useful here, too
         return 29
     }
-//复制代码
-//将得到类似于下边这样的输出，可以看出函数是按顺序先后执行的
-//The answer is 42
-//Completed in 2007 ms
+    //复制代码
+    //将得到类似于下边这样的输出，可以看出函数是按顺序先后执行的
+    //The answer is 42
+    //Completed in 2007 ms
 
 
 //二、使用 async 并发
-//如果 doSomethingUsefulOne() 和 doSomethingUsefulTwo() 这两个函数之间没有依赖关系，
-// 并且我们希望通过同时执行这两个操作（并发）以便更快地得到答案，此时就需要用到 async 了
-//从概念上讲，async 就类似于 launch。async 启动一个单独的协程，这是一个与所有其它协程同时工作的轻量级协程。
-// 不同之处在于，launch 返回 Job 对象并且不携带任何运行结果值。而 async 返回一个轻量级非阻塞的 Deferred 对象，
-// 可用于在之后取出返回值，可以通过调用 Deferred 的 await() 方法来获取最终结果。此外，Deferred 也实现了 Job 接口，
-// 所以也可以根据需要来取消它
+    /*
+    如果 doSomethingUsefulOne() 和 doSomethingUsefulTwo() 这两个函数之间没有依赖关系，
+     并且我们希望通过同时执行这两个操作（并发）以便更快地得到答案，此时就需要用到 async 了
+    从概念上讲，async 就类似于 launch。async 启动一个单独的协程，这是一个与所有其它协程同时工作的轻量级协程。
+     不同之处在于，launch 返回 Job 对象并且不携带任何运行结果值。而 async 返回一个轻量级非阻塞的 Deferred 对象，
+     可用于在之后取出返回值，可以通过调用 Deferred 的 await() 方法来获取最终结果。此外，Deferred 也实现了 Job 接口，
+     所以也可以根据需要来取消它
+     */
 
     @Test
     fun test2() = runBlocking<Unit> {
@@ -66,9 +70,9 @@ class `15_3协程的组合挂起函数` {
         val time = measureTimeMillis {
             val one = async { doSomethingUsefulOne() }
             val two = async { doSomethingUsefulTwo() }
-            println("The answer is ${one.await() + two.await()}")
+            println("这个答案是--->  ${one.await() + two.await()}")
         }
-        println("Completed in $time ms")
+        println("计算的时间---> $time ms")
         //sampleEnd
     }
 
@@ -91,10 +95,11 @@ class `15_3协程的组合挂起函数` {
 
 
 //三、惰性启动 async
-//可选的，可以将 async 的 start 参数设置为 CoroutineStart.lazy 使其变为懒加载模式。在这种模式下，
-// 只有在主动调用 Deferred 的 await() 或者 start() 方法时才会启动协程。运行以下示例：
+    /*
+    可选的，可以将 async 的 start 参数设置为 CoroutineStart.lazy 使其变为懒加载模式。在这种模式下，
+    只有在主动调用 Deferred 的 await() 或者 start() 方法时才会启动协程。运行以下示例：
+    */
 
-    //
     @Test
     fun test3() = runBlocking<Unit> {
         //sampleStart
@@ -104,9 +109,9 @@ class `15_3协程的组合挂起函数` {
             // some computation
             one.start() // start the first one
             two.start() // start the second one
-            println("The answer is ${one.await() + two.await()}")
+            println("这个答案是--->  ${one.await() + two.await()}")
         }
-        println("Completed in $time ms")
+        println("计算的时间--->  $time ms")
         //sampleEnd
     }
 //
@@ -131,28 +136,30 @@ class `15_3协程的组合挂起函数` {
 // 的用例是标准标准库中的 lazy 函数的替代品，用于在值的计算涉及挂起函数的情况下
 
 
-//四、异步风格的函数
-//我们可以定义异步风格的函数，使用带有显式 GlobalScope 引用的异步协程生成器来调用 doSomethingUsefulOne 和
-// doSomethingUsefulTwo 函数。用 “…Async” 后缀来命名这些函数，以此来强调它们用来启动异步计算，
-// 并且需要通过其返回的延迟值来获取结果
+    //四、异步风格的函数
+    /*
+    我们可以定义异步风格的函数，使用带有显式 GlobalScope 引用的异步协程生成器来调用 doSomethingUsefulOne 和
+     doSomethingUsefulTwo 函数。用 “…Async” 后缀来命名这些函数，以此来强调它们用来启动异步计算，
+     并且需要通过其返回的延迟值来获取结果
 
-    //// The result type of somethingUsefulOneAsync is Deferred<Int>
-//fun somethingUsefulOneAsync() = GlobalScope.async {
-//    doSomethingUsefulOne()
-//}
-//
-//// The result type of somethingUsefulTwoAsync is Deferred<Int>
-//fun somethingUsefulTwoAsync() = GlobalScope.async {
-//    doSomethingUsefulTwo()
-//}
-//复制代码
-//注意，这些 xxxAsync 函数不是挂起函数，它们可以从任何地方调用。但是，调用这些函数意味着是要用异步形式来执行操作
-//以下示例展示了它们在协程之外的使用：
-//import kotlinx.coroutines.*
-//import kotlin.system.*
-//
-////sampleStart
-//// note that we don't have `runBlocking` to the right of `main` in this example
+        // The result type of somethingUsefulOneAsync is Deferred<Int>
+    fun somethingUsefulOneAsync() = GlobalScope.async {
+        doSomethingUsefulOne()
+    }
+
+    // The result type of somethingUsefulTwoAsync is Deferred<Int>
+    fun somethingUsefulTwoAsync() = GlobalScope.async {
+        doSomethingUsefulTwo()
+    }
+    复制代码
+    注意，这些 xxxAsync 函数不是挂起函数，它们可以从任何地方调用。但是，调用这些函数意味着是要用异步形式来执行操作
+    以下示例展示了它们在协程之外的使用：
+    import kotlinx.coroutines.*
+    import kotlin.system.*
+
+    //sampleStart
+    // note that we don't have `runBlocking` to the right of `main` in this example
+    */
     @Test
     fun test4() {
         val time = measureTimeMillis {
@@ -162,10 +169,10 @@ class `15_3协程的组合挂起函数` {
             // but waiting for a result must involve either suspending or blocking.
             // here we use `runBlocking { ... }` to block the main thread while waiting for the result
             runBlocking {
-                println("The answer is ${one.await() + two.await()}")
+                println("这个答案是--->  ${one.await() + two.await()}")
             }
         }
-        println("Completed in $time ms")
+        println("计算的时间--->  $time ms")
     }
 
     ////sampleEnd
@@ -199,16 +206,18 @@ class `15_3协程的组合挂起函数` {
 
 
     //五、使用 async 的结构化并发
-//让我们以 Concurrent using async 章节为例，提取一个同时执行 doSomethingUsefulOne() 和 doSomethingUsefulTwo()
-// 并返回其结果之和的函数。因为 async 函数被定义为 CoroutineScope 上的一个扩展函数，所以我们需要将它放在
-// CoroutineScope 中，这就是  coroutineScope 函数提供的功能：
-//suspend fun concurrentSum(): Int = coroutineScope {
-//    val one = async { doSomethingUsefulOne() }
-//    val two = async { doSomethingUsefulTwo() }
-//    one.await() + two.await()
-//}
-//复制代码
-//这样，如果 concurrentSum() 函数发生错误并引发异常，则在其作用域中启动的所有协程都将被取消
+    /*
+    让我们以 Concurrent using async 章节为例，提取一个同时执行 doSomethingUsefulOne() 和 doSomethingUsefulTwo()
+     并返回其结果之和的函数。因为 async 函数被定义为 CoroutineScope 上的一个扩展函数，所以我们需要将它放在
+     CoroutineScope 中，这就是  coroutineScope 函数提供的功能：
+    suspend fun concurrentSum(): Int = coroutineScope {
+        val one = async { doSomethingUsefulOne() }
+        val two = async { doSomethingUsefulTwo() }
+        one.await() + two.await()
+    }
+    复制代码
+    这样，如果 concurrentSum() 函数发生错误并引发异常，则在其作用域中启动的所有协程都将被取消
+    */
 //import kotlinx.coroutines.*
 //import kotlin.system.*
 //
@@ -216,9 +225,9 @@ class `15_3协程的组合挂起函数` {
     fun test5() = runBlocking<Unit> {
         //sampleStart
         val time = measureTimeMillis {
-            println("The answer is ${concurrentSum()}")
+            println("这个答案是--->  ${concurrentSum()}")
         }
-        println("Completed in $time ms")
+        println("计算的时间--->  $time ms")
         //sampleEnd
     }
 

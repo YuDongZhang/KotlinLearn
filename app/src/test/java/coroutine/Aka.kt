@@ -1,0 +1,5 @@
+package coroutine
+
+class Aka {
+
+}

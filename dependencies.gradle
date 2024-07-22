@@ -77,9 +77,17 @@ dependencies {
     // endregion
 
     // region 协程
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     // endregion
+
+
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+//    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+
+
+
+
 
     // region JetPack
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'

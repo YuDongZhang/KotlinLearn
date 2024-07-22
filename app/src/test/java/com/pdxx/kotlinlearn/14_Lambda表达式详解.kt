@@ -89,6 +89,13 @@ class `14_Lambda表达式详解` {
         fun test(a: Int, b: (num1: Int, num2: Int) -> Int): Int {
             return a + b.invoke(3, 5) //invoke()函数：表示为通过函数变量调用自身，因为上面例子中的变量b是一个匿名函数。
         }
+        /*
+        b.invoke(3, 5)：调用函数 b，传递参数 3 和 5。invoke() 函数表示通过函数变量 b 调用它自身。这与 b(3, 5) 是等效的。
+        invoke 函数
+        在 Kotlin 中，invoke 是一个特殊的函数，它允许通过函数类型的变量调用匿名函数或函数引用。例如，b.invoke(3, 5) 可以简化为 b(3, 5)。
+        invoke 函数是 Kotlin 提供的一种语法糖，使得函数调用更加简洁和直观。
+
+         */
 
         // 调用
         test(10, { num1: Int, num2: Int -> num1 + num2 })  // 结果为：18
@@ -134,7 +141,8 @@ class `14_Lambda表达式详解` {
 
         println(test(10, { it > 5 }))
         println(test(4, { it > 5 }))
-        //代码讲解：上面的代码意思是，在高阶函数test中，其返回值为Int类型，Lambda表达式以num1位条件。其中如果Lambda表达式的值为false的时候返回0，反之返回num1。
+        //代码讲解：上面的代码意思是，在高阶函数test中，其返回值为Int类型，Lambda表达式以num1位条件。
+        // 其中如果Lambda表达式的值为false的时候返回0，反之返回num1。
         // 故而当条件为num1 > 5这个条件时，当调用test函数，num1 = 10返回值就是10，num1 = 4返回值就是0。
     }
 

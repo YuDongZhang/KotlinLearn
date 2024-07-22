@@ -9,7 +9,7 @@ class `05_方法进阶` {
     //目标: 对集合求和 , 并且返回每一项
     //接收callback作为回调
                 //sum扩展  callback:(int)回调,(int)是集合元素 unit是没有返回值  : int是方法返回值
-    fun List<Int>.sum(callback: (Int) -> Unit): Int {
+    fun List<Int>.sum(callback: (Int) -> Unit): Int { //callback: (Int) -> Unit：表示这个 sum 函数接收一个参数 callback，callback 是一个函数类型，接受一个 Int 参数并返回 Unit。
         var result = 0
         for (v in this) {//this表示扩展的本身 , 代表list
             result += v
@@ -18,12 +18,29 @@ class `05_方法进阶` {
         return result;
     }
 
+
+    /*
+    传递 lambda 表达式：
+
+    { println("it:${it}") } 是传递给 sum 函数的 lambda 表达式。
+    这个 lambda 表达式的类型是 (Int) -> Unit，即接受一个 Int 参数并返回 Unit。
+    在 lambda 表达式中，it 是当前元素。
+    执行过程
+    当 list.sum { println("it:${it}") } 被执行时，sum 函数会遍历 list 中的每一个元素，并对每个元素执行以下操作：
+
+    累加当前元素到 result。
+    调用 callback，即传递的 lambda 表达式 { println("it:${it}") }，并将当前元素作为参数传递给它。
+    */
+
+
     @Test
     fun test1() {
         val list = listOf(1, 2, 3)
         var result = list.sum { println("it:${it}") }//这里打印的就是回调  , it 可以理解为你传入的这个函数的结果 (单次)
         println(result)
     }
+
+
 
     /**
      * 函数作为返回值
@@ -58,7 +75,9 @@ class `05_方法进阶` {
      * 方法可以作为另一个方法的返回值或参数，还可以作为一个变量的值。
      * 方法可以嵌套定义，即在一个方法内部可以定义另一个方法。
 
-    加强模块化：闭包有益于模块化编程，它能以简单的方式开发较小的模块，从而提高开发速度和程序的可复用性
+    加强模块化：闭包有益于模块化编程，它能以简单的方式开发较小的模块，
+    从而提高开发速度和程序的可复用性
+
     抽象：闭包是数据和行为的组合，这使得闭包具有较好抽象能力
     灵活：闭包的应用是的编程更加的灵活 简化代码：闭包还能简化代码
      */
@@ -66,9 +85,20 @@ class `05_方法进阶` {
 //    需求：实现一个接受一个testClosure方法，该方法要接受一个Int类型的v1参数，
 //    同时能够返回一个声明为(v2: Int, (Int) -> Unit)的函数，
 //    并且这个函数能够计算v1与v2的和
-    //(Int, (Int) -> Unit) -> Unit 返回的类型
 
-    fun testClosure(v1: Int): (Int, (Int) -> Unit) -> Unit { //(Int, (Int) -> Unit就是方法
+    //(Int, (Int) -> Unit) -> Unit 返回的类型 , 这里没有说错，就是返回的类型是怎么样的。
+    //可以看返回值就能看出来 。
+
+    /*
+    testClosure 是一个接受一个整数 v1 作为参数并返回一个函数的高阶函数。返回的函数接受两个参数：一个整数 v2 和一个函数 printer，
+    该函数接受一个整数作为参数并返回 Unit。
+
+    fun testClosure(v1: Int)：testClosure 接受一个整数参数 v1。
+    return fun(v2: Int, printer: (Int) -> Unit)：返回一个匿名函数，该函数接受两个参数 v2 和 printer。
+    printer(v1 + v2)：调用 printer 函数，并传递 v1 和 v2 的和作为参数
+     */
+
+    fun testClosure(v1: Int): (Int, (Int) -> Unit) -> Unit {
         return fun(v2: Int, printer: (Int) -> Unit) {//和上面的类型对应的
             printer(v1 + v2)//printer 就是上面的方法
         }

@@ -8,6 +8,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
+import com.didichuxing.doraemonkit.util.LunarUtils.Lunar
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class MainActivity : AppCompatActivity() {
@@ -49,6 +54,30 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
+
+    suspend fun test(){
+        runBlocking {
+
+        }
+
+        GlobalScope.launch {
+
+        }
+
+        coroutineScope {
+            launch {
+
+            }
+        }
+
+        runBlocking {
+            launch {
+
+            }
+        }
+
+    }
+
 
 
 }
