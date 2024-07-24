@@ -10,7 +10,15 @@ import java.util.*
 /**
  * 记录OkHttp网络日志的拦截器
  * [block] 这种写法是将函数块作为默认参数传进来,并且默认值为null
- */                      //参数名  //形参类型          //KtHttpLogInterceptor.()就是里面所有方法  //->unit 返回为空的 unit函数的执行
+ */
+
+/*
+(block: (KtHttpLogInterceptor.() -> Unit)? = null)构造函数参数，参数block是可选的，可以传入一个函数或者为null。
+() -> Unit 表示这是一个不接收任何参数且无返回值的函数类型。
+. 操作符之前的 KtHttpLogInterceptor 表示这个函数类型的接收者是 KtHttpLogInterceptor 类型的对象。
+这种函数类型声明告诉编译器，接收一个以 KtHttpLogInterceptor 为接收者类型的函数作为参数。
+函数类型 (KtHttpLogInterceptor.() -> Unit) 允许在其内部直接调用 KtHttpLogInterceptor 对象的方法或者访问其属性，而不需要显式地指定对象名。
+ */
 class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : Interceptor {
 
     /**

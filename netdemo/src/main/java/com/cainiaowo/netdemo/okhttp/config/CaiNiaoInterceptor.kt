@@ -19,7 +19,18 @@ class CaiNiaoInterceptor : Interceptor {
             .enableComplexMapKeySerialization()
             .create()
         private val mapType = object : TypeToken<Map<String, Any>>() {}.type
+//        private val mapdtd = object : TypeToken<Map<String,Any>>() {}.type
     }
+
+    /*
+    静态成员：在 companion object 中定义的成员可以通过类名直接访问，类似于 Java 中的静态成员。
+    工厂方法：可以定义工厂方法用于创建类的实例。
+    常量：可以在其中定义常量，避免在多个实例中重复存储相同的数据。
+
+    object : TypeToken<Map<String, Any>>() {}：这是创建一个继承自 TypeToken<Map<String, Any>> 的匿名内部类。
+    由于是匿名内部类，Kotlin 允许我们直接创建一个该类型的实例。
+
+     */
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originRequest = chain.request()
