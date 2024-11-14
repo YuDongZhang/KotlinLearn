@@ -13,7 +13,6 @@ import com.caoniaowo.app.databinding.ActivityMainBinding
 class LiveActivity : AppCompatActivity() {
     //声明变量live data
     val liveAppleData = MutableLiveData<String>()
-
     //中介者MediatorLiveData使用演示：
     val liveOne = MutableLiveData<String>()
     val liveTwo = MutableLiveData<String>()
@@ -29,7 +28,6 @@ class LiveActivity : AppCompatActivity() {
 
         //Fragment
         val appleFragment = AppleFragment()
-
         supportFragmentManager.beginTransaction()
             .add(R.id.fl_container_live, appleFragment)
             .commit()

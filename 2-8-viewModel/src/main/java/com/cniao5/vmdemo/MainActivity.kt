@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
-import com.didichuxing.doraemonkit.util.LunarUtils.Lunar
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -18,15 +17,15 @@ import kotlinx.coroutines.runBlocking
 class MainActivity : AppCompatActivity() {
 
     //第一种
-    val vm by ViewModelLazy<VmOne>(VmOne::class,
+    val vmOne by ViewModelLazy<VmOne>(VmOne::class,
         { viewModelStore },
         { defaultViewModelProviderFactory })
 
     //第二种 ktx
-    val vm1: VmOne by viewModels<VmOne> { defaultViewModelProviderFactory }
+    val vmTwo: VmOne by viewModels<VmOne> { defaultViewModelProviderFactory }
 
     //android view model
-    val vmodel2 by viewModels<VmTwo> { VmFactory(application) }
+    val vmThree by viewModels<VmTwo> { VmFactory(application) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,15 +43,16 @@ class MainActivity : AppCompatActivity() {
 //        ViewModelProvider.Factory
 
         //输出结果
-        Log.i("MainActivity", "vm.getNum ${vm.getNum()}")
-        Log.i("MainActivity", "vm1.getNum ${vm1.getNum()}")
+        Log.i("MainActivity", "vm.getNum ${vmOne.getNum()}")
+        Log.i("MainActivity", "vm1.getNum ${vmTwo.getNum()}")
         Log.i("MainActivity", "vm2.getNum ${vm2.getNum()}")
-        Log.i("MainActivity", "vmodel2.getNum ${vmodel2.getNum()}")
+        Log.i("MainActivity", "vmodel2.getNum ${vmThree.getNum()}")
 
         //点击后新创建  你可以看log来查看他的生命周期的问题 , viewmodel中自动做了数据的操作
         findViewById<Button>(R.id.button).setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+
     }
 
     suspend fun test(){
