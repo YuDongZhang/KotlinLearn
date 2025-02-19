@@ -22,6 +22,7 @@ import com.hym.netdemo.toLivedata
 import kotlinx.coroutines.launch
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 class MainActivity : AppCompatActivity() {
@@ -39,9 +40,9 @@ class MainActivity : AppCompatActivity() {
 //            .userInfo()
 
 
-        val retrofitCall = KtRetrofit.initConfig("https://api.apiopen.top/")
+        val retrofitCall = KtRetrofit.initConfig("https://api.istero.com/")
             .getService(CniaoService::class.java)
-            .getHaoKan()
+            .getHaoKan("c047d98062f0bdaff2df9d4d7b617064")
 
         //ktx的livedata  用这个call.调用 toLivedata .这是扩展的函数
         val liveInfo = retrofitCall.toLivedata()
@@ -52,43 +53,43 @@ class MainActivity : AppCompatActivity() {
 
 
         //登录这块用的也是post请求
-        val loginCall = KtRetrofit.initConfig(
-            "https://course.api.cniao5.com/",
-            OkHttpApi.getInstance().getClient()
-        )
-            .getService(CniaoService::class.java)
-            .login(LoginReq())
+//        val loginCall = KtRetrofit.initConfig(
+//            "https://course.api.cniao5.com/",
+//            OkHttpApi.getInstance().getClient()
+//        )
+//            .getService(CniaoService::class.java)
+//            .login(LoginReq())
 
         /*
         loginCall.serverRsp() 挂起函数 , 所以要在协程中使用
          */
         //lifecycleScope 他可以启动协程 , 协程里面启动异步的函数
-        lifecycleScope.launch {
-            //表达式声明，使用when,协程，同步的代码形式，执行异步的操作
-            when (val serverRsp = loginCall.serverRsp()) {//serverRsp  用到的就是扩展函数  , 这块执行了网络请求得到网络请求的结果
-               //下面就是成功失败的打印
-                is ApiSuccessResponse -> {
-                    LogUtils.i("mika apiservice ${serverRsp.body.toString()}")
-                    // tvHello1.text = HymUtils.decodeData(serverRsp.body.data.toString())
-                }
-                is ApiErrorResponse -> {
-                    LogUtils.e("mika apiservice ${serverRsp.errorMessage}")
-                   // tvHello1.text = serverRsp.errorMessage
-                }
-                is ApiEmptyResponse -> {
-                    LogUtils.d("mika empty apireoponese")
-                   // tvHello1.text = "empty apireoponese"
-                }
-            }
-        }
+//        lifecycleScope.launch {
+//            //表达式声明，使用when,协程，同步的代码形式，执行异步的操作
+//            when (val serverRsp = loginCall.serverRsp()) {//serverRsp  用到的就是扩展函数  , 这块执行了网络请求得到网络请求的结果
+//               //下面就是成功失败的打印
+//                is ApiSuccessResponse -> {
+//                    LogUtils.i("mika apiservice ${serverRsp.body.toString()}")
+//                    // tvHello1.text = HymUtils.decodeData(serverRsp.body.data.toString())
+//                }
+//                is ApiErrorResponse -> {
+//                    LogUtils.e("mika apiservice ${serverRsp.errorMessage}")
+//                   // tvHello1.text = serverRsp.errorMessage
+//                }
+//                is ApiEmptyResponse -> {
+//                    LogUtils.d("mika empty apireoponese")
+//                   // tvHello1.text = "empty apireoponese"
+//                }
+//            }
+//        }
 
 
 
-        KtRetrofit.initConfig("https://course.api.cniao5.com/")
-            .getService(CniaoService::class.java)
-            .userInfo2().observe(this, Observer {
-                LogUtils.d("mika retrofit liveRsp ${it.toString()}")
-            })
+//        KtRetrofit.initConfig("https://course.api.cniao5.com/")
+//            .getService(CniaoService::class.java)
+//            .userInfo2().observe(this, Observer {
+//                LogUtils.d("mika retrofit liveRsp ${it.toString()}")
+//            })
         //endregion
 
     }
@@ -98,6 +99,10 @@ class MainActivity : AppCompatActivity() {
         val mobi: String = "18648957777",
         val password: String = "cn5123456"
     )
+
+    data class Zhihu1Req(
+        val data:String = "rank"
+    )
 }
 
 
@@ -105,11 +110,15 @@ interface CniaoService {
     @POST("accounts/course/10301/login")
     fun login(@Body body: MainActivity.LoginReq): retrofit2.Call<NetResponse>
 
+    @POST("accounts/course/10301/login")
+    fun zhihu1(@Body body: MainActivity.Zhihu1Req): retrofit2.Call<NetResponse>
+
+
     @GET("member/userinfo")
     fun userInfo(): retrofit2.Call<NetResponse>
 
-    @GET("api/getHaoKanVideo")
-    fun getHaoKan(): retrofit2.Call<NetResponse>
+    @GET("resource/zhihu/top")
+    fun getHaoKan(@Header("Authorization") authToken: String): retrofit2.Call<NetResponse>
 
     @GET("member/userinfo")
     fun userInfo2(): LiveData<ApiResponse<NetResponse>>

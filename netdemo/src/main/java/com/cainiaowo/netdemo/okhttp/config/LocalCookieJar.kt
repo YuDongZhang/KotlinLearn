@@ -6,6 +6,8 @@ import okhttp3.HttpUrl
 
 /**
  * 持久化的CookieJar实现类
+ *
+ * Cookie管理类，需要确认Cookie的存储和过期处理是否正确。
  */
 internal class LocalCookieJar : CookieJar {
 

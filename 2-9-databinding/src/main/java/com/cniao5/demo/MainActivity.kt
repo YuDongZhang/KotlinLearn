@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
         //这个地方就是 DataBinding 在 activity 中使用
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         //经过测试布局中是不能加注释的
-
         //赋值    apply对这个作用对象,对他做一系列的操作 , 对binding做一系列的操作
         binding.apply {
 
