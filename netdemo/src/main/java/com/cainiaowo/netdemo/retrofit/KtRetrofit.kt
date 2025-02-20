@@ -51,6 +51,15 @@ object KtRetrofit {
     /**
      * 获取Retrofit的Service对象
      * [serviceClazz] 定义的Retrofit的Service接口类
+     *
+     * <T>	声明泛型参数 T，表示接口类型
+     * Class<T>	传入接口类的类型信息（运行时通过反射使用）
+     * return retrofit.create(serviceClazz)	动态生成接口的代理实现类，并返回 T 类型的实例
+     *
+     *interface ApiService { ... }
+     * val apiService: ApiService = retrofit.getService(ApiService::class.java) //这个是对的 ✅
+     * // 错误用法：Class 对象未指定泛型类型
+     * val apiService = retrofit.getService(object : Class<Any>() {}) // ❌
      */
     fun <T> getService(serviceClazz: Class<T>): T {
         if (retrofit == null) {

@@ -1,25 +1,17 @@
 package com.cainiaowo.netdemo.okhttp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.blankj.utilcode.util.GsonUtils
-import com.blankj.utilcode.util.LogUtils
 import com.cainiaowo.netdemo.R
 import com.cainiaowo.netdemo.okhttp.model.NetResponse
-import com.cainiaowo.netdemo.okhttp.support.CaiNiaoUtils
-import com.cainiaowo.netdemo.okhttp.support.IHttpCallback
 import com.cainiaowo.netdemo.retrofit.KtRetrofit
-import com.cainiaowo.netdemo.retrofit.model.ApiEmptyResponse
 import com.cainiaowo.netdemo.retrofit.model.ApiErrorResponse
 import com.cainiaowo.netdemo.retrofit.model.ApiResponse
 import com.cainiaowo.netdemo.retrofit.model.ApiSuccessResponse
 import com.cainiaowo.netdemo.retrofit.support.serverResponse
-import com.hym.netdemo.serverRsp
-import com.hym.netdemo.toLivedata
 import kotlinx.coroutines.launch
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -40,14 +32,14 @@ class MainActivity : AppCompatActivity() {
 //            .getService(CniaoService::class.java)
 //            .userInfo()
 
-        lifecycleScope.launch{
-            try {
-                val response = KtRetrofit.initConfig("https://api.istero.com/")
-                    .getService(CniaoService::class.java)
-                    .getHaoKan("c047d98062f0bdaff2df9d4d7b617064")
-                    .serverResponse()
+        val responseGET = KtRetrofit.initConfig("https://api.istero.com/")
+            .getService(CniaoService::class.java)
+            .getHaoKan("c047d98062f0bdaff2df9d4d7b617064")
 
-                when (response) {
+        lifecycleScope.launch {
+            try {
+
+                when (val response = responseGET.serverResponse()) {
                     is ApiSuccessResponse -> {
                         val questions = response.body.data
                         getResult.text = "共加载 ${questions.size} 条热榜问题"
@@ -58,21 +50,18 @@ class MainActivity : AppCompatActivity() {
                             postResult.text = "最新问题：${firstQuestion.title}"
                         }
                     }
+
                     is ApiErrorResponse -> {
                         getResult.text = "加载失败：${response.errorMessage}"
                     }
                 }
 
-            }catch (e: Exception) {
+            } catch (e: Exception) {
                 getResult.text = "发生异常：${e.message}"
             }
 
 
-
         }
-
-
-
 
 
         //登录这块用的也是post请求
@@ -107,7 +96,6 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
-
 //        KtRetrofit.initConfig("https://course.api.cniao5.com/")
 //            .getService(CniaoService::class.java)
 //            .userInfo2().observe(this, Observer {
@@ -124,7 +112,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     data class Zhihu1Req(
-        val data:String = "rank"
+        val data: String = "rank"
     )
 }
 
