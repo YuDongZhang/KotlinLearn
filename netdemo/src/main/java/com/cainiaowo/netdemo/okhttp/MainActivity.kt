@@ -40,21 +40,39 @@ class MainActivity : AppCompatActivity() {
 //            .getService(CniaoService::class.java)
 //            .userInfo()
 
-//        lifecycleScope.launch{
-//
-//        }
+        lifecycleScope.launch{
+            try {
+                val response = KtRetrofit.initConfig("https://api.istero.com/")
+                    .getService(CniaoService::class.java)
+                    .getHaoKan("c047d98062f0bdaff2df9d4d7b617064")
+                    .serverResponse()
 
-        val retrofitCall = KtRetrofit.initConfig("https://api.istero.com/")
-            .getService(CniaoService::class.java)
-            .getHaoKan("c047d98062f0bdaff2df9d4d7b617064")
+                when (response) {
+                    is ApiSuccessResponse -> {
+                        val questions = response.body.data
+                        getResult.text = "共加载 ${questions.size} 条热榜问题"
+
+                        // 如果需要显示前几条数据可以这样做：
+                        if (questions.isNotEmpty()) {
+                            val firstQuestion = questions[0]
+                            postResult.text = "最新问题：${firstQuestion.title}"
+                        }
+                    }
+                    is ApiErrorResponse -> {
+                        getResult.text = "加载失败：${response.errorMessage}"
+                    }
+                }
+
+            }catch (e: Exception) {
+                getResult.text = "发生异常：${e.message}"
+            }
 
 
-//        ktx的livedata  用这个call.调用 toLivedata .这是扩展的函数
-        val liveInfo = retrofitCall.toLivedata()
-        liveInfo.observe(this, Observer {
-            LogUtils.d("mika retrofit userinfo ${it.toString()}")
-            getResult.text = it.toString()
-        })
+
+        }
+
+
+
 
 
         //登录这块用的也是post请求
@@ -123,7 +141,7 @@ interface CniaoService {
     fun userInfo(): retrofit2.Call<NetResponse>
 
     @GET("resource/zhihu/top")
-    fun getHaoKan(@Header("Authorization") authToken: String): retrofit2.Call<NetResponse>
+    fun getHaoKan(@Header("Authorization") authToken: String): retrofit2.Call<QuestionResponse>
 
     @GET("member/userinfo")
     fun userInfo2(): LiveData<ApiResponse<NetResponse>>
