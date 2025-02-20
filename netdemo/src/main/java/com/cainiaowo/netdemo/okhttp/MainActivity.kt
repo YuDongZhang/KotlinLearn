@@ -17,6 +17,7 @@ import com.cainiaowo.netdemo.retrofit.model.ApiEmptyResponse
 import com.cainiaowo.netdemo.retrofit.model.ApiErrorResponse
 import com.cainiaowo.netdemo.retrofit.model.ApiResponse
 import com.cainiaowo.netdemo.retrofit.model.ApiSuccessResponse
+import com.cainiaowo.netdemo.retrofit.support.serverResponse
 import com.hym.netdemo.serverRsp
 import com.hym.netdemo.toLivedata
 import kotlinx.coroutines.launch
@@ -39,12 +40,16 @@ class MainActivity : AppCompatActivity() {
 //            .getService(CniaoService::class.java)
 //            .userInfo()
 
+//        lifecycleScope.launch{
+//
+//        }
 
         val retrofitCall = KtRetrofit.initConfig("https://api.istero.com/")
             .getService(CniaoService::class.java)
             .getHaoKan("c047d98062f0bdaff2df9d4d7b617064")
 
-        //ktx的livedata  用这个call.调用 toLivedata .这是扩展的函数
+
+//        ktx的livedata  用这个call.调用 toLivedata .这是扩展的函数
         val liveInfo = retrofitCall.toLivedata()
         liveInfo.observe(this, Observer {
             LogUtils.d("mika retrofit userinfo ${it.toString()}")
@@ -123,6 +128,21 @@ interface CniaoService {
     @GET("member/userinfo")
     fun userInfo2(): LiveData<ApiResponse<NetResponse>>
 }
+
+// 单条问题数据类
+data class Question(
+    val rank: Int,
+    val title: String,
+    val hot: String, // 保留原始"XX万"格式
+    val url: String
+)
+
+// 整体响应数据类
+data class QuestionResponse(
+    val code: Int,
+    val data: List<Question>,
+    val message: String
+)
 
 data class LoginReq(val mobi: String = "13067732886", val password: String = "123456789")
 // data class LoginReq(val mobi: String = "13067732886", val password: String = "66666666")
