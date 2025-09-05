@@ -1,54 +1,5 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
-buildscript {
-
-    ext {
-
-        kotlin_version = '1.6.21'
-
-        compile_sdk_version = 32
-
-        build_tools_version = '30.0.3'
-
-        min_sdk_version = 21
-
-        target_sdk_version = 32
-
-        lib_version_code = 1
-        lib_version_name = "1.0"
-
-        navigation_version = '2.4.1'
-
-        koin_version = "3.0.2"  // koin v3版本号
-
-        dokitx_version = "3.4.0-alpha04"    // dokit版本号
-    }
-
-
-    repositories {
-        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        mavenCentral()
-        //jcenter()
-
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
-allprojects {
-    repositories {
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.compose) apply false
 }
