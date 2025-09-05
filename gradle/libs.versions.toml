@@ -41,6 +41,7 @@ fragmentKtx = "1.4.0"
 activityKtx = "1.4.0"
 lifecycleExtensions = "2.2.0"
 testCore = "1.4.0"
+activity = "1.10.1"
 
 
 [libraries]
@@ -109,6 +110,7 @@ arouter-compiler = { group = "com.alibaba", name = "arouter-compiler", version.r
 live-event-bus = { group = "io.github.jeremyliao", name = "live-event-bus-x", version.ref = "liveeventbus" }
 dokitx = { group = "io.github.didi.dokit", name = "dokitx", version.ref = "dokit" }
 dokitx-no-op = { group = "io.github.didi.dokit", name = "dokitx-no-op", version.ref = "dokit" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 
 
 [plugins]
