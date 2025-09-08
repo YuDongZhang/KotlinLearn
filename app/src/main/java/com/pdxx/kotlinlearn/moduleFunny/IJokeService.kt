@@ -17,7 +17,7 @@ interface IJokeService {
      *
      * 注意：为了能被协程调用，这个函数必须被声明为 `suspend`
      */
-    @GET("api/getVideo")
+    @GET("api/getHaoKanVideo")
     suspend fun getJokes(
         @Query("page") page: Int,
         @Query("size") count: Int

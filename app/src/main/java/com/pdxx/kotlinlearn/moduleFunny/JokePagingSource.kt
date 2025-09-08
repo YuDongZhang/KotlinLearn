@@ -33,7 +33,7 @@ class JokePagingSource(private val jokeService: IJokeService) : PagingSource<Int
 
             // 2. 调用Retrofit Service中的方法，执行网络请求
             val response = jokeService.getJokes(page = currentPage, count = pageSize)
-            val jokes = response.result
+            val jokes = response.result.list
 
             // 3. 计算上一页和下一页的Key
             // 如果当前页是第一页，那么就没有上一页，prevKey为null

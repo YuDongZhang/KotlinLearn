@@ -49,9 +49,9 @@ class PagingActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@PagingActivity)
             adapter = jokeAdapter
             // 也可以添加LoadStateAdapter来在列表底部显示加载动画或重试按钮
-            // adapter = jokeAdapter.withLoadStateFooter(
-            //     footer = YourLoadStateAdapter { jokeAdapter.retry() }
-            // )
+//             adapter = jokeAdapter.withLoadStateFooter(
+//                 footer = YourLoadStateAdapter { jokeAdapter.retry() }
+//             )
         }
     }
 

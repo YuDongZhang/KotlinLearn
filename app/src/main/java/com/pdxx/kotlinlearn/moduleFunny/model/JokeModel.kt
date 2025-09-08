@@ -1,18 +1,25 @@
 package com.pdxx.kotlinlearn.moduleFunny.model
 
-// API返回的完整数据结构
+// 完整的API响应结构
 data class JokeResponse(
     val code: Int,
     val message: String,
-    val result: List<Joke>
+    val result: JokeResult
 )
 
-// 单个笑话的数据模型
+// “result”字段对应的结构
+data class JokeResult(
+    val total: Int,
+    val list: List<Joke>
+)
+
+// 视频列表中的单个视频对象
 data class Joke(
-    val sid: String,
-    val text: String,
-    val type: String,
-    val thumbnail: String,
-    val video: String,
-    val author: String
+    val id: String,
+    val title: String,
+    val userName: String,
+    val userPic: String,
+    val coverUrl: String,
+    val playUrl: String,
+    val duration: String
 )

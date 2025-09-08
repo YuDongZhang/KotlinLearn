@@ -15,17 +15,19 @@ import com.pdxx.kotlinlearn.moduleFunny.model.Joke
  * - 第一个泛型参数 `Joke`: 列表中每个item的数据类型。
  * - 第二个泛型参数 `JokeViewHolder`: ViewHolder的类型。
  */
-class JokePagingAdapter : PagingDataAdapter<Joke, JokePagingAdapter.JokeViewHolder>(JOKE_COMPARATOR) {
+class JokePagingAdapter :
+    PagingDataAdapter<Joke, JokePagingAdapter.JokeViewHolder>(JOKE_COMPARATOR) {
 
     /**
      * ViewHolder: 持有Item View的引用。
      */
-    class JokeViewHolder(private val binding: ListItemJokeBinding) : RecyclerView.ViewHolder(binding.root) {
+    class JokeViewHolder(private val binding: ListItemJokeBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(joke: Joke?) {
             // Paging 3支持占位符(placeholders)，当数据还未加载时，item可能为null
             if (joke != null) {
-                binding.tvJokeAuthor.text = joke.author
-                binding.tvJokeText.text = joke.text
+                binding.tvJokeAuthor.text = joke.userName
+                binding.tvJokeText.text = joke.title
             } else {
                 // 可以设置占位符的UI
                 binding.tvJokeAuthor.text = "Loading..."
@@ -38,7 +40,8 @@ class JokePagingAdapter : PagingDataAdapter<Joke, JokePagingAdapter.JokeViewHold
      * 创建ViewHolder实例。
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokeViewHolder {
-        val binding = ListItemJokeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListItemJokeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return JokeViewHolder(binding)
     }
 
@@ -62,7 +65,7 @@ class JokePagingAdapter : PagingDataAdapter<Joke, JokePagingAdapter.JokeViewHold
              * 判断两个item是否是同一个对象。通常通过比较唯一ID来实现。
              */
             override fun areItemsTheSame(oldItem: Joke, newItem: Joke): Boolean {
-                return oldItem.sid == newItem.sid
+                return oldItem.id == newItem.id
             }
 
             /**
