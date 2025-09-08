@@ -13,6 +13,7 @@ import com.pdxx.kotlinlearn.R
 import com.pdxx.kotlinlearn.bean.ListItem
 import com.pdxx.kotlinlearn.bean.PersonEntity
 import com.pdxx.kotlinlearn.bean.Student
+import com.pdxx.kotlinlearn.databind.MainDBActivity
 import com.pdxx.kotlinlearn.databinding.ActivityMainBinding
 import com.pdxx.kotlinlearn.moduleFunny.PagingActivity
 import com.pdxx.kotlinlearn.mvi.MviActivity
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         items.add(ListItem("10 .LiveDate讲解", getRandomColor(), LiveActivity::class.java))
         items.add(ListItem("11 .mvvm讲解", getRandomColor(), MvvmOneActivity::class.java))
         items.add(ListItem("12. Scope Functions 符号", getRandomColor(), ScopeFunctionsActivity::class.java))
-
+        items.add(ListItem("13. databind使用", getRandomColor(), MainDBActivity::class.java))
 
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

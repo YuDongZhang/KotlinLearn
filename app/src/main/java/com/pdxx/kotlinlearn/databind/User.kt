@@ -1,9 +1,10 @@
-package com.cniao5.demo
+package com.pdxx.kotlinlearn.databind
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
+import com.pdxx.kotlinlearn.BR
 
 
 //1、继承BaseObservable的binding数据

@@ -18,15 +18,15 @@
 
         <variable
             name="oUser"
-            type="com.cniao5.demo.ObUser" />
+            type="com.pdxx.kotlinlearn.databind.ObUser" />
 
         <variable
             name="user"
-            type="com.cniao5.demo.User" />
+            type="com.pdxx.kotlinlearn.databind.User" />
 
         <variable
             name="fUser"
-            type="com.cniao5.demo.FoUser" />
+            type="com.pdxx.kotlinlearn.databind.FoUser" />
 
         <variable
             name="click"
@@ -38,7 +38,7 @@
 
         <variable
             name="info"
-            type="com.cniao5.demo.ItemBean" />
+            type="com.pdxx.kotlinlearn.databind.ItemBean" />
 
         <variable
             name="imgRes"

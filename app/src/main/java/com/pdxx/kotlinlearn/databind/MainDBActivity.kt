@@ -1,4 +1,4 @@
-package com.cniao5.demo
+package com.pdxx.kotlinlearn.databind
 
 import android.os.Bundle
 import android.view.View

@@ -3,13 +3,13 @@
 
     <data>
 
-        <import type="com.cniao5.demo.BdTool" />
+        <import type="com.pdxx.kotlinlearn.databind.BdTool" />
 
-        <import type="com.cniao5.demo.BdToolKt" />
+        <import type="com.pdxx.kotlinlearn.databind.BdToolKt" />
 
         <variable
             name="info"
-            type="com.cniao5.demo.ItemBean" />
+            type="com.pdxx.kotlinlearn.databind.ItemBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

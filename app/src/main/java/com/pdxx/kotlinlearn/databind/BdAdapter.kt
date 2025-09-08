@@ -1,4 +1,4 @@
-package com.cniao5.demo
+package com.pdxx.kotlinlearn.databind
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

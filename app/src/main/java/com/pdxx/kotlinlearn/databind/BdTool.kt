@@ -1,4 +1,4 @@
-package com.cniao5.demo
+package com.pdxx.kotlinlearn.databind
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
