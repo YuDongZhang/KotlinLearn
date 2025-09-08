@@ -73,11 +73,25 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = ItemListAdapter(items)
 
         Log.d("TAG", "onCreate: " + p2.company)
+
+        val leakThread = LeakThread()
+        leakThread.start()
     }
 
     private fun getRandomColor(): Int {
         val rnd = Random
         return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+    }
+
+    inner class LeakThread : Thread() {
+        override fun run() {
+            super.run()
+            try {
+                sleep(6 * 60 * 1000)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+        }
     }
 }
 

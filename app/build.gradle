@@ -150,4 +150,6 @@ dependencies {
     implementation libs.glide
     implementation libs.glide.okhttp
     kapt libs.glide.compiler
+
+    debugImplementation libs.leakcanary.android
 }
