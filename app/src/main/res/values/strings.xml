@@ -102,4 +102,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="str_name_pre">姓名: %s</string>
 </resources>

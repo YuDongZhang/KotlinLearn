@@ -49,6 +49,7 @@
         <activity android:name=".activity.SwitchFragmentActivity" />
         <activity android:name=".activity.ListActivity" />
         <activity android:name=".activity.NavigationActivity" />
+        <activity android:name=".databind.MainDBActivity"/>
 
         <activity
             android:name=".activity.MainActivity"

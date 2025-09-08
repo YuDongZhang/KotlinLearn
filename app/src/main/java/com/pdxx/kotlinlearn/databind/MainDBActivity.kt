@@ -5,14 +5,15 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
-import com.cniao5.demo.databinding.ActivityMainBinding
+import com.pdxx.kotlinlearn.R
+import com.pdxx.kotlinlearn.databinding.ActivityMainDatabindBinding
 
-class MainActivity : AppCompatActivity() {
+class MainDBActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //这个地方就是 DataBinding 在 activity 中使用
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val binding = DataBindingUtil.setContentView<ActivityMainDatabindBinding>(this, R.layout.activity_main_databind)
         //经过测试布局中是不能加注释的
         //赋值    apply对这个作用对象,对他做一系列的操作 , 对binding做一系列的操作
         binding.apply {
