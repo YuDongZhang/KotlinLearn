@@ -61,6 +61,8 @@ class MainActivity : AppCompatActivity() {
         items.add(ListItem("7 .paging", getRandomColor(), PagingActivity::class.java))
         items.add(ListItem("8 .协程", getRandomColor(), CoroutinesActivity::class.java))
         items.add(ListItem("9 .mvi架构", getRandomColor(), MviActivity::class.java))
+        items.add(ListItem("10 .LiveDate讲解", getRandomColor(), LiveActivity::class.java))
+        items.add(ListItem("11 .mvvm讲解", getRandomColor(), MvvmOneActivity::class.java))
 
 
 
