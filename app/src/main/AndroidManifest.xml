@@ -12,11 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activity.ScopeFunctionsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.FunctionDefineActivity"
             android:exported="false" />
         <activity
             android:name=".activity.MvvmOneActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".mvi.MviActivity"
             android:exported="false" />
@@ -46,6 +49,7 @@
         <activity android:name=".activity.SwitchFragmentActivity" />
         <activity android:name=".activity.ListActivity" />
         <activity android:name=".activity.NavigationActivity" />
+
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">

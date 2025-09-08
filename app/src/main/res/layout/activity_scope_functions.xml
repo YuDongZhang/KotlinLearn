@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ScopeFunctionsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- apply -->
+        <TextView style="@style/TextAppearance.AppCompat.Title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="apply"/>
+        <TextView style="@style/TextAppearance.AppCompat.Body1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="- 接收者对象: this\n- 返回值: 接收者对象本身\n- 主要用途: 对象初始化和配置。"/>
+        <Button android:id="@+id/btn_apply" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="运行 'apply' 示例"/>
+        <TextView android:id="@+id/tv_apply_result" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="16dp" tools:text="apply 的结果"/>
+
+        <!-- also -->
+        <TextView style="@style/TextAppearance.AppCompat.Title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="also"/>
+        <TextView style="@style/TextAppearance.AppCompat.Body1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="- 接收者对象: it\n- 返回值: 接收者对象本身\n- 主要用途: 执行不改变对象本身的副作用操作（如日志、添加到列表）。"/>
+        <Button android:id="@+id/btn_also" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="运行 'also' 示例"/>
+        <TextView android:id="@+id/tv_also_result" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="16dp" tools:text="also 的结果"/>
+
+        <!-- let -->
+        <TextView style="@style/TextAppearance.AppCompat.Title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="let"/>
+        <TextView style="@style/TextAppearance.AppCompat.Body1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="- 接收者对象: it\n- 返回值: Lambda表达式的结果\n- 主要用途: 对非空对象执行代码块（空安全检查）。"/>
+        <Button android:id="@+id/btn_let" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="运行 'let' 示例"/>
+        <TextView android:id="@+id/tv_let_result" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="16dp" tools:text="let 的结果"/>
+
+        <!-- run -->
+        <TextView style="@style/TextAppearance.AppCompat.Title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="run"/>
+        <TextView style="@style/TextAppearance.AppCompat.Body1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="- 接收者对象: this\n- 返回值: Lambda表达式的结果\n- 主要用途: 对象配置并计算一个结果；或者在需要表达式的地方执行一个语句块。"/>
+        <Button android:id="@+id/btn_run" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="运行 'run' 示例"/>
+        <TextView android:id="@+id/tv_run_result" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="16dp" tools:text="run 的结果"/>
+
+        <!-- with -->
+        <TextView style="@style/TextAppearance.AppCompat.Title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="with"/>
+        <TextView style="@style/TextAppearance.AppCompat.Body1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="- 接收者对象: this\n- 返回值: Lambda表达式的结果\n- 主要用途: 对一个对象进行分组函数调用（非扩展函数）。"/>
+        <Button android:id="@+id/btn_with" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="运行 'with' 示例"/>
+        <TextView android:id="@+id/tv_with_result" android:layout_width="wrap_content" android:layout_height="wrap_content" tools:text="with 的结果"/>
+
+    </LinearLayout>
+</ScrollView>

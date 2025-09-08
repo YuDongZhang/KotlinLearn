@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         items.add(ListItem("9 .mvi架构", getRandomColor(), MviActivity::class.java))
         items.add(ListItem("10 .LiveDate讲解", getRandomColor(), LiveActivity::class.java))
         items.add(ListItem("11 .mvvm讲解", getRandomColor(), MvvmOneActivity::class.java))
+        items.add(ListItem("12. Scope Functions", getRandomColor(), ScopeFunctionsActivity::class.java))
 
 
 
