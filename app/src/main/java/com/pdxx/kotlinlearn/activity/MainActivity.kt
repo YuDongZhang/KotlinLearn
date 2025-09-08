@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         items.add(ListItem("11 .mvvm讲解", getRandomColor(), MvvmOneActivity::class.java))
         items.add(ListItem("12. Scope Functions 符号", getRandomColor(), ScopeFunctionsActivity::class.java))
         items.add(ListItem("13. databind使用", getRandomColor(), MainDBActivity::class.java))
+        items.add(ListItem("14. Lifecycle学习", getRandomColor(), LifecycleActivity::class.java))
 
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
