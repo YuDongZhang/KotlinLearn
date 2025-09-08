@@ -144,4 +144,8 @@ dependencies {
     implementation libs.logging.interceptor
 
     implementation libs.swiperefreshlayout
+
+    // Glide for image loading
+    implementation libs.glide
+    kapt libs.glide.compiler
 }

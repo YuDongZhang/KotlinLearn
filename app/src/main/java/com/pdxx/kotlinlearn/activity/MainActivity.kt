@@ -15,6 +15,7 @@ import com.pdxx.kotlinlearn.bean.PersonEntity
 import com.pdxx.kotlinlearn.bean.Student
 import com.pdxx.kotlinlearn.databinding.ActivityMainBinding
 import com.pdxx.kotlinlearn.moduleFunny.PagingActivity
+import com.pdxx.kotlinlearn.mvi.MviActivity
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.core.component.KoinComponent
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         items.add(ListItem("6 .navigation", getRandomColor(), NavigationActivity::class.java))
         items.add(ListItem("7 .paging", getRandomColor(), PagingActivity::class.java))
         items.add(ListItem("8 .协程", getRandomColor(), CoroutinesActivity::class.java))
+        items.add(ListItem("9 .mvi架构", getRandomColor(), MviActivity::class.java))
 
 
 
