@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".koindemo.KoinActivity"
+            android:name=".koindemo.ui.KoinActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ScopeFunctionsActivity"
@@ -54,7 +54,6 @@
         <activity android:name=".activity.NavigationActivity" />
         <activity android:name=".databind.MainDBActivity" />
         <activity android:name=".activity.LifecycleActivity" />
-        <activity android:name=".koindemo.ui.KoinActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">

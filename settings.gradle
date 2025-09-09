@@ -23,4 +23,4 @@ dependencyResolutionManagement {
 
 
 rootProject.name = "KotlinLearn"
-include ':app',':mvvm',':netdemo'
+include ':app',':mvvm'

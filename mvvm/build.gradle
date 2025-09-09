@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 35
-    buildToolsVersion '35.0.0'
+    compileSdk  35
+    namespace 'com.example.mvvm'
 
     defaultConfig {
         applicationId "com.example.mvvm"
-        minSdkVersion 21
-        targetSdkVersion 35
+        minSdk 21
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
@@ -45,14 +45,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
-        // 添加注解@OptIn(ExperimentalContracts::class)时需要添加
-        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn",]
+        jvmTarget = "11"
     }
 
     buildFeatures {
@@ -62,6 +60,22 @@ android {
 }
 
 dependencies {
+    implementation libs.appcompat
+    implementation libs.material
     implementation libs.circleimageview
     implementation libs.picasso
+    implementation libs.swiperefreshlayout
+    implementation libs.constraintlayout
+
+    // Room
+    implementation libs.androidx.room.runtime
+    implementation libs.androidx.room.common
+    implementation libs.androidx.room.ktx
+    kapt libs.androidx.room.compiler
+
+    // Retrofit & OkHttp
+    implementation libs.retrofit
+    implementation libs.converter.gson
+    implementation libs.okhttp
+    implementation libs.logging.interceptor
 }
