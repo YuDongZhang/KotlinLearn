@@ -54,6 +54,7 @@
         <activity android:name=".activity.NavigationActivity" />
         <activity android:name=".databind.MainDBActivity" />
         <activity android:name=".activity.LifecycleActivity" />
+        <activity android:name=".koindemo.ui.KoinActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">

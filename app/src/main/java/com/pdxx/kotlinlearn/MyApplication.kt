@@ -3,15 +3,19 @@ package com.pdxx.kotlinlearn
 
 import com.pdxx.kotlinlearn.base.BaseApplication
 import com.pdxx.kotlinlearn.di.cnModules
+import com.pdxx.kotlinlearn.koindemo.di.appModule
 import leakcanary.AppWatcher
 import leakcanary.LeakCanary
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
+import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 
 class MyApplication : BaseApplication() {
 
     private val modules = mutableListOf<Module>(
         cnModules,
+        appModule
 //        moduleJoke
     )
 
