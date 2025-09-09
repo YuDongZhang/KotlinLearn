@@ -56,35 +56,35 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Add" />
+                android:text="添加" />
 
             <Button
                 android:id="@+id/btnUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Update" />
+                android:text="更新" />
 
             <Button
                 android:id="@+id/btnDelete"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Delete" />
+                android:text="删除" />
 
             <Button
                 android:id="@+id/btnQuery"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Query" />
+                android:text="查询" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btnDeleteAll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete All" />
+            android:text="删除所有" />
 
         <!-- Person List -->
         <androidx.recyclerview.widget.RecyclerView
