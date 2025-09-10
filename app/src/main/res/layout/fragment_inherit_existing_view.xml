@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="2. 继承自已有 View (如 TextView)" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="当你想在现有View的基础上增加功能或修改样式时，可以选择这种方式。例如，为一个TextView增加一个边框。" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="示例代码 (MyTextView.kt):" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#f0f0f0"
+        android:padding="8dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
+            android:text=
+"'package com.pdxx.kotlinlearn.custom
+
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatTextView
+
+class MyTextView(context: Context, attrs: AttributeSet? = null) : AppCompatTextView(context, attrs) {
+
+    private val paint = Paint().apply {
+        color = Color.BLUE
+        style = Paint.Style.STROKE
+        strokeWidth = 5f
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        // Draw a border around the TextView
+        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
+        super.onDraw(canvas)
+    }
+}'" />
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="效果展示:" />
+
+    <com.pdxx.kotlinlearn.custom.MyTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:gravity="center"
+        android:text="这是一个带边框的TextView" />
+
+</LinearLayout>

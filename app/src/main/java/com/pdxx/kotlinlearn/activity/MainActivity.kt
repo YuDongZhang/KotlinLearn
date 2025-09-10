@@ -13,6 +13,7 @@ import com.pdxx.kotlinlearn.R
 import com.pdxx.kotlinlearn.bean.ListItem
 import com.pdxx.kotlinlearn.bean.PersonEntity
 import com.pdxx.kotlinlearn.bean.Student
+import com.pdxx.kotlinlearn.custom.CustomActivity
 import com.pdxx.kotlinlearn.databind.MainDBActivity
 import com.pdxx.kotlinlearn.databinding.ActivityMainBinding
 import com.pdxx.kotlinlearn.koindemo.ui.KoinActivity
@@ -70,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         items.add(ListItem("13. databind使用", getRandomColor(), MainDBActivity::class.java))
         items.add(ListItem("14. Lifecycle学习", getRandomColor(), LifecycleActivity::class.java))
         items.add(ListItem("15. Koin MVVM Demo", getRandomColor(), KoinActivity::class.java))
+        items.add(ListItem("16. 自定义控件", getRandomColor(), CustomActivity::class.java))
 
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

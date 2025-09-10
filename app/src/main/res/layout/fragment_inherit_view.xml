@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="1. 继承自 View" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="这是最基础的自定义View方式。你需要重写 onDraw() 方法来绘制你想要的任何内容。通常还需要重写 onMeasure() 来指定View的大小。" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="示例代码 (MyView.kt):" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#f0f0f0"
+        android:padding="8dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
+            android:text=
+"'package com.pdxx.kotlinlearn.custom
+
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.util.AttributeSet
+import android.view.View
+
+class MyView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
+
+    private val paint = Paint().apply {
+        color = Color.RED
+        style = Paint.Style.FILL
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        // Draw a circle in the center of the view
+        val cx = width / 2f
+        val cy = height / 2f
+        val radius = width.coerceAtMost(height) / 4f
+        canvas.drawCircle(cx, cy, radius, paint)
+    }
+}'" />
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="效果展示:" />
+
+    <com.pdxx.kotlinlearn.custom.MyView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

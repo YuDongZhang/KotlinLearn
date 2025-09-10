@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="3. 继承自 ViewGroup" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="当你需要创建自定义的布局容器时，可以继承自ViewGroup。你需要重写 onMeasure() 来测量子View，以及 onLayout() 来确定子View的位置。" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="示例代码 (MyLayout.kt):" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#f0f0f0"
+        android:padding="8dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
+            android:text=
+"'package com.pdxx.kotlinlearn.custom
+
+import android.content.Context
+import android.util.AttributeSet
+import android.view.ViewGroup
+import androidx.core.view.children
+
+class MyLayout(context: Context, attrs: AttributeSet? = null) : ViewGroup(context, attrs) {
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        // Measure all children
+        children.forEach { child ->
+            measureChild(child, widthMeasureSpec, heightMeasureSpec)
+        }
+
+        // Calculate the total height required
+        var totalHeight = 0
+        children.forEach { child ->
+            totalHeight += child.measuredHeight
+        }
+
+        // Set the measured dimension for this layout
+        setMeasuredDimension(
+            resolveSize(suggestedMinimumWidth, widthMeasureSpec),
+            resolveSize(totalHeight, heightMeasureSpec)
+        )
+    }
+
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        var currentTop = 0
+        // Layout children in a vertical stack
+        children.forEach { child ->
+            child.layout(l, currentTop, r, currentTop + child.measuredHeight)
+            currentTop += child.measuredHeight
+        }
+    }
+}'" />
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="效果展示:" />
+
+    <com.pdxx.kotlinlearn.custom.MyLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="#e0e0ff"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第一个子 View (TextView)" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第二个子 View (Button)" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/ic_kotlin" />
+
+    </com.pdxx.kotlinlearn.custom.MyLayout>
+
+</LinearLayout>
