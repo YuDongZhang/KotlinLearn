@@ -1,6 +1,5 @@
 package com.pdxx.kotlinlearn.activity
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +16,7 @@ import com.pdxx.kotlinlearn.custom.CustomActivity
 import com.pdxx.kotlinlearn.databind.MainDBActivity
 import com.pdxx.kotlinlearn.databinding.ActivityMainBinding
 import com.pdxx.kotlinlearn.koindemo.ui.KoinActivity
+import com.pdxx.kotlinlearn.ktxdemo.KtxDemoActivity
 
 import com.pdxx.kotlinlearn.moduleFunny.PagingActivity
 import com.pdxx.kotlinlearn.mvi.MviActivity
@@ -26,7 +26,6 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 import org.koin.core.qualifier.qualifier
-import kotlin.math.log
 import kotlin.random.Random
 
 
@@ -72,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         items.add(ListItem("14. Lifecycle学习", getRandomColor(), LifecycleActivity::class.java))
         items.add(ListItem("15. Koin MVVM Demo", getRandomColor(), KoinActivity::class.java))
         items.add(ListItem("16. 自定义控件", getRandomColor(), CustomActivity::class.java))
-        items.add(ListItem("17. KTX MVVM Demo", getRandomColor(), com.pdxx.kotlinlearn.ktxdemo.KtxDemoActivity::class.java))
+        items.add(ListItem("17. KTX MVVM Demo", getRandomColor(), KtxDemoActivity::class.java))
 
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

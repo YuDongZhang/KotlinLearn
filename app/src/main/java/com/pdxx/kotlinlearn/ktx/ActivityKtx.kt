@@ -2,14 +2,19 @@ package com.pdxx.kotlinlearn.ktx
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.annotation.LayoutRes
-import androidx.core.app.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Activity扩展
@@ -33,9 +38,9 @@ fun <T : ViewDataBinding> Activity.bindView(@LayoutRes layoutId: Int): T {
  *
  * 上面方法重写
  * 原型 : if (view == null) {
-                view = View.inflate(getActivity(), R.layout.fragment_service_detail, null);
-                }
-                binding = DataBindingUtil.bind(view);
+view = View.inflate(getActivity(), R.layout.fragment_service_detail, null);
+}
+binding = DataBindingUtil.bind(view);
  *
  */
 fun <T : ViewDataBinding> Activity.bindView(root: View): T? {
@@ -63,6 +68,39 @@ fun Activity.immediateStatusBar() {
 fun Activity.dismissKeyBoard(view: View) {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager?
     imm?.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+
+/**
+ * Set content view for activity, and return the binding.
+ */
+fun <T : ViewDataBinding> AppCompatActivity.bindContentView(layoutId: Int): T {
+    return DataBindingUtil.setContentView(this, layoutId)
+}
+
+/**
+ * Start an activity.
+ */
+inline fun <reified T : Activity> Context.startActivity(bundle: Bundle? = null) {
+    val intent = Intent(this, T::class.java)
+    if (bundle != null) {
+        intent.putExtras(bundle)
+    }
+    startActivity(intent)
+}
+
+/**
+ * Show a toast.
+ */
+fun Context.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
+}
+
+/**
+ * Show a snackbar.
+ */
+fun View.snackbar(message: CharSequence, duration: Int = Snackbar.LENGTH_SHORT) {
+    Snackbar.make(this, message, duration).show()
 }
 
 // endregion

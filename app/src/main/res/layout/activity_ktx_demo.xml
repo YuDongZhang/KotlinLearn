@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.pdxx.kotlinlearn.ktxdemo.KtxDemoViewModel"/>
         <variable
             name="viewModel"
-            type="com.pdxx.kotlinlearn.ktxdemo.KtxDemoViewModel" />
+            type="KtxDemoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
