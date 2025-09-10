@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         items.add(ListItem("14. Lifecycle学习", getRandomColor(), LifecycleActivity::class.java))
         items.add(ListItem("15. Koin MVVM Demo", getRandomColor(), KoinActivity::class.java))
         items.add(ListItem("16. 自定义控件", getRandomColor(), CustomActivity::class.java))
+        items.add(ListItem("17. KTX MVVM Demo", getRandomColor(), com.pdxx.kotlinlearn.ktxdemo.KtxDemoActivity::class.java))
 
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
