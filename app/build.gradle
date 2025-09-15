@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace 'com.pdxx.kotlinlearn'
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.pdxx.kotlinlearn"
         minSdk 21
-        targetSdk 35
+        targetSdk 36
         versionCode 1
         versionName "1.0"
 
