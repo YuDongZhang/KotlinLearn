@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".exception.ListExceptionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ktxdemo.KtxDemoActivity"
             android:exported="false" />
         <activity

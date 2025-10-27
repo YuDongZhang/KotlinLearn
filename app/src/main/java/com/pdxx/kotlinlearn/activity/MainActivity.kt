@@ -15,6 +15,7 @@ import com.pdxx.kotlinlearn.bean.Student
 import com.pdxx.kotlinlearn.custom.CustomActivity
 import com.pdxx.kotlinlearn.databind.MainDBActivity
 import com.pdxx.kotlinlearn.databinding.ActivityMainBinding
+import com.pdxx.kotlinlearn.exception.ListExceptionActivity
 import com.pdxx.kotlinlearn.koindemo.ui.KoinActivity
 import com.pdxx.kotlinlearn.ktxdemo.KtxDemoActivity
 
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         items.add(ListItem("15. Koin MVVM Demo", getRandomColor(), KoinActivity::class.java))
         items.add(ListItem("16. 自定义控件", getRandomColor(), CustomActivity::class.java))
         items.add(ListItem("17. KTX MVVM Demo", getRandomColor(), KtxDemoActivity::class.java))
+        items.add(ListItem("18. 内存的泄漏", getRandomColor(), ListExceptionActivity::class.java))
 
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
