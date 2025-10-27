@@ -17,6 +17,8 @@ class `15_4协程上下文和调度器` {
      */
     //请尝试以下示例：
     //import kotlinx.coroutines.*
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    @kotlinx.coroutines.DelicateCoroutinesApi
     @Test
     fun test1() = runBlocking<Unit> {
         //sampleStart
@@ -128,6 +130,8 @@ class `15_4协程上下文和调度器` {
 //
 //fun log(msg: String) = println("[${Thread.currentThread().name}] $msg")
 //
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    @kotlinx.coroutines.DelicateCoroutinesApi
     @Test
     fun test4() {
         //sampleStart
@@ -180,6 +184,7 @@ class `15_4协程上下文和调度器` {
 //但是，当使用 GlobalScope 启动协程时，协程的 Job 没有父级。因此，它不受其启动的作用域和独立运作范围的限制
 //import kotlinx.coroutines.*
 //
+    @kotlinx.coroutines.DelicateCoroutinesApi
     @Test
     fun test6() = runBlocking<Unit> {
         //sampleStart

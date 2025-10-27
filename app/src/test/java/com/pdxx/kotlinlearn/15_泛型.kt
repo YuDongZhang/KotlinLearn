@@ -1,6 +1,8 @@
 package com.pdxx.kotlinlearn
 
 import org.junit.Test
+import java.util.Locale
+import java.util.Locale.getDefault
 
 class `15_泛型` {
 
@@ -110,7 +112,7 @@ class `15_泛型` {
     /**----------------泛型字段--------------------*/
     fun <T> fromJson(json: String, tClass: Class<T>): T? {
         /*获取T的实例*/
-        val t: T? = tClass.newInstance()
+        val t: T? = tClass.getDeclaredConstructor().newInstance()
         return t
     }
 
@@ -135,7 +137,7 @@ class `15_泛型` {
 
         when (content) {
             is Int -> println("整型数字为 $content")
-            is String -> println("字符串转换为大写：${content.toUpperCase()}")
+            is String -> println("字符串转换为大写：${content.uppercase(getDefault())}")
             else -> println("T 不是整型，也不是字符串")
         }
     }
