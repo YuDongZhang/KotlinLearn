@@ -53,27 +53,11 @@ class MainActivity : AppCompatActivity() {
 
         val items = mutableListOf<ListItem>()
 
-        // Extract data from existing TextViews and their click listeners
-        // I'm hardcoding the class names here based on the original code.
-        // In a real project, you might have a more dynamic way to map these.
-        items.add(ListItem("1 .函数定义", getRandomColor(), FunctionDefineActivity::class.java))
-        items.add(ListItem("2 .recyclerview", getRandomColor(), ListActivity::class.java))
-        items.add(ListItem("3 .fragment", getRandomColor(), SwitchFragmentActivity::class.java))
-        items.add(ListItem("4 .ViewPager翻页", getRandomColor(), ViewPagerActivity::class.java))
-        items.add(ListItem("5 .普通的写的方式", getRandomColor(), GeneralActivity::class.java))
-        items.add(ListItem("6 .navigation", getRandomColor(), NavigationActivity::class.java))
-        items.add(ListItem("7 .paging", getRandomColor(), PagingActivity::class.java))
-        items.add(ListItem("8 .协程", getRandomColor(), CoroutinesActivity::class.java))
-        items.add(ListItem("9 .mvi架构", getRandomColor(), MviActivity::class.java))
-        items.add(ListItem("10 .LiveDate讲解", getRandomColor(), LiveActivity::class.java))
-        items.add(ListItem("11 .mvvm讲解", getRandomColor(), MvvmOneActivity::class.java))
-        items.add(ListItem("12. Scope Functions 符号", getRandomColor(), ScopeFunctionsActivity::class.java))
-        items.add(ListItem("13. databind使用", getRandomColor(), MainDBActivity::class.java))
-        items.add(ListItem("14. Lifecycle学习", getRandomColor(), LifecycleActivity::class.java))
-        items.add(ListItem("15. Koin MVVM Demo", getRandomColor(), KoinActivity::class.java))
-        items.add(ListItem("16. 自定义控件", getRandomColor(), CustomActivity::class.java))
-        items.add(ListItem("17. KTX MVVM Demo", getRandomColor(), KtxDemoActivity::class.java))
-        items.add(ListItem("18. 内存的泄漏", getRandomColor(), ListExceptionActivity::class.java))
+        items.add(ListItem("1 .kotlin基础知识一", getRandomColor(), KotlinBasicOneActivity::class.java))
+        items.add(ListItem("2 .kotlin基础知识二", getRandomColor(), KotlinBasicTwoActivity::class.java))
+        items.add(ListItem("3 .Android基础知识一", getRandomColor(), AndroidBasicOneActivity::class.java))
+        items.add(ListItem("3 .Android基础知识二", getRandomColor(), AndroidBasicTwoActivity::class.java))
+        items.add(ListItem("4 .Android实践", getRandomColor(), AndroidPracticeActivity::class.java))
 
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
