@@ -85,8 +85,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getRandomColor(): Int {
-        val rnd = Random
-        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+        //改成浅灰 色
+        return Color.argb(255, 211, 211, 211)
+//        return Color.argb(255, 0, 255, 0)
+//        return Color.argb(255, Random.nextInt(256), Random.nextInt(256), Random.nextInt(256))
+
     }
 
     inner class LeakThread : Thread() {

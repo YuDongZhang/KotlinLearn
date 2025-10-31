@@ -52,5 +52,15 @@
         "example": "inline fun measureTime(action: () -> Unit) {\n    val start = System.currentTimeMillis()\n    action()\n    val end = System.currentTimeMillis()\n    println(\"Elapsed: ${end - start}ms\")\n}\n\nfun main() {\n    measureTime {\n        Thread.sleep(200)\n        println(\"Task done!\")\n    }\n}"
       }
     ]
+  },
+  {
+    "title": "委托（Delegation）",
+    "list": [
+      {
+        "concept": "委托模式是一种设计模式，Kotlin 通过语言级支持使其更易用。\n- 类委托：使用 `by` 关键字将接口实现委托给另一个对象\n- 属性委托：将属性的 getter/setter 委托给另一个对象\n- 标准委托：lazy、observable、vetoable 等",
+        "example": "// 委托的作用：\n// 1. 代码复用：避免重复实现相同功能\n// 2. 解耦：将具体实现委托给其他对象\n// 3. 灵活性：可以动态改变委托对象\n\n// 类委托示例\ninterface Base {\n    fun print()\n}\n\nclass BaseImpl(val x: Int) : Base {\n    override fun print() { print(x) }\n}\n\nclass Derived(b: Base) : Base by b\n\n// 属性委托示例\nclass Example {\n    val p: String by Delegate()\n}\n\nclass Delegate {\n    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {\n        return \"$thisRef, thank you for delegating '${property.name}' to me!\"\n    }\n}\n\n// 标准委托 lazy\nval lazyValue: String by lazy {\n    println(\"computed!\")\n    \"Hello\"\n}\n\nfun main() {\n    val b = BaseImpl(10)\n    Derived(b).print() // 输出: 10\n    \n    val e = Example()\n    println(e.p) // 输出: Example@..., thank you for delegating 'p' to me!\n    \n    println(lazyValue) // 首次调用输出: computed! Hello\n    println(lazyValue) // 第二次调用只输出: Hello\n}"
+      }
+    ]
   }
 ]
+
