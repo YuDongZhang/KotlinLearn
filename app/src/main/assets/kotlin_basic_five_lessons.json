@@ -1,0 +1,80 @@
+[
+  {
+    "title": "Android开发基础",
+    "list": [
+      {
+        "concept": "Android是一种基于Linux内核的开源移动操作系统，主要用于智能手机和平板电脑。Android应用通常使用Java或Kotlin语言开发，通过Android SDK提供API访问设备功能。",
+        "example": "// 基本的Android Activity示例\npackage com.example.myapp\n\nimport android.os.Bundle\nimport androidx.appcompat.app.AppCompatActivity\n\nclass MainActivity : AppCompatActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_main)\n    }\n}"
+      },
+      {
+        "concept": "Android应用由多个组件构成，包括Activity（用户界面）、Service（后台服务）、BroadcastReceiver（接收系统广播）和ContentProvider（数据共享）。这些组件通过Intent进行通信。",
+        "example": "// 显式Intent启动Activity\nval intent = Intent(this, SecondActivity::class.java)\nintent.putExtra(\"key\", \"value\")\nstartActivity(intent)\n\n// 隐式Intent发送广播\nval broadcastIntent = Intent(\"com.example.ACTION_CUSTOM\")\nsendBroadcast(broadcastIntent)"
+      }
+    ]
+  },
+  {
+    "title": "Android UI开发",
+    "list": [
+      {
+        "concept": "Android提供多种方式构建用户界面，包括XML布局文件、Jetpack Compose（现代声明式UI工具包）和视图绑定。XML布局文件是最传统的方式，使用视图层次结构定义UI。",
+        "example": "<!-- XML布局示例 -->\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:orientation=\"vertical\"\n    android:padding=\"16dp\">\n\n    <TextView\n        android:id=\"@+id/titleText\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Hello World\"\n        android:textSize=\"18sp\" />\n\n    <Button\n        android:id=\"@+id/actionButton\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Click Me\" />\n</LinearLayout>"
+      },
+      {
+        "concept": "Jetpack Compose是Android的现代UI工具包，使用Kotlin代码构建UI，简化了UI开发流程。它采用声明式编程模型，UI状态变化时自动更新界面。",
+        "example": "// Jetpack Compose示例\n@Composable\nfun Greeting(name: String) {\n    var expanded by remember { mutableStateOf(false) }\n    \n    Column(\n        modifier = Modifier\n            .padding(16.dp)\n            .clickable { expanded = !expanded }\n    ) {\n        Text(text = \"Hello, $name!\")\n        if (expanded) {\n            Text(text = \"更多内容...\")\n        }\n    }\n}"
+      }
+    ]
+  },
+  {
+    "title": "Android数据存储",
+    "list": [
+      {
+        "concept": "Android提供多种数据存储方式：SharedPreferences用于存储简单的键值对；SQLite数据库用于结构化数据；内部/外部存储用于文件存储；Room是SQLite的抽象层，简化数据库操作。",
+        "example": "// SharedPreferences示例\nval sharedPreferences = getSharedPreferences(\"MyPrefs\", Context.MODE_PRIVATE)\nval editor = sharedPreferences.edit()\neditor.putString(\"username\", \"John\")\neditor.putInt(\"age\", 25)\neditor.apply()\n\n// 读取数据\nval username = sharedPreferences.getString(\"username\", \"\")\nval age = sharedPreferences.getInt(\"age\", 0)"
+      },
+      {
+        "concept": "Room数据库是一个持久性库，提供对SQLite的抽象层。它允许使用注解定义数据库、实体和数据访问对象(DAO)，简化了数据库操作并支持编译时SQL查询验证。",
+        "example": "// Room数据库示例\n\n// 实体类\n@Entity(tableName = \"users\")\ndata class User(\n    @PrimaryKey val id: Int,\n    val name: String,\n    val email: String\n)\n\n// DAO接口\n@Dao\ninterface UserDao {\n    @Insert\n    suspend fun insertUser(user: User)\n    \n    @Query(\"SELECT * FROM users WHERE id = :userId\")\n    suspend fun getUserById(userId: Int): User?\n}\n\n// 数据库类\n@Database(entities = [User::class], version = 1)\nabstract class AppDatabase : RoomDatabase() {\n    abstract fun userDao(): UserDao\n}"
+      }
+    ]
+  },
+  {
+    "title": "Android网络编程",
+    "list": [
+      {
+        "concept": "Android应用经常需要与网络交互，常用库包括Retrofit（类型安全的HTTP客户端）、OkHttp（HTTP客户端）和Ktor（Kotlin多平台异步HTTP客户端）。网络操作必须在后台线程执行，不能在主线程进行。",
+        "example": "// Retrofit网络请求示例\n\n// API接口定义\ninterface ApiService {\n    @GET(\"users/{id}\")\n    suspend fun getUser(@Path(\"id\") userId: Int): Response<User>\n    \n    @POST(\"users\")\n    suspend fun createUser(@Body user: User): Response<User>\n}\n\n// 使用Retrofit\nval retrofit = Retrofit.Builder()\n    .baseUrl(\"https://api.example.com/\")\n    .addConverterFactory(GsonConverterFactory.create())\n    .build()\n    \nval apiService = retrofit.create(ApiService::class.java)\n\n// 在协程中发起请求\nlifecycleScope.launch {\n    try {\n        val response = apiService.getUser(1)\n        if (response.isSuccessful) {\n            val user = response.body()\n            // 处理用户数据\n        }\n    } catch (e: Exception) {\n        // 处理异常\n    }\n}"
+      },
+      {
+        "concept": "Android 9.0（API级别28）及以上版本默认禁用明文HTTP流量，推荐使用HTTPS。如需使用HTTP，需要在网络安全配置中明确允许。同时，AndroidManifest.xml中需要添加网络权限。",
+        "example": "<!-- AndroidManifest.xml中添加网络权限 -->\n<uses-permission android:name=\"android.permission.INTERNET\" />\n\n<!-- 网络安全配置 res/xml/network_security_config.xml -->\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<network-security-config>\n    <domain-config cleartextTrafficPermitted=\"true\">\n        <domain includeSubdomains=\"true\">api.example.com</domain>\n    </domain-config>\n</network-security-config>\n\n<!-- 在AndroidManifest.xml中应用网络安全配置 -->\n<application\n    ...\n    android:networkSecurityConfig=\"@xml/network_security_config\">\n    ...\n</application>"
+      }
+    ]
+  },
+  {
+    "title": "Android架构组件",
+    "list": [
+      {
+        "concept": "Android Jetpack架构组件帮助开发者设计健壮、可测试和可维护的应用。主要组件包括ViewModel（存储和管理UI相关数据）、LiveData（可观察的数据持有者）和Room（数据库抽象层）。",
+        "example": "// ViewModel示例\nclass UserViewModel : ViewModel() {\n    private val _user = MutableLiveData<User>()\n    val user: LiveData<User> = _user\n    \n    private val repository = UserRepository()\n    \n    fun loadUser(userId: Int) {\n        viewModelScope.launch {\n            _user.value = repository.getUser(userId)\n        }\n    }\n}\n\n// Activity中使用ViewModel\nclass UserActivity : AppCompatActivity() {\n    private val viewModel: UserViewModel by viewModels()\n    \n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        \n        viewModel.user.observe(this) { user ->\n            // 更新UI\n            findViewById<TextView>(R.id.nameText).text = user.name\n        }\n        \n        // 加载数据\n        viewModel.loadUser(1)\n    }\n}"
+      },
+      {
+        "concept": "Repository模式是Android应用架构中的关键部分，它抽象了数据源，为应用其余部分提供干净的数据访问API。Repository可以决定从网络、数据库或缓存中获取数据。",
+        "example": "// Repository示例\nclass UserRepository {\n    private val apiService = RetrofitClient.apiService\n    private val userDao = AppDatabase.getInstance().userDao()\n    \n    suspend fun getUser(userId: Int): User {\n        // 先从本地数据库获取\n        val cachedUser = userDao.getUserById(userId)\n        \n        if (cachedUser != null) {\n            // 有缓存数据，同时从网络更新\n            try {\n                val networkUser = apiService.getUser(userId).body()\n                if (networkUser != null) {\n                    userDao.insertUser(networkUser)\n                    return networkUser\n                }\n            } catch (e: Exception) {\n                // 网络错误，返回缓存数据\n                return cachedUser\n            }\n        }\n        \n        // 没有缓存，从网络获取\n        val networkUser = apiService.getUser(userId).body()\n        if (networkUser != null) {\n            userDao.insertUser(networkUser)\n            return networkUser\n        }\n        \n        throw Exception(\"无法获取用户数据\")\n    }\n}"
+      }
+    ]
+  },
+  {
+    "title": "Android权限与安全",
+    "list": [
+      {
+        "concept": "Android系统采用权限机制保护用户数据和系统资源。权限分为普通权限（安装时自动授予）和危险权限（需要运行时请求）。Android 6.0（API级别23）引入了运行时权限请求模型。",
+        "example": "// 运行时权限请求示例\nprivate val REQUEST_CAMERA_PERMISSION = 100\n\nprivate fun requestCameraPermission() {\n    if (ContextCompat.checkSelfPermission(\n            this, Manifest.permission.CAMERA\n        ) != PackageManager.PERMISSION_GRANTED) {\n        \n        // 解释为什么需要权限（可选）\n        if (ActivityCompat.shouldShowRequestPermissionRationale(\n                this, Manifest.permission.CAMERA)) {\n            // 显示解释对话框\n            showRationaleDialog()\n        } else {\n            // 直接请求权限\n            ActivityCompat.requestPermissions(\n                this,\n                arrayOf(Manifest.permission.CAMERA),\n                REQUEST_CAMERA_PERMISSION\n            )\n        }\n    } else {\n        // 已有权限，执行操作\n        openCamera()\n    }\n}\n\n// 处理权限请求结果\noverride fun onRequestPermissionsResult(\n    requestCode: Int,\n    permissions: Array<out String>,\n    grantResults: IntArray\n) {\n    super.onRequestPermissionsResult(requestCode, permissions, grantResults)\n    \n    if (requestCode == REQUEST_CAMERA_PERMISSION) {\n        if (grantResults.isNotEmpty() && \n            grantResults[0] == PackageManager.PERMISSION_GRANTED) {\n            // 权限被授予\n            openCamera()\n        } else {\n            // 权限被拒绝\n            Toast.makeText(this, \"需要相机权限才能使用此功能\", Toast.LENGTH_SHORT).show()\n        }\n    }\n}"
+      },
+      {
+        "concept": "Android提供多种安全机制保护应用和数据，包括应用签名、数据加密、网络安全配置和生物识别认证。Android Keystore系统可以安全存储加密密钥，防止密钥被提取。",
+        "example": "// 使用Android Keystore加密数据示例\n\nclass CryptoManager(context: Context) {\n    private val keyStore = KeyStore.getInstance(\"AndroidKeyStore\").apply {\n        load(null)\n    }\n    \n    private val encryptCipher: Cipher\n    private val decryptCipher: Cipher\n    \n    init {\n        val keyAlias = \"my_secret_key\"\n        \n        // 创建或获取密钥\n        if (!keyStore.containsAlias(keyAlias)) {\n            KeyGenerator.getInstance(\n                KeyProperties.KEY_ALGORITHM_AES, \"AndroidKeyStore\"\n            ).apply {\n                init(\n                    KeyGenParameterSpec.Builder(\n                        keyAlias,\n                        KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT\n                    )\n                        .setBlockModes(KeyProperties.BLOCK_MODE_GCM)\n                        .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)\n                        .build()\n                )\n                generateKey()\n            }\n        }\n        \n        // 初始化加密和解密Cipher\n        val key = keyStore.getKey(keyAlias, null) as SecretKey\n        encryptCipher = Cipher.getInstance(\"AES/GCM/NoPadding\").apply {\n            init(Cipher.ENCRYPT_MODE, key)\n        }\n        decryptCipher = Cipher.getInstance(\"AES/GCM/NoPadding\").apply {\n            init(Cipher.DECRYPT_MODE, key, encryptCipher.parameters)\n        }\n    }\n    \n    fun encrypt(data: String): ByteArray {\n        return encryptCipher.doFinal(data.toByteArray())\n    }\n    \n    fun decrypt(encryptedData: ByteArray): String {\n        return String(decryptCipher.doFinal(encryptedData))\n    }\n}"
+      }
+    ]
+  }
+]
