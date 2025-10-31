@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
     </data>
     
@@ -12,18 +14,18 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kotlin基础知识二"
+            android:text="Kotlin面向对象编程"
             android:textSize="24sp"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_marginBottom="24dp" />
             
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="这是Kotlin基础知识二的简单页面。"
-            android:textSize="16sp"
-            android:lineSpacingExtra="4dp" />
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_kotlin_basic" />
             
     </LinearLayout>
 </layout>

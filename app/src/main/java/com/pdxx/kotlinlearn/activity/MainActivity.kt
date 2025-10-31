@@ -1,9 +1,11 @@
 package com.pdxx.kotlinlearn.activity
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -48,6 +50,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // 设置状态栏透明
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = Color.TRANSPARENT
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        }
 
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 

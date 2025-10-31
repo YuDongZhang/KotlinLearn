@@ -32,6 +32,13 @@ class MyApplication : BaseApplication() {
 
     }
 
+//    基本语法	     main 函数、println、注释、代码结构
+//    变量与常量	  val vs var、类型推断
+//    数据类型	    Int、Double、Boolean、String、Char
+//    运算符	    算术、逻辑、比较、区间
+//    控制流    	 if、when、for、while
+//    函数	        参数默认值、命名参数、返回值、Unit
+
 
     private fun leakCanaryConfig() {
         //App 处于前台时检测保留对象的阈值，默认是 5
