@@ -65,6 +65,9 @@
         <activity android:name=".activity.LifecycleActivity" />
         <activity android:name=".activity.KotlinBasicOneActivity" />
         <activity android:name=".activity.KotlinBasicTwoActivity" />
+        <activity android:name=".activity.KotlinBasicThreeActivity" />
+        <activity android:name=".activity.KotlinBasicFourActivity" />
+        <activity android:name=".activity.KotlinBasicFiveActivity" />
         <activity android:name=".activity.AndroidBasicOneActivity" />
         <activity android:name=".activity.AndroidBasicTwoActivity" />
         <activity android:name=".activity.AndroidPracticeActivity" />

@@ -67,9 +67,12 @@ class MainActivity : AppCompatActivity() {
 
         items.add(ListItem("1 .kotlin基础知识一", getRandomColor(), KotlinBasicOneActivity::class.java))
         items.add(ListItem("2 .kotlin基础知识二", getRandomColor(), KotlinBasicTwoActivity::class.java))
-        items.add(ListItem("3 .Android基础知识一", getRandomColor(), AndroidBasicOneActivity::class.java))
-        items.add(ListItem("3 .Android基础知识二", getRandomColor(), AndroidBasicTwoActivity::class.java))
-        items.add(ListItem("4 .Android实践", getRandomColor(), AndroidPracticeActivity::class.java))
+        items.add(ListItem("3 .kotlin基础知识三", getRandomColor(), KotlinBasicThreeActivity::class.java))
+        items.add(ListItem("4 .kotlin基础知识四", getRandomColor(), KotlinBasicFourActivity::class.java))
+        items.add(ListItem("5 .kotlin实战应用", getRandomColor(), KotlinBasicFiveActivity::class.java))
+        items.add(ListItem("6 .Android基础知识一", getRandomColor(), AndroidBasicOneActivity::class.java))
+        items.add(ListItem("7 .Android基础知识二", getRandomColor(), AndroidBasicTwoActivity::class.java))
+        items.add(ListItem("8 .Android实践", getRandomColor(), AndroidPracticeActivity::class.java))
 
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
