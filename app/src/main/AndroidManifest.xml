@@ -60,6 +60,12 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
+
+        <!-- WorkManager Demo Activity -->
+        <activity android:name=".activity.WorkManagerActivity"
+            android:exported="true"
+            android:label="WorkManager Demo"/>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
