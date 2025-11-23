@@ -1,14 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.GeneralActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kotlin 高阶函数、Lambda 表达式和匿名函数"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="高阶函数是将函数用作参数或返回值的函数。"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lambda 表达式是一种简化定义函数的方式。"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="匿名函数是没有名字的函数。"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/btnLambdaExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lambda 表达式示例"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnHigherOrderExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="高阶函数示例"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnAnonymousExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="匿名函数示例"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击上面的按钮查看示例结果"
+            android:textSize="16sp"
+            android:background="#f0f0f0"
+            android:padding="16dp"
+            android:minLines="4"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+</ScrollView>

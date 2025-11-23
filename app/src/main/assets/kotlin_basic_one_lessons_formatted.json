@@ -1,0 +1,56 @@
+[
+  {
+    "title": "基本语法",
+    "list": [
+      {
+        "concept": "Kotlin 程序的入口是 `main` 函数，所有可执行代码从这里开始运行。\n`println()` 用于输出内容。\n注释使用 `//` 表示单行注释，`/* ... */` 表示多行注释。",
+        "example": "// 这是单行注释\n/*\n  这是多行注释\n*/\n\nfun main() {\n    println(\"Hello, Kotlin!\") // 输出 Hello, Kotlin!\n}"
+      }
+    ]
+  },
+  {
+    "title": "变量与常量",
+    "list": [
+      {
+        "concept": "`val` 用于声明不可变变量（常量），`var` 用于声明可变变量。\nKotlin 支持类型推断，不一定要写出类型。",
+        "example": "fun main() {\n    val name = \"Tom\"    // 不可变变量\n    var age = 20        // 可变变量\n    println(\"Name: $name, Age: $age\")\n\n    age = 21            // ✅ OK\n    // name = \"Jerry\"   // ❌ 错误，val 不可修改\n}"
+      }
+    ]
+  },
+  {
+    "title": "数据类型",
+    "list": [
+      {
+        "concept": "Kotlin 是强类型语言。常见数据类型：\n- 整数：Byte、Short、Int、Long\n- 浮点：Float、Double\n- 字符：Char\n- 布尔：Boolean\n- 字符串：String",
+        "example": "fun main() {\n    val a: Int = 10\n    val b: Double = 3.14\n    val c: Boolean = true\n    val d: Char = 'K'\n    val e: String = \"Kotlin\"\n\n    println(\"$a, $b, $c, $d, $e\")\n}"
+      }
+    ]
+  },
+  {
+    "title": "运算符",
+    "list": [
+      {
+        "concept": "Kotlin 支持算术、逻辑、比较和区间运算符：\n- 算术：+ - * / %\n- 比较：== != > < >= <=\n- 逻辑：&& || !\n- 区间：1..5 表示从 1 到 5 的范围",
+        "example": "fun main() {\n    val x = 5\n    val y = 3\n\n    println(x + y)       // 8\n    println(x > y)       // true\n    println(x in 1..10)  // true\n    println(x % 2 == 1 && y % 2 == 1) // true\n}"
+      }
+    ]
+  },
+  {
+    "title": "控制流",
+    "list": [
+      {
+        "concept": "控制语句决定程序执行的路径：\n- if 表达式\n- when 表达式\n- for 循环\n- while 循环",
+        "example": "fun main() {\n    val score = 85\n\n    // if 表达式\n    val grade = if (score >= 90) \"A\" else if (score >= 80) \"B\" else \"C\"\n    println(grade) // 输出 B\n\n    // when 表达式\n    when (grade) {\n        \"A\" -> println(\"Excellent\")\n        \"B\" -> println(\"Good\")\n        \"C\" -> println(\"Pass\")\n        else -> println(\"Unknown\")\n    }\n\n    // for 循环\n    for (i in 1..3) {\n        println(\"Count: $i\")\n    }\n\n    // while 循环\n    var num = 0\n    while (num < 3) {\n        println(\"num = $num\")\n        num++\n    }\n}"
+      }
+    ]
+  },
+  {
+    "title": "函数",
+    "list": [
+      {
+        "concept": "函数使用 `fun` 关键字定义。\n可以有参数和返回值。\n`Unit` 表示没有返回值（类似 Java 的 void）。\n支持默认参数与命名参数。",
+        "example": "// 带参数和返回值\nfun add(a: Int, b: Int): Int {\n    return a + b\n}\n\n// 默认参数与命名参数\nfun greet(name: String = \"Guest\") {\n    println(\"Hello, $name!\")\n}\n\nfun main() {\n    println(add(3, 5))  // 输出 8\n    greet()             // 使用默认参数\n    greet(name = \"Tom\") // 使用命名参数\n}"
+      }
+    ]
+  }
+]

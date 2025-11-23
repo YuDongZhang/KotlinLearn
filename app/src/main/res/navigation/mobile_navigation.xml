@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Step 1: 创建Navigation Graph
+Navigation Graph是一个XML文件，它相当于你App内所有页面（Destination）以及它们之间跳转路径（Action）的“导航地图”。
+
+- <navigation>: 是根元素。
+  - `app:startDestination`: 定义了用户进入这个导航图时，首先看到的页面是哪一个。这里是`navigation_home`。
+
+- <fragment>: 代表一个导航目标（Destination）。通常就是一个Fragment。
+  - `android:id`: 唯一ID，用于在代码中引用这个Destination。
+  - `android:name`: Destination对应的Fragment的完整类名。
+  - `android:label`: 显示在ActionBar或Toolbar上的标题。
+  - `tools:layout`: 方便在Android Studio的设计视图中预览Fragment的布局。
+-->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +22,20 @@
         android:id="@+id/navigation_home"
         android:name="com.pdxx.kotlinlearn.activity.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <!--
+        Step 3: 定义Action
+        Action代表一条从当前Destination出发的导航路径。
+        - `android:id`: Action的唯一ID，我们通过这个ID来触发导航。
+        - `app:destination`: 此Action将要导航到的目标Destination的ID。
+        - `app:enterAnim`, `app:exitAnim`, etc.: 定义页面切换时的动画效果（可选）。
+        -->
+        <action
+            android:id="@+id/action_home_to_details"
+            app:destination="@id/navigation_details" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +48,26 @@
         android:name="com.pdxx.kotlinlearn.activity.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <!-- 新增的目标页面: DetailsFragment -->
+    <fragment
+        android:id="@+id/navigation_details"
+        android:name="com.pdxx.kotlinlearn.activity.ui.details.DetailsFragment"
+        android:label="详情页面"
+        tools:layout="@layout/fragment_details">
+
+        <!--
+        Step 4: 定义Argument
+        Argument用于在导航时传递数据。在这里，我们定义了一个名为`itemId`的参数。
+        - `android:name`: 参数的名称。
+        - `app:argType`: 参数的数据类型。这里是字符串。
+        - `app:nullable`: (可选) 定义参数是否可以为null，默认为false。
+        - `android:defaultValue`: (可选) 为参数提供一个默认值。
+        -->
+        <argument
+            android:name="itemId"
+            app:argType="string" />
+
+    </fragment>
+
 </navigation>

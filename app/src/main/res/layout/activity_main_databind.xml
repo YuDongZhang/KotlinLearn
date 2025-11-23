@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="address"
+            type="String" />
+
+        <variable
+            name="obName"
+            type="androidx.databinding.ObservableField&lt;String>" />
+
+        <variable
+            name="oUser"
+            type="com.pdxx.kotlinlearn.databind.ObUser" />
+
+        <variable
+            name="user"
+            type="com.pdxx.kotlinlearn.databind.User" />
+
+        <variable
+            name="fUser"
+            type="com.pdxx.kotlinlearn.databind.FoUser" />
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="adapter"
+            type="androidx.recyclerview.widget.RecyclerView.Adapter" />
+
+        <variable
+            name="info"
+            type="com.pdxx.kotlinlearn.databind.ItemBean" />
+
+        <variable
+            name="imgRes"
+            type="android.graphics.drawable.Drawable" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DataBinding示例"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25sp" />
+
+        <!-- name 赋值为 null -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`name为null示例：`+ name}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`name??示例：` + name??`Null of Name`}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`name三目示例：` + (name==null?`null`:`nonull`)}"
+            android:textSize="18sp" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`name占位符示例：` + @string/str_name_pre(name)}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`default示例：` + address,default=`beijing`}"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#778899" />
+
+        <!-- ***********************************************************-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`非Observable不改变name：` + user.name}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`非Observable不改变age：` + oUser.age+``}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Observable类型改变name：` + fUser.name}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Observable类型改变name：` + oUser.name+oUser.age}"
+            android:textSize="18sp" />
+
+<!--        oUser.name 改变的时候会重新赋值 , 导致控件刷新 , age也改变-->
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{`green`}"
+            android:onClick="@{click}"
+            android:text="改变" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#778899" />
+
+        <!-- ***********************************************************-->
+<!--这个地方的 adapter 就是上面的 导入的 adapter-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:adapter="@{adapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_rv" />
+
+<!--        这个 info 你可以去布局里面看 -->
+        <include
+            info="@{info}"
+            layout="@layout/item_rv" />
+
+
+<!--        image 这个属性是不存在的  , 要在bdtool.kt中找-->
+        <androidx.appcompat.widget.AppCompatImageView
+            image="@{imgRes}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>

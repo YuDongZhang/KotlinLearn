@@ -1,6 +1,8 @@
 package com.pdxx.kotlinlearn
 
 import org.junit.Test
+import java.util.Locale
+import java.util.Locale.getDefault
 
 class Runoob {  // 类名为 Runoob
     // 大括号内是类体构成
@@ -11,10 +13,18 @@ class Empty
 
 
 //可以在类中定义成员函数：
-@Test
-fun foo() {
-    print("Foo")
-} // 成员函数
+class Test40 {
+    @Test
+    fun TestRun() {
+        var runoob = Runoob()
+        var empty = Empty()
+    }
+
+    @Test
+    fun fooabe() {
+        print("Foo123")
+    } // 成员函数
+}
 
 
 /**
@@ -245,7 +255,7 @@ class Banana constructor(num1: Int = 10, num2: Int = 20) {
 
 class TestBanana {
     @Test
-    fun main(args: Array<String>) {
+    fun main() {
         var test = Banana()
         var test1 = Banana(1, 2)
         var test2 = Banana(4, 5, 6)
@@ -313,7 +323,7 @@ class Test44 {
 
 class Person41 {
     var lastName: String = "zhang"
-        get() = field.toUpperCase()   // 将变量赋值后转换为大写
+        get() = field.uppercase(getDefault())   // 将变量赋值后转换为大写
         set
 
     var no: Int = 100
@@ -814,12 +824,12 @@ class BanShengLei {
         }
     }
 
-    fun useCompanion(){
+    fun useCompanion() {
         //在类的内部直接用 伴生类的方法
         BanShengLei.staticMethod()
     }
 
-    fun useCompanionTwo(){
+    fun useCompanionTwo() {
         //如果没有同名的可以直接使用
         staticMethod()
     }
@@ -829,8 +839,9 @@ class BanShengLei {
 interface BanShengInterface {
     fun interfaceMethod()
 }
-class BanShengLeiTwo{
-    companion object:BanShengInterface{
+
+class BanShengLeiTwo {
+    companion object : BanShengInterface {
         override fun interfaceMethod() {
             TODO("Not yet implemented")
         }

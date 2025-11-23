@@ -1,0 +1,56 @@
+[
+  {
+    "title": "类与对象",
+    "list": [
+      {
+        "concept": "在 Kotlin 中，类使用 `class` 关键字定义。\n对象是类的实例，用 `val` 或 `var` 声明。\n构造函数可以写在类名后，也可以定义 `init` 初始化块。",
+        "example": "class Person(val name: String, var age: Int) {\n    init {\n        println(\"Person created: $name, age $age\")\n    }\n\n    fun introduce() {\n        println(\"Hi, I'm $name and I'm $age years old.\")\n    }\n}\n\nfun main() {\n    val p = Person(\"Tom\", 20)\n    p.introduce()\n}"
+      }
+    ]
+  },
+  {
+    "title": "继承",
+    "list": [
+      {
+        "concept": "Kotlin 的类默认是 `final`，不能被继承。\n如果想让类可以被继承，需要加上 `open`。\n重写函数使用 `override`。",
+        "example": "open class Animal {\n    open fun sound() {\n        println(\"Some sound\")\n    }\n}\n\nclass Dog : Animal() {\n    override fun sound() {\n        println(\"Woof!\")\n    }\n}\n\nfun main() {\n    val dog = Dog()\n    dog.sound() // 输出 Woof!\n}"
+      }
+    ]
+  },
+  {
+    "title": "接口与抽象类",
+    "list": [
+      {
+        "concept": "`interface` 用于定义行为规范，可以包含抽象方法和默认实现。\n`abstract class` 可以包含成员变量和具体实现，但不能实例化。\n类可以实现多个接口，但只能继承一个类。",
+        "example": "interface Flyable {\n    fun fly()\n}\n\nabstract class Bird(val name: String) {\n    abstract fun sound()\n}\n\nclass Eagle(name: String) : Bird(name), Flyable {\n    override fun fly() {\n        println(\"$name is flying high!\")\n    }\n\n    override fun sound() {\n        println(\"$name screams!\")\n    }\n}\n\nfun main() {\n    val eagle = Eagle(\"Eagle\")\n    eagle.fly()\n    eagle.sound()\n}"
+      }
+    ]
+  },
+  {
+    "title": "可见性修饰符",
+    "list": [
+      {
+        "concept": "Kotlin 提供四种可见性修饰符控制访问范围：\n- `public`：默认，所有地方可见。\n- `private`：仅在当前文件或类内可见。\n- `protected`：在类和子类中可见。\n- `internal`：在同一模块内可见。",
+        "example": "open class Parent {\n    private val privateData = \"private\"\n    protected val protectedData = \"protected\"\n    internal val internalData = \"internal\"\n    val publicData = \"public\"\n}\n\nclass Child : Parent() {\n    fun show() {\n        // println(privateData) // ❌ 无法访问\n        println(protectedData)  // ✅ 子类可访问\n        println(internalData)   // ✅ 同模块可访问\n        println(publicData)     // ✅ 公共可访问\n    }\n}\n\nfun main() {\n    val c = Child()\n    c.show()\n}"
+      }
+    ]
+  },
+  {
+    "title": "数据类 (Data Class)",
+    "list": [
+      {
+        "concept": "`data class` 用于表示数据结构。\n编译器会自动生成常用方法：`toString()`、`equals()`、`hashCode()`、`copy()`。",
+        "example": "data class User(val name: String, val age: Int)\n\nfun main() {\n    val user1 = User(\"Alice\", 18)\n    val user2 = user1.copy(age = 20)\n\n    println(user1) // 输出：User(name=Alice, age=18)\n    println(user2) // 输出：User(name=Alice, age=20)\n    println(user1 == user2) // false\n}"
+      }
+    ]
+  },
+  {
+    "title": "对象声明与伴生对象",
+    "list": [
+      {
+        "concept": "`object` 用于声明单例对象。\n`companion object` 用于定义类的静态成员（类似 Java 的 static）。",
+        "example": "object Logger {\n    fun log(message: String) {\n        println(\"[LOG] $message\")\n    }\n}\n\nclass MathUtil {\n    companion object {\n        fun add(a: Int, b: Int): Int = a + b\n    }\n}\n\nfun main() {\n    Logger.log(\"App started\")\n    println(MathUtil.add(3, 5))\n}"
+      }
+    ]
+  }
+]

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="4. 复合组件 (Compound View)" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="这种方式通过组合多个现有View来创建一个可重用的组件。通常继承自一个ViewGroup（如LinearLayout），并填充一个XML布局。" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="示例代码 (CompoundView.kt):" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#f0f0f0"
+        android:padding="8dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
+            android:text="
+
+            // CompoundView.kt
+package com.pdxx.kotlinlearn.custom
+
+import android.content.Context
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.widget.EditText
+import android.widget.LinearLayout
+import com.pdxx.kotlinlearn.R
+
+class CompoundView(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
+
+    private val editText: EditText
+
+    init {
+        LayoutInflater.from(context).inflate(R.layout.view_compound, this, true)
+        editText = findViewById(R.id.edit_text)
+    }
+
+    fun getText(): String {
+        return editText.text.toString()
+    }
+}"/>
+
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="效果展示:" />
+
+    <com.pdxx.kotlinlearn.custom.CompoundView
+        android:id="@+id/compound_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

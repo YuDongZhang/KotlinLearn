@@ -1,0 +1,66 @@
+[
+  {
+    "title": "集合（List、Set、Map）",
+    "list": [
+      {
+        "concept": "Kotlin 提供丰富的集合类型：\n- `List`：有序集合，可包含重复元素；\n- `Set`：无序集合，元素唯一；\n- `Map`：键值对集合。\n默认集合是不可变的（`listOf`、`setOf`、`mapOf`），\n可变集合需使用 `mutableListOf`、`mutableSetOf`、`mutableMapOf`。",
+        "example": "fun main() {\n    // 不可变集合\n    val list = listOf(\"A\", \"B\", \"C\")\n    val set = setOf(1, 2, 3, 3)\n    val map = mapOf(\"name\" to \"Tom\", \"age\" to 20)\n\n    println(list) // [A, B, C]\n    println(set)  // [1, 2, 3]\n    println(map)  // {name=Tom, age=20}\n\n    // 可变集合\n    val mutableList = mutableListOf(1, 2)\n    mutableList.add(3)\n    println(mutableList) // [1, 2, 3]\n}"
+      }
+    ]
+  },
+  {
+    "title": "Lambda 表达式与高阶函数",
+    "list": [
+      {
+        "concept": "Lambda 表达式是 Kotlin 的匿名函数。\n高阶函数是以函数作为参数或返回值的函数。\n语法：`{ 参数 -> 函数体 }`\n常用于集合操作（map、filter、forEach）。",
+        "example": "fun main() {\n    val numbers = listOf(1, 2, 3, 4, 5)\n\n    // Lambda 表达式\n    val doubled = numbers.map { it * 2 }\n    println(doubled) // [2, 4, 6, 8, 10]\n\n    // 高阶函数\n    fun operate(a: Int, b: Int, action: (Int, Int) -> Int): Int {\n        return action(a, b)\n    }\n\n    val result = operate(3, 5) { x, y -> x + y }\n    println(result) // 8\n}"
+      }
+    ]
+  },
+  {
+    "title": "扩展函数与扩展属性",
+    "list": [
+      {
+        "concept": "扩展函数可以给已有类\"添加新功能\"，无需继承。\n语法：`fun 类名.函数名(参数): 返回类型`\n扩展属性用于为类添加新的只读或可写属性。",
+        "example": "// 扩展函数\nfun String.lastChar(): Char = this[this.length - 1]\n\n// 扩展属性\nval String.wordCount: Int\n    get() = this.split(\" \").size\n\nfun main() {\n    val text = \"Hello Kotlin\"\n    println(text.lastChar())  // n\n    println(text.wordCount)   // 2\n}"
+      }
+    ]
+  },
+  {
+    "title": "空安全（Null Safety）",
+    "list": [
+      {
+        "concept": "Kotlin 最大的特性之一是\"空安全\"。\n通过类型系统避免空指针异常（NPE）。\n关键符号：\n- `?`：可空类型；\n- `!!`：强制非空（可能抛异常）；\n- `?:`：Elvis 操作符（提供默认值）；\n- `let`、`run`：安全调用。",
+        "example": "fun main() {\n    var name: String? = \"Tom\"\n    println(name?.length) // 安全调用，输出 3\n\n    name = null\n    println(name?.length ?: 0) // Elvis 操作符，输出 0\n\n    name?.let {\n        println(\"Name is $it\")\n    } // null 时不会执行\n}"
+      }
+    ]
+  },
+  {
+    "title": "泛型（Generics）",
+    "list": [
+      {
+        "concept": "泛型让类或函数能操作不同类型的数据。\n语法：`fun <T> functionName(param: T): T`\n支持协变（out）和逆变（in）修饰符。",
+        "example": "// 泛型函数\nfun <T> echo(value: T): T {\n    return value\n}\n\n// 泛型类\nclass Box<T>(var content: T)\n\nfun main() {\n    println(echo(\"Hello\"))\n    val intBox = Box(123)\n    println(intBox.content)\n}"
+      }
+    ]
+  },
+  {
+    "title": "内联函数（inline）",
+    "list": [
+      {
+        "concept": "内联函数用于减少高阶函数带来的运行时开销。\n`inline` 会在编译期将函数体直接展开。\n常用于性能优化或控制作用域函数。",
+        "example": "inline fun measureTime(action: () -> Unit) {\n    val start = System.currentTimeMillis()\n    action()\n    val end = System.currentTimeMillis()\n    println(\"Elapsed: ${end - start}ms\")\n}\n\nfun main() {\n    measureTime {\n        Thread.sleep(200)\n        println(\"Task done!\")\n    }\n}"
+      }
+    ]
+  },
+  {
+    "title": "委托（Delegation）",
+    "list": [
+      {
+        "concept": "委托模式是一种设计模式，Kotlin 通过语言级支持使其更易用。\n- 类委托：使用 `by` 关键字将接口实现委托给另一个对象\n- 属性委托：将属性的 getter/setter 委托给另一个对象\n- 标准委托：lazy、observable、vetoable 等",
+        "example": "// 委托的作用：\n// 1. 代码复用：避免重复实现相同功能\n// 2. 解耦：将具体实现委托给其他对象\n// 3. 灵活性：可以动态改变委托对象\n\n// 类委托示例\ninterface Base {\n    fun print()\n}\n\nclass BaseImpl(val x: Int) : Base {\n    override fun print() { print(x) }\n}\n\nclass Derived(b: Base) : Base by b\n\n// 属性委托示例\nclass Example {\n    val p: String by Delegate()\n}\n\nclass Delegate {\n    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {\n        return \"$thisRef, thank you for delegating '${property.name}' to me!\"\n    }\n}\n\n// 标准委托 lazy\nval lazyValue: String by lazy {\n    println(\"computed!\")\n    \"Hello\"\n}\n\nfun main() {\n    val b = BaseImpl(10)\n    Derived(b).print() // 输出: 10\n    \n    val e = Example()\n    println(e.p) // 输出: Example@..., thank you for delegating 'p' to me!\n    \n    println(lazyValue) // 首次调用输出: computed! Hello\n    println(lazyValue) // 第二次调用只输出: Hello\n}"
+      }
+    ]
+  }
+]
+

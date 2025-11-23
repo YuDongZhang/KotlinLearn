@@ -10,6 +10,7 @@ import org.junit.Test
 class `19_1协程` {
 
     @Test
+    @kotlinx.coroutines.DelicateCoroutinesApi
     fun test1() {
         GlobalScope.launch {
             println("简单测试")
@@ -35,6 +36,7 @@ class `19_1协程` {
     //在第一个协程程序里，混用了非阻塞代码 delay() 与阻塞代码 Thread.sleep() ，使得我们很容易就搞混当前程序
     // 是否是阻塞的。可以改用 runBlocking 来明确这种情形
     @Test
+    @kotlinx.coroutines.DelicateCoroutinesApi
     fun test2() {
         GlobalScope.launch { // launch a new coroutine in background and continue
             delay(1000L)
@@ -50,6 +52,7 @@ class `19_1协程` {
     }
 
     @Test
+    @kotlinx.coroutines.DelicateCoroutinesApi
     fun test3() {
         fun main() = runBlocking<Unit> { // 启动主协程
             GlobalScope.launch { // 在后台启动一个新协程并继续执行
@@ -82,6 +85,7 @@ class `19_1协程` {
     //延迟一段时间来等待另一个协程运行并不是一个好的选择，可以显式（非阻塞的方式）地等待协程执行完成
 
     @Test
+    @kotlinx.coroutines.DelicateCoroutinesApi
     fun test4() = runBlocking {
         //Kotlin 协程中的 Job 对象提供了控制和监控协程的机制，可以使用它来等待协程的完成或取消。
         val job = GlobalScope.launch {  // 启动一个新的协程并保持对其 Job 的引用
@@ -218,6 +222,7 @@ class `19_1协程` {
     //import kotlinx.coroutines.*
     //
     @Test
+    @kotlinx.coroutines.DelicateCoroutinesApi
     fun test9() = runBlocking {
         //sampleStart
         GlobalScope.launch {
@@ -241,6 +246,7 @@ class `19_1协程` {
 
 
     @Test
+    @kotlinx.coroutines.DelicateCoroutinesApi
     fun test10() {
 
         runBlocking {

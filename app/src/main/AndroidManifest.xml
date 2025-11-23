@@ -11,17 +11,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity
+            android:name=".exception.ListExceptionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ktxdemo.KtxDemoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".custom.CustomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".koindemo.ui.KoinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ScopeFunctionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.FunctionDefineActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.MvvmOneActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".mvi.MviActivity"
             android:exported="false" />
@@ -51,14 +61,24 @@
         <activity android:name=".activity.SwitchFragmentActivity" />
         <activity android:name=".activity.ListActivity" />
         <activity android:name=".activity.NavigationActivity" />
+        <activity android:name=".databind.MainDBActivity" />
+        <activity android:name=".activity.LifecycleActivity" />
+        <activity android:name=".activity.KotlinBasicOneActivity" />
+        <activity android:name=".activity.KotlinBasicTwoActivity" />
+        <activity android:name=".activity.KotlinBasicThreeActivity" />
+        <activity android:name=".activity.KotlinBasicFourActivity" />
+        <activity android:name=".activity.KotlinBasicFiveActivity" />
+        <activity android:name=".activity.AndroidBasicOneActivity" />
+        <activity android:name=".activity.AndroidBasicTwoActivity" />
+        <activity android:name=".activity.AndroidPracticeActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!-- WorkManager Demo Activity -->

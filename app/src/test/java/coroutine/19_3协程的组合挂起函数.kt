@@ -161,6 +161,7 @@ class `15_3协程的组合挂起函数` {
     // note that we don't have `runBlocking` to the right of `main` in this example
     */
     @Test
+    @kotlinx.coroutines.DelicateCoroutinesApi
     fun test4() {
         val time = measureTimeMillis {
             // we can initiate async actions outside of a coroutine
@@ -176,10 +177,12 @@ class `15_3协程的组合挂起函数` {
     }
 
     ////sampleEnd
+    @kotlinx.coroutines.DelicateCoroutinesApi
     fun somethingUsefulOneAsync() = GlobalScope.async {
         doSomethingUsefulOne()
     }
 
+    @kotlinx.coroutines.DelicateCoroutinesApi
     fun somethingUsefulTwoAsync() = GlobalScope.async {
         doSomethingUsefulTwo()
     }

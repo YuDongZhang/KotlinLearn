@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="person"
+            type="com.example.mvvm.model.Person" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(&quot;ID: %d&quot;, person.id)}"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="ID: 1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(&quot;Name: %s&quot;, person.name)}"
+            android:textSize="16sp"
+            tools:text="Name: John Doe" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(&quot;Age: %d&quot;, person.age)}"
+            android:textSize="16sp"
+            tools:text="Age: 30" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(&quot;Gender: %s&quot;, person.gender)}"
+            android:textSize="16sp"
+            tools:text="Gender: Male" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(&quot;Job: %s&quot;, person.job)}"
+            android:textSize="16sp"
+            tools:text="Job: Programmer" />
+
+    </LinearLayout>
+</layout>

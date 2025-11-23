@@ -141,7 +141,7 @@ class `09_扩展` {
         }
     }
 
-    fun C3.foo() {
+    fun C3.fooExtension() {
         println("扩展函数")
     }
 
@@ -150,6 +150,7 @@ class `09_扩展` {
     fun test4() {
         var c3 = C3()
         c3.foo()
+        c3.fooExtension()
     }
 
 

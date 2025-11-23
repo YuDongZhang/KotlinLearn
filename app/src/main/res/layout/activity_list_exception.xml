@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:id="@+id/main"
+    tools:context=".exception.ListExceptionActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="内存泄漏示例演示"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击按钮查看各种内存泄漏示例"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            android:textColor="#666" />
+
+        <!-- 1. Context使用不当 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Context使用不当"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_static_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="静态变量持有Activity引用"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_singleton_context"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="单例类中持有Context引用"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_inner_class_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="内部类持有外部类引用"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 2. Handler/MessageQueue泄漏 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. Handler/MessageQueue泄漏"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_handler_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Handler非静态内部类泄漏"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_message_not_removed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Message未及时移除"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 3. 线程/异步任务泄漏 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. 线程/异步任务泄漏"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_thread_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thread未停止"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_async_task_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AsyncTask泄漏"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_timer_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Timer未取消"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_rxjava_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RxJava未dispose"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 4. 资源未关闭 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4. 资源未关闭"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_cursor_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cursor未关闭"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_broadcast_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="广播未注销"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 5. 静态集合泄漏 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5. 静态集合泄漏"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_static_collection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="静态集合持有对象"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 6. WebView泄漏 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6. WebView泄漏"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_webview_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WebView泄漏示例"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 7. Adapter泄漏 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="7. Adapter泄漏"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_adapter_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adapter持有Activity引用"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 8. 监听器未解绑 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="8. 监听器未解绑"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_listener_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="匿名监听器未解绑"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_eventbus_leak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EventBus未注销"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 日志输出区域 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="日志输出:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tv_log"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#f5f5f5"
+            android:padding="12dp"
+            android:text="点击上方按钮查看内存泄漏示例..."
+            android:textColor="#333"
+            android:textSize="14sp"
+            android:textIsSelectable="true"
+            android:scrollbars="vertical" />
+
+        <Button
+            android:id="@+id/btn_clear_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:text="清空日志" />
+
+    </LinearLayout>
+
+</ScrollView>

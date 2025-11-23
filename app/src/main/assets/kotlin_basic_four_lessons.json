@@ -1,0 +1,80 @@
+[
+  {
+    "title": "协程基础",
+    "list": [
+      {
+        "concept": "协程是Kotlin中用于异步编程的轻量级线程。它们比线程更轻量，可以在单个线程中并发执行多个协程。协程通过挂起和恢复机制实现非阻塞式编程。",
+        "example": "// 基本协程示例\nimport kotlinx.coroutines.*\n\nfun main() = runBlocking {\n    // 启动一个协程\n    launch {\n        delay(1000L) // 非阻塞延迟1秒\n        println(\"协程执行完成!\")\n    }\n    println(\"主线程继续执行\")\n    delay(2000L) // 等待协程完成\n}"
+      },
+      {
+        "concept": "CoroutineScope是协程的作用域，它定义了协程的生命周期。runBlocking、launch和async都是CoroutineScope的扩展函数。",
+        "example": "// CoroutineScope示例\nfun main() = runBlocking {\n    // runBlocking创建一个协程作用域\n    println(\"开始\")\n    \n    // 在作用域内启动新协程\n    launch {\n        println(\"内部协程\")\n    }\n    \n    println(\"结束\")\n}"
+      }
+    ]
+  },
+  {
+    "title": "协程构建器",
+    "list": [
+      {
+        "concept": "launch是用于启动新协程的构建器，它不返回结果，主要用于执行'发射后不管'的任务。它返回一个Job对象，可以用于管理协程的生命周期。",
+        "example": "// launch示例\nimport kotlinx.coroutines.*\n\nfun main() = runBlocking {\n    val job = launch {\n        // 在后台执行一些工作\n        delay(1000L)\n        println(\"后台任务完成\")\n    }\n    \n    println(\"主线程继续工作\")\n    job.join() // 等待job完成\n    println(\"所有任务完成\")\n}"
+      },
+      {
+        "concept": "async是另一个协程构建器，它启动一个新协程并返回一个Deferred对象，该对象表示将来可用的结果。可以使用await()函数获取结果。",
+        "example": "// async示例\nfun main() = runBlocking {\n    val deferred1 = async {\n        delay(1000L)\n        \"结果1\"\n    }\n    \n    val deferred2 = async {\n        delay(2000L)\n        \"结果2\"\n    }\n    \n    println(\"等待结果...\")\n    println(\"结果1: ${deferred1.await()}\")\n    println(\"结果2: ${deferred2.await()}\")\n}"
+      }
+    ]
+  },
+  {
+    "title": "协程上下文与调度器",
+    "list": [
+      {
+        "concept": "协程上下文(CoroutineContext)是一组定义协程行为的元素集合，包括调度器(Dispatcher)、Job、CoroutineName等。调度器决定协程在哪个线程或线程池中执行。",
+        "example": "// 调度器示例\nimport kotlinx.coroutines.*\n\nfun main() = runBlocking {\n    // 使用默认调度器\n    launch {\n        println(\"默认调度器: ${Thread.currentThread().name}\")\n    }\n    \n    // 使用IO调度器\n    launch(Dispatchers.IO) {\n        println(\"IO调度器: ${Thread.currentThread().name}\")\n    }\n    \n    // 使用主线程调度器（在Android中常用）\n    // launch(Dispatchers.Main) { ... }\n    \n    // 使用新线程\n    launch(newSingleThreadContext(\"新线程\")) {\n        println(\"新线程: ${Thread.currentThread().name}\")\n    }\n}"
+      },
+      {
+        "concept": "withContext函数用于在特定上下文中执行代码块，它会挂起当前协程，直到代码块执行完成，然后返回结果。这是切换协程上下文的推荐方式。",
+        "example": "// withContext示例\nsuspend fun fetchData(): String {\n    // 在IO线程执行网络请求\n    return withContext(Dispatchers.IO) {\n        println(\"在IO线程获取数据: ${Thread.currentThread().name}\")\n        delay(1000L)\n        \"获取的数据\"\n    }\n}\n\nfun main() = runBlocking {\n    println(\"主线程: ${Thread.currentThread().name}\")\n    val result = fetchData()\n    println(\"结果: $result\")\n    println(\"仍在主线程: ${Thread.currentThread().name}\")\n}"
+      }
+    ]
+  },
+  {
+    "title": "协程作用域函数",
+    "list": [
+      {
+        "concept": "coroutineScope函数创建一个协程作用域，它会等待所有子协程完成。如果任何子协程失败，整个作用域也会失败并取消所有子协程。",
+        "example": "// coroutineScope示例\nimport kotlinx.coroutines.*\n\nsuspend fun loadData(): String {\n    return coroutineScope {\n        val deferred1 = async {\n            delay(1000L)\n            \"数据1\"\n        }\n        \n        val deferred2 = async {\n            delay(2000L)\n            \"数据2\"\n        }\n        \n        \"${deferred1.await()} 和 ${deferred2.await()}\"\n    }\n}\n\nfun main() = runBlocking {\n    val result = loadData()\n    println(result)\n}"
+      },
+      {
+        "concept": "supervisorScope创建一个监督作用域，其中的子协程失败不会影响其他子协程或父协程。每个子协程独立处理自己的异常。",
+        "example": "// supervisorScope示例\nimport kotlinx.coroutines.*\n\nfun main() = runBlocking {\n    supervisorScope {\n        val child1 = launch {\n            println(\"子协程1开始\")\n            delay(500)\n            println(\"子协程1完成\")\n        }\n        \n        val child2 = launch {\n            println(\"子协程2开始\")\n            delay(1000)\n            throw RuntimeException(\"子协程2失败\")\n        }\n        \n        val child3 = launch {\n            println(\"子协程3开始\")\n            delay(1500)\n            println(\"子协程3完成\")\n        }\n        \n        // 等待所有子协程完成\n        child1.join()\n        child2.join()\n        child3.join()\n    }\n    println(\"监督作用域完成\")\n}"
+      }
+    ]
+  },
+  {
+    "title": "协程异常处理",
+    "list": [
+      {
+        "concept": "协程中的异常可以使用传统的try-catch块处理。对于async构建器，异常只会在调用await()时抛出。对于launch，异常会在协程内部抛出，并导致协程失败。",
+        "example": "// 异常处理示例\nimport kotlinx.coroutines.*\n\nfun main() = runBlocking {\n    try {\n        val result = async {\n            delay(1000L)\n            throw RuntimeException(\"异步任务失败\")\n        }\n        \n        // 异常在await()时抛出\n        println(\"结果: ${result.await()}\")\n    } catch (e: Exception) {\n        println(\"捕获异常: ${e.message}\")\n    }\n}"
+      },
+      {
+        "concept": "CoroutineExceptionHandler是一个全局异常处理器，用于捕获未处理的协程异常。它只能用于根协程，不能用于子协程。",
+        "example": "// CoroutineExceptionHandler示例\nimport kotlinx.coroutines.*\n\nfun main() = runBlocking {\n    val handler = CoroutineExceptionHandler { _, exception ->\n        println(\"捕获未处理异常: ${exception.message}\")\n    }\n    \n    val job = GlobalScope.launch(handler) {\n        println(\"协程开始\")\n        throw RuntimeException(\"协程中发生错误\")\n    }\n    \n    job.join()\n    println(\"程序继续\")\n}"
+      }
+    ]
+  },
+  {
+    "title": "协程取消与超时",
+    "list": [
+      {
+        "concept": "协程可以通过调用Job的cancel()方法取消。被取消的协程会抛出CancellationException，这是协程的正常关闭机制，不应被捕获。",
+        "example": "// 协程取消示例\nimport kotlinx.coroutines.*\n\nfun main() = runBlocking {\n    val job = launch {\n        try {\n            repeat(1000) { i ->\n                println(\"协程执行 $i...\")\n                delay(500L)\n            }\n        } catch (e: CancellationException) {\n            println(\"协程被取消\")\n        }\n    }\n    \n    delay(1300L) // 等待一段时间\n    println(\"准备取消协程\")\n    job.cancel() // 取消协程\n    job.join() // 等待协程完成清理\n    println(\"主线程继续\")\n}"
+      },
+      {
+        "concept": "withTimeout函数设置协程执行的超时时间，如果超时会抛出TimeoutCancellationException。withTimeoutOrNull则返回null而不是抛出异常。",
+        "example": "// 超时处理示例\nimport kotlinx.coroutines.*\n\nfun main() = runBlocking {\n    try {\n        val result = withTimeout(1000L) {\n            repeat(1000) { i ->\n                println(\"循环 $i\")\n                delay(100L)\n            }\n            \"完成\"\n        }\n        println(\"结果: $result\")\n    } catch (e: TimeoutCancellationException) {\n        println(\"操作超时\")\n    }\n    \n    // 使用withTimeoutOrNull\n    val result2 = withTimeoutOrNull(1000L) {\n        repeat(1000) { i ->\n            println(\"循环2 $i\")\n            delay(100L)\n        }\n        \"完成\"\n    }\n    println(\"结果2: $result2\") // 结果为null，因为超时\n}"
+      }
+    ]
+  }
+]
