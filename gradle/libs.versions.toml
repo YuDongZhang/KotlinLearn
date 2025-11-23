@@ -35,22 +35,6 @@ arouter = "1.5.1"
 liveeventbus = "1.8.0"
 dokit = "3.4.0-alpha04"
 coroutines = "1.6.4"
-coreKtx = "1.7.0"
-recyclerview = "1.2.1"
-fragmentKtx = "1.4.0"
-activityKtx = "1.4.0"
-lifecycleExtensions = "2.2.0"
-testCore = "1.4.0"
-activity = "1.10.1"
-
-
-[libraries]
-circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
-core = { module = "com.google.zxing:core", version.ref = "core" }
-eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
-glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 glide-okhttp = { module = "com.github.bumptech.glide:okhttp3-integration", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
