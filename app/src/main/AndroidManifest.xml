@@ -76,84 +76,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pdxx.kotlinlearn">
-
-    <application
-        android:name=".MyApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".exception.ListExceptionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ktxdemo.KtxDemoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".custom.CustomActivity"
-            android:exported="false" />
-        <activity
-            android:name=".koindemo.ui.KoinActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.ScopeFunctionsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.FunctionDefineActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.MvvmOneActivity"
-            android:exported="true" />
-        <activity
-            android:name=".mvi.MviActivity"
-            android:exported="false" />
-        <activity
-            android:name=".moduleFunny.PagingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".base.TestActivity"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".NavigationActivity" -->
-        <!-- android:exported="false" -->
-        <!-- android:label="@string/title_activity_navigation"> -->
-        <!-- <meta-data -->
-        <!-- android:name="android.app.lib_name" -->
-        <!-- android:value="" /> -->
-        <!-- </activity> -->
-        <activity
-            android:name=".activity.LiveActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity android:name=".activity.GeneralActivity" />
-        <activity android:name=".activity.CoroutinesActivity" />
-        <activity android:name=".activity.ViewPagerActivity" />
-        <activity android:name=".activity.SwitchFragmentActivity" />
-        <activity android:name=".activity.ListActivity" />
-        <activity android:name=".activity.NavigationActivity" />
-        <activity android:name=".databind.MainDBActivity" />
-        <activity android:name=".activity.LifecycleActivity" />
-        <activity android:name=".activity.KotlinBasicOneActivity" />
-        <activity android:name=".activity.KotlinBasicTwoActivity" />
-        <activity android:name=".activity.KotlinBasicThreeActivity" />
-        <activity android:name=".activity.KotlinBasicFourActivity" />
-        <activity android:name=".activity.KotlinBasicFiveActivity" />
-        <activity android:name=".activity.AndroidBasicOneActivity" />
-        <activity android:name=".activity.AndroidBasicTwoActivity" />
-        <activity android:name=".activity.AndroidPracticeActivity" />
-        <activity
-            android:name=".activity.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -169,8 +91,25 @@
             android:exported="true"
             android:label="Secure Note"/>
 
+        <!-- BLE Demo -->
+        <activity android:name=".activity.BleActivity"
+            android:exported="true"
+            android:label="BLE Scanner"/>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- BLE Permissions -->
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    
+    <!-- Android 12+ -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    
+    <!-- Location needed for scanning on Android 6-11 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>
