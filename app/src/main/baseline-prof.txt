@@ -1,0 +1,56 @@
+# Baseline Profiles Guide
+# 什么是 Baseline Profiles？
+Baseline Profiles 允许您在安装时预编译关键代码路径，从而显著提高应用启动速度并减少卡顿。
+
+# 如何生成 Baseline Profile？
+由于生成 Profile 需要运行在真机或模拟器上，并且需要特定的 Gradle 任务，因此无法在此环境中自动生成。以下是手动生成步骤：
+
+1.  **创建 Benchmark 模块**:
+    在 Android Studio 中，使用 **File > New > New Module > Benchmark** 创建一个新的 Benchmark 模块。
+    选择 "Macrobenchmark" 模板。
+
+2.  **编写生成测试**:
+    在 Benchmark 模块中，创建一个测试类，例如 `BaselineProfileGenerator`：
+
+    ```kotlin
+    @OptIn(ExperimentalBaselineProfilesApi::class)
+    class BaselineProfileGenerator {
+        @get:Rule
+        val baselineProfileRule = BaselineProfileRule()
+
+        @Test
+        fun generate() = baselineProfileRule.collect(
+            packageName = "com.pdxx.kotlinlearn",
+            includeInStartupProfile = true // 优化启动
+        ) {
+            pressHome()
+            startActivityAndWait()
+            
+            // 在这里添加关键用户旅程 (CUJ)，例如滚动列表
+            // device.findObject(By.res("my_list")).scroll(Direction.DOWN, Percent(0.5f))
+        }
+    }
+    ```
+
+3.  **运行生成命令**:
+    连接真机（推荐 Android 9+），在终端运行：
+    ```bash
+    ./gradlew :benchmark:pixel6Api33BenchmarkAndroidTest -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile
+    ```
+    *(注：模块名称和任务名称可能因您的项目设置而异)*
+
+4.  **复制文件**:
+    生成的 `baseline-prof.txt` 文件通常位于 `benchmark/build/outputs/managed_device_android_test_additional_output/...`。
+    将其复制到 `app/src/main/baseline-prof.txt`。
+
+# 当前文件说明
+此文件 (`app/src/main/baseline-prof.txt`) 目前是一个示例占位符。
+当您按照上述步骤生成真正的 Profile 后，请用生成的内容覆盖此文件。
+
+# 示例内容格式
+```text
+HSPLcom/pdxx/kotlinlearn/MyApplication;->onCreate()V
+HSPLcom/pdxx/kotlinlearn/activity/MainActivity;->onCreate(Landroid/os/Bundle;)V
+HSPLcom/pdxx/kotlinlearn/activity/MainActivity;->onResume()V
+...
+```
